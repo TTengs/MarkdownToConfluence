@@ -1,0 +1,11 @@
+# action.yml
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  atlassianToken:  # id of input
+    description: 'GitHub secret to Atlassian Token'
+    required: true
+    default: 'test'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
