@@ -1,11 +1,15 @@
-# action.yml
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  atlassianToken:  # id of input
-    description: 'GitHub secret to Atlassian Token'
+  who-to-greet:  # id of input
+    description: 'Who to greet'
     required: true
-    default: 'test'
+    default: 'World'
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.who-to-greet }}
