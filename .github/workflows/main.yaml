@@ -12,9 +12,11 @@ jobs:
       - name: Conversion step
         uses: ./ # Uses an action in the root directory
         id: hello
-#        with:
-#          who-to-greet: 'Mona the Octocat'
-#          sut: 'Myggen'
+#        env:
+#          DOC_PATH: ./dinMor
+        with:
+#          build-args: DOC_PATH=./dinMor
+          docs_path: 'dinMor'
       # Use the output from the `hello` step
-      - name: Get the status
-        run: echo "Status is - ${{ steps.hello.outputs.status }}"
+#      - name: Get the status
+#        run: echo "Status is - ${{ steps.hello.outputs.status }}"

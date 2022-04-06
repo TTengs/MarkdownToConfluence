@@ -1,10 +1,10 @@
 name: 'Markdown To Confluence'
 description: 'Converts the contents of documentation folder to HTML and uploads to Confluence'
-#inputs:
-#  who-to-greet:  # id of input
-#    description: 'Who to greet'
-#    required: true
-#    default: 'World'
+inputs:
+  docs_path:  # id of input
+    description: 'Path to files'
+    required: false
+    default: './'
 #  sut:
 #    description: 'Who to sut?'
 #    required: true
@@ -18,3 +18,6 @@ runs:
 #  args:
 #    - ${{ inputs.who-to-greet }}
 #    - ${{ inputs.sut }}
+branding:
+  icon: 'coffee'
+  color: 'blue'
