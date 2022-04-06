@@ -1,15 +1,20 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
-inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+name: 'Markdown To Confluence'
+description: 'Converts the contents of documentation folder to HTML and uploads to Confluence'
+#inputs:
+#  who-to-greet:  # id of input
+#    description: 'Who to greet'
+#    required: true
+#    default: 'World'
+#  sut:
+#    description: 'Who to sut?'
+#    required: true
+#    default: 'Anders'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  status: # id of output
+    description: 'Status of the converter'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+#    - ${{ inputs.who-to-greet }}
+#    - ${{ inputs.sut }}

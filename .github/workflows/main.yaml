@@ -3,17 +3,18 @@ on: [push] #change
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Converting Markdown to Confluence
     steps:
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Hello world action step
+      - name: Conversion step
         uses: ./ # Uses an action in the root directory
         id: hello
-        with:
-          who-to-greet: 'Mona the Octocat'
+#        with:
+#          who-to-greet: 'Mona the Octocat'
+#          sut: 'Myggen'
       # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Get the status
+        run: echo "Status is - ${{ steps.hello.outputs.status }}"

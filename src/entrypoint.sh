@@ -3,6 +3,8 @@
 echo "Hello world"
 
 echo "Hello $1"
+echo "sut den $2"
+
 time=$(date)
 echo "::set-output name=time::$time"
 #docker run -it -v /path/to/diagrams:/data minlag/mermaid-cli -i /data/diagram.mmd
