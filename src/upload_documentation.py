@@ -9,21 +9,33 @@ space_obj = {
         "name": "Anders Larsen"
     }
 
-def upload_documentation(path_name:str):
+def upload_documentation(path_name:str, page_name:str):
     pages = path_name.split('/')
-    page_name = pages[-1]
-    parent_name = pages[-2] if(len(pages) > 2 and pages[-2] != 'documentation') else "none"
 
-    if(page_exists_in_space(page_name, space_obj["key"])): #Deletes page if it already exists TODO: Update existing pages
-        page_id = get_page_id(page_name, space_obj['key'])
-        update_page_content(path_name, page_name, space_obj)
+    _page_name = ""
+    if(page_name == "index"):
+        _page_name = pages[-2]
+    else:
+        _page_name = page_name
+
+    parent_name = ""
+    if(page_name == "index"):
+        parent_name = pages[-3] if(len(pages) > 2 and pages[-3] != 'documentation') else "none"
+    else:
+        parent_name = pages[-2]
+
+    if(page_exists_in_space(_page_name, space_obj["key"])): #Deletes page if it already exists TODO: Update existing pages
+        page_id = get_page_id(_page_name, space_obj['key'])
+        update_page_content(path_name, _page_name, page_id, space_obj)
     else:
         if(parent_name != "none" and page_exists_in_space(parent_name, space_obj['key'])): #Create page as a child page, if there is a parent
             parent_id = get_page_id(parent_name, space_obj['key'])
-            create_page(path_name, page_name, space_obj, parent_id)
+            create_page(path_name, _page_name, space_obj, parent_id)
         else:
-            create_page(path_name, page_name, space_obj) #Create page as top page
+            create_page(path_name, _page_name, space_obj) #Create page as top page
+
+    print(f"Uploaded {_page_name} with {parent_name} as parent")
 
 if __name__ == "__main__":
     import sys
-    upload_documentation(sys.argv[1])
+    upload_documentation(sys.argv[1], sys.argv[2])

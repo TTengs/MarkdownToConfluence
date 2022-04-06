@@ -1,10 +1,9 @@
 import json
 import codecs
 import requests
-import sys
 
-def create_page(filename: str, title: str, space_obj, parent_id="none"):
-    filename = filename.replace(".md", ".html")
+def create_child_page(filename: str, title: str, space_obj, parent_id: str):
+    filename = filename.replace('.md', '')
     template = {
         "version" : {
             "number": 1
@@ -12,6 +11,11 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
         "title": title,
         "type": "page",
         "space": space_obj,
+        "ancestors": [
+            {
+                "id": parent_id,
+            }
+        ],
         "body": {
                 "storage": {
                     "value": "",
@@ -20,24 +24,17 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
             }
     }
 
-    if(parent_id != "none"):
-        template['ancestors'] = [
-            {
-                "id": parent_id,
-            }
-        ]
-
     # Remove <!DOCTYPE html> from html file
-    with open(f"{filename}", "r") as f:
+    with open(f"{filename}.html", "r") as f:
         lines = f.readlines()
-    with open(f"{filename}", "w") as f:
+    with open(f"{filename}.html", "w") as f:
         for line in lines:
             if line.strip("\n") != "<!DOCTYPE html>":
                 f.write(line)
 
 
     # Load html file into template
-    f = codecs.open(f"{filename}", 'r', encoding='utf-8')
+    f = codecs.open(f"{filename}.html", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
     url = "https://at-bachelor.atlassian.net/wiki/rest/api/content"
@@ -54,9 +51,12 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
 
     return response
 
-if __name__ == "__main__":
-    print(sys.argv)
-    if(len(sys.argv) > 4):
-        create_page(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-    else:
-        create_page(sys.argv[1], sys.argv[2], sys.argv[3])
+"""
+space_obj = {
+                "id": 33014,
+                "key": "~955037829",
+                "name": "Anders Larsen"
+            }
+
+print(create_child_page("./documentation/page 1/index.md", "Underpage tdqwest", space_obj, "none").text)
+"""

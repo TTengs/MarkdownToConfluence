@@ -1,14 +1,10 @@
 name: 'Markdown To Confluence'
 description: 'Converts the contents of documentation folder to HTML and uploads to Confluence'
-#inputs:
-#  who-to-greet:  # id of input
-#    description: 'Who to greet'
-#    required: true
-#    default: 'World'
-#  sut:
-#    description: 'Who to sut?'
-#    required: true
-#    default: 'Anders'
+inputs:
+  fileslocation:  # id of input
+    description: 'location of documentation'
+    required: false
+    default: './'
 outputs:
   status: # id of output
     description: 'Status of the converter'

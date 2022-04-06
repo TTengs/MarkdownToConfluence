@@ -2,8 +2,8 @@ import json
 import codecs
 import requests
 
-def update_page_content(pathname: str, title: str, space_obj,):
-    filename = pathname + "/index"
+def update_page_content(filename: str, title: str, page_id: str, space_obj,):
+    filename = filename.replace(".md", ".html")
     template = {
         "version" : {
             "number": 0,
@@ -20,18 +20,18 @@ def update_page_content(pathname: str, title: str, space_obj,):
     }
 
     # Remove <!DOCTYPE html> from html file
-    with open(f"{filename}.html", "r") as f:
+    with open(f"{filename}", "r") as f:
         lines = f.readlines()
-    with open(f"{filename}.html", "w") as f:
+    with open(f"{filename}", "w") as f:
         for line in lines:
             if line.strip("\n") != "<!DOCTYPE html>":
                 f.write(line)
 
     # Load html file into template
-    f = codecs.open(f"{filename}.html", 'r', encoding='utf-8')
+    f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
-    url = "https://at-bachelor.atlassian.net/wiki/rest/api/content/1310721"
+    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/{page_id}"
 
     headers = {
     'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
@@ -40,7 +40,7 @@ def update_page_content(pathname: str, title: str, space_obj,):
     }
 
     # Get current version
-    get_response = requests.request("GET", "https://at-bachelor.atlassian.net/wiki/rest/api/content/1310721?expand=version", headers=headers)
+    get_response = requests.request("GET", f"https://at-bachelor.atlassian.net/wiki/rest/api/content/{page_id}?expand=version", headers=headers)
     version_number = int(json.loads(get_response.text)['version']['number'])
     template['version']['number'] = version_number + 1
 
