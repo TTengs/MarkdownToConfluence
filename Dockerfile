@@ -10,6 +10,7 @@ RUN apt-get install -y pandoc
 COPY src /scripts
 COPY dinMor /docs
 
+RUN ls
 #${INPUT_DOCS_PATH}
 RUN chmod +x /scripts/convert_all.sh
 RUN chmod +x /scripts/entrypoint.sh
