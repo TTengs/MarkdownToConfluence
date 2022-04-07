@@ -1,20 +1,17 @@
 FROM ubuntu:latest
 
-#ARG DOC_PATH
+RUN apt-get update && apt-get install -y software-properties-common gcc && \
+    add-apt-repository -y ppa:deadsnakes/ppa
 
-#ENV DOC_PATH=${DOC_PATH}
+RUN apt-get update && apt-get install -y python3.6 python3-distutils python3-pip python3-apt
 
-#RUN apt-get update && apt-get install -y software-properties-common gcc && \
-#    add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt-get install -y pandoc
 
-#RUN apt-get update && apt-get install -y python3.6 python3-distutils python3-pip python3-apt
+COPY src /scripts
+COPY dinMor /docs
 
-#RUN apt-get install -y pandoc
+#${INPUT_DOCS_PATH}
+RUN chmod +x /scripts/convert_all.sh
+RUN chmod +x /scripts/entrypoint.sh
 
-COPY src src
-COPY dinMor docs/
-
-#RUN chmod +x /src/convert_all.sh
-RUN chmod +x /src/entrypoint.sh
-
-ENTRYPOINT ["/src/entrypoint.sh"]
+ENTRYPOINT ["/scripts/entrypoint.sh"]

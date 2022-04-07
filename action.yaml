@@ -3,21 +3,16 @@ description: 'Converts the contents of documentation folder to HTML and uploads 
 inputs:
   docs_path:  # id of input
     description: 'Path to files'
-    required: false
+    required: true
     default: './'
-#  sut:
-#    description: 'Who to sut?'
-#    required: true
-#    default: 'Anders'
 outputs:
   status: # id of output
     description: 'Status of the converter'
+  time:
+    description: 'The time job is complete'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-#  args:
-#    - ${{ inputs.who-to-greet }}
-#    - ${{ inputs.sut }}
 branding:
   icon: 'coffee'
   color: 'blue'

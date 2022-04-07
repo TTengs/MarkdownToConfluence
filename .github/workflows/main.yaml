@@ -12,11 +12,13 @@ jobs:
       - name: Conversion step
         uses: ./ # Uses an action in the root directory
         id: hello
-#        env:
-#          DOC_PATH: ./dinMor
         with:
 #          build-args: DOC_PATH=./dinMor
-          docs_path: 'dinMor'
+          docs_path: './dinMor'
       # Use the output from the `hello` step
-#      - name: Get the status
-#        run: echo "Status is - ${{ steps.hello.outputs.status }}"
+      - name: Get the status
+        run: echo "Status is - ${{ steps.hello.outputs.status }}"
+#      - name: Get the time
+#        run: echo "The time is - ${{ steps.hello.outputs.time }}"
+      - name: Hjælp mig
+        run: "whoami"
