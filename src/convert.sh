@@ -1,9 +1,10 @@
 #!bin/sh
 
 PATHNAME=$1
+ROOT="$INPUT_FILESLOCATION"
 DIR="$(dirname "${PATHNAME}")"
 FILE="$(basename "${PATHNAME}")"
-FILENAME="$(echo "${FILE}" |cut -f 1 -d '.')"
+FILENAME="$(echo ${FILE%.*})"
 echo "[${PATHNAME}] [${DIR}] [${FILENAME}]"
 BASE_PATH=$(pwd)
 
@@ -14,4 +15,6 @@ pandoc "$DIR"/"${FILENAME}_final.md" -f markdown -t html -o "$DIR"/"${FILENAME}"
 rm "$DIR/${FILENAME}_final.md"
 
 #Uploading
-python3 /src/upload_documentation.py "$PATHNAME" "$FILENAME"
+python3 /src/upload_documentation.py "$PATHNAME" "$ROOT"
+rm "$DIR/${FILENAME}.html"
+

@@ -1,6 +1,8 @@
-import upload_attachments
+import upload_attachments, os
 
 def parse_mermaid_macro(filename):
+    if(os.path.isdir(filename)):
+        filename += "/index.md"
     mermaid_diagram_num = 0
     reading_mermaid = False
     new_filename = filename.split('.md')[0] + '_final.md'
