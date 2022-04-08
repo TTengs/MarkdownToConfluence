@@ -8,7 +8,7 @@ jobs:
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
       - name: Conversion step
         uses: ./ # Uses an action in the root directory
         id: hello
@@ -21,4 +21,6 @@ jobs:
 #      - name: Get the time
 #        run: echo "The time is - ${{ steps.hello.outputs.time }}"
       - name: Hjælp mig
-        run: "whoami"
+        run: | 
+          whoami
+          ls
