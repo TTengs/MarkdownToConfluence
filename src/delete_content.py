@@ -4,6 +4,7 @@ import sys, os
 
 BASE_URL = os.environ.get("CONFLUENCE_URL")
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
+SPACE_ID = os.environ.get("SPACE_ID")
 
 def delete_page(page_id: str, page_name=""):
     
@@ -57,4 +58,4 @@ if __name__ == "__main__":
     if(len(sys.argv)> 1):
         delete_non_existing_pages(sys.argv[1], sys.argv[2])
     else:
-        delete_non_existing_pages("~955037829", FILES_PATH)
+        delete_non_existing_pages(SPACE_ID, FILES_PATH)

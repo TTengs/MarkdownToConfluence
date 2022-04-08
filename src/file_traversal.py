@@ -3,12 +3,14 @@
 import os
 # assign directory
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
+SPACE_ID = os.environ.get("SPACE_ID")
 #TODO removede comment
 #directory = 'documentation'
 
+#Space id = ~955037829
 space_obj = {
                 "id": 33014,
-                "key": "~955037829",
+                "key": SPACE_ID,
                 "name": "Anders Larsen"
             }
         

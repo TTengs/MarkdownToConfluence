@@ -7,9 +7,11 @@ from page_file_info import get_prefix, get_page_name_from_path, get_parent_name_
 import os
 import subprocess
 
+SPACE_ID = os.environ.get("SPACE_ID")
+
 space_obj = {
         "id": 33014,
-        "key": "~955037829",
+        "key": SPACE_ID,
         "name": "Anders Larsen"
     }
 

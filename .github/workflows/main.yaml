@@ -14,6 +14,7 @@ jobs:
           #The not so secret, secret
           #https://at-bachelor.atlassian.net
           CONFLUENCE_URL: ${{ secrets.CONFLUENCE_URL }}
+          SPACE_ID: ${{ secrets.SPACE_ID }}
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
