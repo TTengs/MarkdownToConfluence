@@ -1,8 +1,8 @@
 from posixpath import dirname, basename
 from check_if_page_exists import page_exists_in_space, get_page_id
-from create_page import create_page
-from delete_page import delete_page
-from update_page import update_page_content
+from create_content import create_page
+from delete_content import delete_page
+from update_content import update_page_content
 from prefix import get_prefix
 import os
 import subprocess
