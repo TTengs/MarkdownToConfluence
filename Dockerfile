@@ -10,8 +10,8 @@ RUN apt-get install -y vim
 
 COPY src src
 
-RUN chmod +x /src/convert_all.sh
-RUN sed $'s/\r$//' /src/convert_all.sh
-RUN sed $'s/\r$//' /src/convert.sh
+RUN chmod +x src/convert_all.sh
+RUN sed $'s/\r$//' src/convert_all.sh
+RUN sed $'s/\r$//' src/convert.sh
 
 ENTRYPOINT ["sh", "src/convert_all.sh"]
