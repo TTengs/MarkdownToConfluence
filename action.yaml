@@ -12,5 +12,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
 #  args:
-#    - ${{ inputs.who-to-greet }}
-#    - ${{ inputs.sut }}
+#    - ${{ inputs.fileslocation }}
+branding:
+  icon: "coffee"
+  color: "blue"
