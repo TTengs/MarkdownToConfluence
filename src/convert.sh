@@ -5,7 +5,7 @@ ROOT="$INPUT_FILESLOCATION"
 DIR="$(dirname "${PATHNAME}")"
 FILE="$(basename "${PATHNAME}")"
 FILENAME="$(echo ${FILE%.*})"
-echo "[${PATHNAME}] [${DIR}] [${FILENAME}]"
+#echo "[${PATHNAME}] [${DIR}] [${FILENAME}]"
 BASE_PATH=$(pwd)
 
 #Conversion
