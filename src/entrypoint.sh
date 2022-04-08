@@ -4,6 +4,9 @@ echo "Hello world"
 
 ls
 pwd
+cd ..
+cd ..
+ls
 
 #printenv
 echo "${INPUT_DOCS_PATH}"
