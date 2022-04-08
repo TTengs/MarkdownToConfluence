@@ -6,7 +6,7 @@ ls
 pwd
 cd ..
 cd ..
-ls
+ls /docs
 
 #printenv
 echo "${INPUT_DOCS_PATH}"

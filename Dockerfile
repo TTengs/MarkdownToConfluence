@@ -7,13 +7,13 @@ RUN apt-get update && apt-get install -y python3.6 python3-distutils python3-pip
 
 RUN apt-get install -y pandoc
 
-COPY src ${GITHUB_WORKDIR}/scripts
-COPY dinMor ${GITHUB_WORKDIR}/docs
+COPY src /scripts
+COPY ${INPUT_DOCS_PATH} /docs
 
 RUN ls
 #${INPUT_DOCS_PATH}
-RUN chmod +x ${GITHUB_WORKDIR}/scripts/convert_all.sh
-RUN chmod +x ${GITHUB_WORKDIR}/scripts/entrypoint.sh
+RUN chmod +x /scripts/convert_all.sh
+RUN chmod +x /scripts/entrypoint.sh
 
 #Entrypoint kører scripts på workflowet og ikke containerne==!=!?!?!??
-ENTRYPOINT ["${GITHUB_WORKDIR}/scripts/entrypoint.sh"]
+ENTRYPOINT ["/scripts/entrypoint.sh"]

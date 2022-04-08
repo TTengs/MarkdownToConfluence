@@ -4,7 +4,7 @@ inputs:
   docs_path:  # id of input
     description: 'Path to files'
     required: true
-    default: './'
+    default: ''
 outputs:
   status: # id of output
     description: 'Status of the converter'
