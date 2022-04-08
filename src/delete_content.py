@@ -3,6 +3,7 @@ from page_file_info import get_all_page_names_in_filesystem
 import sys, os
 
 BASE_URL = os.environ.get("CONFLUENCE_URL")
+FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
 
 def delete_page(page_id: str, page_name=""):
     
@@ -53,8 +54,7 @@ def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
                 delete_page(result['id'], result['title'])
     
 if __name__ == "__main__":
-    print(BASE_URL)
     if(len(sys.argv)> 1):
         delete_non_existing_pages(sys.argv[1], sys.argv[2])
     else:
-        delete_non_existing_pages("~955037829", "./documentation") #TODO: Remove
+        delete_non_existing_pages("~955037829", FILES_PATH)

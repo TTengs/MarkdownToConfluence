@@ -2,7 +2,9 @@
 # import required module
 import os
 # assign directory
-directory = 'documentation'
+FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
+#TODO removede comment
+#directory = 'documentation'
 
 space_obj = {
                 "id": 33014,
@@ -22,4 +24,4 @@ def traverse(directory):
             print(f)
 
 
-traverse(directory) 
+traverse(FILES_PATH) 

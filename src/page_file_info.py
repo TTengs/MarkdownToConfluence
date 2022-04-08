@@ -31,7 +31,7 @@ def get_parent_name_from_path(path: str, root: str, default="Overview"):
     file_name = basename(path).replace(".md", "")
     parent_name = ""
     if(file_name == "index"):
-        parent_name = get_prefix(dirname(dirname(path)), root) + path_arr[-3] if(len(path_arr) > 2 and path_arr[-3] != root) else default
+        parent_name = get_prefix(dirname(dirname(path)), root) + path_arr[-3] if(len(path_arr) > 2 and path_arr[-3] != os.enivron.get("INPUT_FILESLOCATION")) else default
     else:
         parent_name = get_prefix(path, root) + path_arr[-2]
     return parent_name
