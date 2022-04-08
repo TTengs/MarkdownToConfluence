@@ -1,6 +1,7 @@
 import re
-import requests, json
+import requests, json, os
 
+BASE_URL = os.environ.get("CONFLUENCE_URL")
 url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/1310721/child/attachment"
 
 headers = {

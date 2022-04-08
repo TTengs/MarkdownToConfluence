@@ -1,4 +1,3 @@
-"""
 on: [push] #change
 
 jobs:
@@ -11,8 +10,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Conversion step
+        env:
+          #The not so secret, secret
+          #https://at-bachelor.atlassian.net
+          CONFLUENCE_URL: ${{ secrets.CONFLUENCE_URL }}
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
           fileslocation: './documentation'
-""""
