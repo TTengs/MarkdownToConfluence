@@ -1,11 +1,14 @@
-import upload_attachments
+import upload_attachments, os
 
 def parse_mermaid_macro(filename):
+    if(os.path.isdir(filename)):
+        filename += "/index.md"
     mermaid_diagram_num = 0
     reading_mermaid = False
-    with open(f"{filename}.template.md", "r") as f:
+    new_filename = filename.split('.md')[0] + '_final.md'
+    with open(f"{filename}", "r") as f:
         lines = f.readlines()
-    with open(f"{filename}.md", "w") as f:
+    with open(f"{new_filename}", "w") as f:
         for line in lines:
             if line.strip("\n") == "```mermaid":
                 reading_mermaid = True

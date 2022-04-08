@@ -12,9 +12,5 @@ jobs:
       - name: Conversion step
         uses: ./ # Uses an action in the root directory
         id: hello
-#        with:
-#          who-to-greet: 'Mona the Octocat'
-#          sut: 'Myggen'
-      # Use the output from the `hello` step
-      - name: Get the status
-        run: echo "Status is - ${{ steps.hello.outputs.status }}"
+        with:
+          fileslocation: './documentation'
