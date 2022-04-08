@@ -1,7 +1,8 @@
+from urllib.parse import quote
 import requests, json
 
 def page_exists_in_space(title: str, spaceKey: str) -> bool:
-    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={title}"
+    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     #TODO: Get auth from secrets
     headers = {
     'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
@@ -15,10 +16,10 @@ def page_exists_in_space(title: str, spaceKey: str) -> bool:
         else:
             return False
     else:
-        print(response.status_code)
+        print(response.text)
 
 def get_page_id(title: str, spaceKey: str) -> str:
-    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={title}"
+    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     #TODO: Get auth from secrets
     headers = {
     'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
