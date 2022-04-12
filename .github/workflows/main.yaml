@@ -3,6 +3,7 @@ name: Upload Documentation
 on:
   workflow_run:
     workflows: ["Run Linting and PyTest"]
+    branches: [main]
     types:
       - completed
 

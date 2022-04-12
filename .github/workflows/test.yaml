@@ -1,6 +1,6 @@
 name: Run Linting and PyTest
 
-on: [push]
+on: [push, merge]
 
 permissions:
   contents: read
