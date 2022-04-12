@@ -4,6 +4,7 @@ import requests, json, os
 BASE_URL = os.environ.get("CONFLUENCE_URL")
 url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/1310721/child/attachment"
 
+#TODO fix secrets auth
 headers = {
 'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
 'User-Agent': 'python',

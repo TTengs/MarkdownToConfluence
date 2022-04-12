@@ -33,6 +33,7 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
 
     url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/{page_id}"
 
+    #TODO FIX from secrets
     headers = {
     'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
     'Content-Type': 'application/json; charset=utf-8',
