@@ -38,9 +38,9 @@ def upload_documentation(path_name:str, root:str):
         if(parent_name != "none"): #Create page as a child page, if there is a parent
             if(not page_exists_in_space(parent_name, space_obj['key'])): #If the parent page doesn't exists, create it
                 if(file_name != "index"):
-                    subprocess.call(["bash", "/src/convert.sh", f"{dirname(path_name)}/index.md"])
+                    subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(path_name)}/index.md"])
                 else:
-                    subprocess.call(["bash", "/src/convert.sh", f"{dirname(dirname(path_name))}/index.md"])
+                    subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(dirname(path_name))}/index.md"])
             parent_id = get_page_id(parent_name, space_obj['key'])
             response = create_page(path_name, page_name, space_obj, parent_id)
         else:

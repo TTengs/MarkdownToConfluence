@@ -48,8 +48,6 @@ def get_parent_name_from_path(path: str, root: str, default="Overview"):
         parent_name = get_prefix(path, root) + path_arr[-2]
     return parent_name
 
-print(get_parent_name_from_path("./documentation/page 1/index.md", "./documentation"))
-
 def get_all_md_paths(root: str):
     paths = []      
     def traverse(directory):
