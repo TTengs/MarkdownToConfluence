@@ -1,4 +1,10 @@
-on: [push] #change
+name: Upload Documentation
+
+on:
+  workflow_run:
+    workflows: ["Run Linting and PyTest"]
+    types:
+      - completed
 
 jobs:
   hello_world_job:
