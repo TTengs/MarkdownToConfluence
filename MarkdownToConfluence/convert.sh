@@ -15,6 +15,6 @@ pandoc "$DIR"/"${FILENAME}_final.md" -f markdown -t html -o "$DIR"/"${FILENAME}"
 rm "$DIR/${FILENAME}_final.md"
 
 #Uploading
-python3 /MarkdownToConfluence/upload_documentation.py "$PATHNAME" "$ROOT"
+python3 /MarkdownToConfluence/main.py "$PATHNAME" "$ROOT"
 rm "$DIR/${FILENAME}.html"
 
