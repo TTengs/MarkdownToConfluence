@@ -2,8 +2,13 @@ import os, sys
 from posixpath import basename, dirname
 
 def get_prefix(filepath: str, root: str) -> str:
+    if(filepath.endswith("index.md") and "prefix.txt" in os.listdir(dirname(filepath))): # No prefix for index page in folder with prefix.txt (prefix is only for underpages)
+        return ""
     if(os.path.isfile(filepath)):
         filepath = os.path.dirname(filepath)
+    else:
+        if("prefix.txt" in os.listdir(filepath)): # assume index.md, No prefix for index page in folder with prefix.txt (prefix is only for underpages)
+            return ""
     while("prefix.txt" not in os.listdir(filepath)):
         filepath = os.path.dirname(filepath)
         if(filepath == root or filepath == ""):
