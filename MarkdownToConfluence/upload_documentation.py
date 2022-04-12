@@ -1,9 +1,8 @@
 from posixpath import dirname, basename
-from check_if_page_exists import page_exists_in_space, get_page_id
-from create_content import create_page
-from delete_content import delete_page
-from update_content import update_page_content
-from page_file_info import get_prefix, get_page_name_from_path, get_parent_name_from_path
+from confluence import page_exists_in_space, get_page_id
+from confluence import create_page
+from confluence import update_page_content
+from filetools.page_file_info import get_page_name_from_path, get_parent_name_from_path
 import os
 import subprocess
 

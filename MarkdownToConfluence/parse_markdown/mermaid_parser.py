@@ -1,4 +1,4 @@
-import upload_attachments, os
+import os
 
 def parse_mermaid_macro(filename):
     if(os.path.isdir(filename)):

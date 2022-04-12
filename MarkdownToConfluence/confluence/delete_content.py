@@ -1,5 +1,5 @@
 import requests, json
-from page_file_info import get_all_page_names_in_filesystem
+from filetools.page_file_info import get_all_page_names_in_filesystem
 import sys, os
 
 BASE_URL = os.environ.get("CONFLUENCE_URL")

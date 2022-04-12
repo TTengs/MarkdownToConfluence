@@ -1,2 +1,2 @@
 # MarkdownToConfluence
-Bachelor 2022 - Anders Larse &amp; Theis Tengs
+Bachelor 2022 - Anders Larsen &amp; Theis Tengs
