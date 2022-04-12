@@ -1,27 +1,28 @@
-name: Upload Documentation
 
-on:
-  workflow_run:
-    workflows: ["Run Linting and PyTest"]
-    branches: [main]
-    types:
-      - completed
+# name: Upload Documentation
 
-jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: Converting Markdown to Confluence
-    steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Conversion step
-        env:
-          #The not so secret, secret
-          #https://at-bachelor.atlassian.net
-          CONFLUENCE_URL: ${{ secrets.CONFLUENCE_URL }}
-        uses: ./ # Uses an action in the root directory
-        id: hello
-        with:
-          fileslocation: './documentation'
+# on:
+#   workflow_run:
+#     workflows: ["Run Linting and PyTest"]
+#     branches: [main]
+#     types:
+#       - completed
+
+# jobs:
+#   hello_world_job:
+#     runs-on: ubuntu-latest
+#     name: Converting Markdown to Confluence
+#     steps:
+#       # To use this repository's private action,
+#       # you must check out the repository
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Conversion step
+#         env:
+#           #The not so secret, secret
+#           #https://at-bachelor.atlassian.net
+#           CONFLUENCE_URL: ${{ secrets.CONFLUENCE_URL }}
+#         uses: ./ # Uses an action in the root directory
+#         id: hello
+#         with:
+#           fileslocation: './documentation'
