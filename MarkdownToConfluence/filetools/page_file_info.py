@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, json
 from posixpath import basename, dirname
 
 def get_prefix(filepath: str, root: str) -> str:
@@ -30,13 +30,20 @@ def get_page_name_from_path(path: str, root: str):
 
 # Returns the page name of the parent of the file in path. Returns default value if no parent exists i system
 def get_parent_name_from_path(path: str, root: str, default="Overview"):
+    if("settings.json" in os.listdir(root)):
+        settings = json.load(open(root + "/settings.json"))
+        if("parent_page" in settings.keys()):
+            default = settings["parent_page"]
     if(os.path.isdir(path)): # Assume index.md if path is dir
         path += "/index.md"
     path_arr = path.split('/')
     file_name = basename(path).replace(".md", "")
     parent_name = ""
     if(file_name == "index"):
-        parent_name = get_prefix(dirname(dirname(path)), root) + path_arr[-3] if(len(path_arr) > 2 and path_arr[-3] != os.environ.get("INPUT_FILESLOCATION")) else default
+        if(len(path_arr) > 2 and path_arr[-3] != basename(root)):
+            parent_name = get_prefix(dirname(dirname(path)), root) + path_arr[-3]
+        else:
+            parent_name = default
     else:
         parent_name = get_prefix(path, root) + path_arr[-2]
     return parent_name

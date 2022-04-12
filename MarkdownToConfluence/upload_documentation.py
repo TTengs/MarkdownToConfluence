@@ -1,9 +1,8 @@
 from posixpath import dirname, basename
-from check_if_page_exists import page_exists_in_space, get_page_id
-from create_content import create_page
-from delete_content import delete_page
-from update_content import update_page_content
-from page_file_info import get_prefix, get_page_name_from_path, get_parent_name_from_path
+from confluence import page_exists_in_space, get_page_id
+from confluence import create_page
+from confluence import update_page_content
+from filetools.page_file_info import get_page_name_from_path, get_parent_name_from_path
 import os
 import subprocess
 
@@ -38,9 +37,9 @@ def upload_documentation(path_name:str, root:str):
         if(parent_name != "none"): #Create page as a child page, if there is a parent
             if(not page_exists_in_space(parent_name, space_obj['key'])): #If the parent page doesn't exists, create it
                 if(file_name != "index"):
-                    subprocess.call(["bash", "/src/convert.sh", f"{dirname(path_name)}/index.md"])
+                    subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(path_name)}/index.md"])
                 else:
-                    subprocess.call(["bash", "/src/convert.sh", f"{dirname(dirname(path_name))}/index.md"])
+                    subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(dirname(path_name))}/index.md"])
             parent_id = get_page_id(parent_name, space_obj['key'])
             response = create_page(path_name, page_name, space_obj, parent_id)
         else:
