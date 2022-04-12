@@ -1,1 +1,1 @@
-import parse_markdown
+from .parse_markdown import *

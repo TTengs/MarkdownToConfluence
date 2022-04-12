@@ -1,4 +1,3 @@
-import re
 import requests, json, os
 
 BASE_URL = os.environ.get("CONFLUENCE_URL")

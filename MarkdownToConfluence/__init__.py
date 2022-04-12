@@ -1,3 +1,3 @@
-import confluence
-import filetools
-import parse_markdown
+from .confluence import *
+from .filetools import *
+from .parse_markdown import *
