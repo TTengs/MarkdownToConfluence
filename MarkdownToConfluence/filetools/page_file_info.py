@@ -1,22 +1,30 @@
-import os, sys, json
+import os, json
 from posixpath import basename, dirname
 
-def get_prefix(filepath: str, root: str) -> str:
-    if(filepath.endswith("index.md") and "prefix.txt" in os.listdir(dirname(filepath))): # No prefix for index page in folder with prefix.txt (prefix is only for underpages)
+# Returns "" if path == root
+def get_prefix(path: str, root: str) -> str:
+    if(not os.path.exists(path) or not os.path.exists(root)):
+        raise FileNotFoundError
+    if(path == root):
         return ""
-    if(os.path.isfile(filepath)):
-        filepath = os.path.dirname(filepath)
+    if(path.endswith("index.md") and "prefix.txt" in os.listdir(dirname(path))): # No prefix for index page in folder with prefix.txt (prefix is only for underpages)
+        return ""
+    if(os.path.isfile(path)):
+        path = os.path.dirname(path)
     else:
-        if("prefix.txt" in os.listdir(filepath)): # assume index.md, No prefix for index page in folder with prefix.txt (prefix is only for underpages)
+        if("prefix.txt" in os.listdir(path)): # assume index.md, No prefix for index page in folder with prefix.txt (prefix is only for underpages)
             return ""
-    while("prefix.txt" not in os.listdir(filepath)):
-        filepath = os.path.dirname(filepath)
-        if(filepath == root or filepath == ""):
+    while("prefix.txt" not in os.listdir(path)):
+        path = os.path.dirname(path)
+        if(path == root or path == ""):
             return ""
-    with open(f"{filepath}/prefix.txt") as f:
+    with open(f"{path}/prefix.txt") as f:
         return f.readline()
 
+# Returns "" if path == root
 def get_page_name_from_path(path: str, root: str):
+    if(path == root):
+        return ""
     if(os.path.isdir(path)): # Assume index.md if path is dir
         path += "/index.md"
     path_arr = path.split('/')
@@ -29,7 +37,10 @@ def get_page_name_from_path(path: str, root: str):
     return page_name
 
 # Returns the page name of the parent of the file in path. Returns default value if no parent exists i system
+# Returns "" if path == root
 def get_parent_name_from_path(path: str, root: str, default="Overview"):
+    if(path == root):
+        return ""
     if("settings.json" in os.listdir(root)):
         settings = json.load(open(root + "/settings.json"))
         if("parent_page" in settings.keys()):
@@ -64,5 +75,7 @@ def get_all_md_paths(root: str):
 def get_all_page_names_in_filesystem(root: str):
     page_names = []
     for path in get_all_md_paths(root):
-        page_names.append(get_page_name_from_path(path, root))
+        name = (get_page_name_from_path(path, root))
+        print(name)
+        page_names.append(name)
     return page_names

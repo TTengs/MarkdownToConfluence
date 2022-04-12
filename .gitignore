@@ -1,2 +1,4 @@
 .vscode/*
-MarkdownToConfluence/__pycache__/*
+.vscode
+**/__pycache__/*
+**/__pycache__
