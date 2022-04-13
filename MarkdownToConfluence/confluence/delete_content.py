@@ -11,7 +11,7 @@ def delete_page(page_id: str, page_name=""):
 
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
     'User-Agent': 'python'
     }
 
@@ -33,7 +33,7 @@ def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
 
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
     'User-Agent': 'python'
     }
 
