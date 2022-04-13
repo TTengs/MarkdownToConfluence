@@ -1,11 +1,6 @@
 name: Upload Documentation
 
 on: [push]
-#  workflow_run:
-#    workflows: ["Run Linting and PyTest"]
-#    branches: [main]
-#    types:
-#      - completed
 
 jobs:
   hello_world_job:

@@ -1,1 +1,2 @@
-from .parse_markdown import *
+__all__ = ["parse_markdown", "mermaid_parser"]
+import parse_markdown

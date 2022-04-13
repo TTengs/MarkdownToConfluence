@@ -2,3 +2,5 @@
 .vscode
 **/__pycache__/*
 **/__pycache__
+venv/
+MarkdownToConfluence.egg-info/
