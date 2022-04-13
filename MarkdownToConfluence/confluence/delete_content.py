@@ -4,14 +4,16 @@ import sys, os
 
 BASE_URL = os.environ.get("CONFLUENCE_URL")
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
+AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
 
 def delete_page(page_id: str, page_name=""):
     
-    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/{page_id}"
+    url = f"{BASE_URL}/rest/api/content/{page_id}"
 
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': AUTH_TOKEN,
     'User-Agent': 'python'
     }
 
@@ -28,12 +30,12 @@ def delete_page(page_id: str, page_name=""):
     the exclude arg takes a list of page names, that are not to be deleted, even if they dont exist in the filesystem
 """
 def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
-    base_url = "https://at-bachelor.atlassian.net/wiki"
-    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={space_key}"
+    base_url = BASE_URL
+    url = f"{BASE_URL}/rest/api/content?spaceKey={space_key}"
 
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': AUTH_TOKEN,
     'User-Agent': 'python'
     }
 
@@ -57,4 +59,4 @@ if __name__ == "__main__":
     if(len(sys.argv)> 1):
         delete_non_existing_pages(sys.argv[1], sys.argv[2])
     else:
-        delete_non_existing_pages("~955037829", FILES_PATH)
+        delete_non_existing_pages(SPACE_ID, FILES_PATH)

@@ -18,7 +18,7 @@ jobs:
           CONFLUENCE_NAME: 'Anders Larsen'
           CONFLUENCE_SPACE_ID: '~955037829'
           #Det er den her som skal ind i Github secrets
-          AUTH_TOKEN: 'larse19:zG1kBMbrOOPKYnSRHP4m415B'
+          AUTH_TOKEN: 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI='
           #${{ secrets.CONFLUENCE_URL }}
         uses: ./ # Uses an action in the root directory
         id: Convert

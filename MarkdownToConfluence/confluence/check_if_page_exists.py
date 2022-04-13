@@ -1,11 +1,15 @@
 from urllib.parse import quote
 import requests, json
+import os
+
+AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+BASE_URL = os.environ.get("CONFLUENCE_URL")
 
 def page_exists_in_space(title: str, spaceKey: str) -> bool:
-    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
+    url = f"{BASE_URL}/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
+    'Authorization': AUTH_TOKEN,
     'User-Agent': 'python'
     }
     response = requests.request('GET', url, headers=headers)
@@ -19,10 +23,10 @@ def page_exists_in_space(title: str, spaceKey: str) -> bool:
         print(response.text)
 
 def get_page_id(title: str, spaceKey: str) -> str:
-    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
+    url = f"{BASE_URL}/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
+    'Authorization': AUTH_TOKEN,
     'User-Agent': 'python'
     }
     response = requests.request('GET', url, headers=headers)

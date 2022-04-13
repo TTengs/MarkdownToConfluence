@@ -1,6 +1,10 @@
 import json
 import codecs
 import requests
+import os
+
+AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+BASE_URL = os.environ.get("CONFLUENCE_URL")
 
 def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     filename = filename.replace(".md", ".html")
@@ -31,16 +35,16 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
-    url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/{page_id}"
+    url = f"{BASE_URL}/rest/api/content/{page_id}"
 
     headers = {
-    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
+    'Authorization': AUTH_TOKEN,
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }
 
     # Get current version
-    get_response = requests.request("GET", f"https://at-bachelor.atlassian.net/wiki/rest/api/content/{page_id}?expand=version", headers=headers)
+    get_response = requests.request("GET", f"{BASE_URL}/rest/api/content/{page_id}?expand=version", headers=headers)
     version_number = int(json.loads(get_response.text)['version']['number'])
     template['version']['number'] = version_number + 1
 
