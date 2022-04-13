@@ -18,8 +18,8 @@ jobs:
           CONFLUENCE_NAME: 'Anders Larsen'
           CONFLUENCE_SPACE_ID: '~955037829'
           #Det er den her som skal ind i Github secrets
-          AUTH_TOKEN: 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI='
-          #${{ secrets.CONFLUENCE_URL }}
+          #Lige nu er auth token = 'Basic ...', skal lige have fjernet "Basic" måske
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         uses: ./ # Uses an action in the root directory
         id: Convert
         with:

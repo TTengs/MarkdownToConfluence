@@ -1,7 +1,10 @@
 import json
 import codecs
 import requests
-import sys
+import sys, os
+
+BASE_URL = os.environ.get("CONFLUENCE_URL")
+AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 
 def create_page(filename: str, title: str, space_obj, parent_id="none"):
     filename = filename.replace(".md", ".html")
@@ -40,11 +43,10 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
     f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
-    url = "https://at-bachelor.atlassian.net/wiki/rest/api/content"
+    url = BASE_URL
 
-    #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': AUTH_TOKEN,
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }

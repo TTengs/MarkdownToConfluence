@@ -1,10 +1,13 @@
 import requests, json, os
 
 BASE_URL = os.environ.get("CONFLUENCE_URL")
-url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/1310721/child/attachment"
+AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+
+#TODO: hvad er '1310721'??
+url = f"{BASE_URL}/rest/api/content/1310721/child/attachment"
 
 headers = {
-'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+'Authorization': AUTH_TOKEN,
 'User-Agent': 'python',
 'X-Atlassian-Token': 'no-check'
 }

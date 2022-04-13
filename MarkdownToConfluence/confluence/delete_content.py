@@ -11,7 +11,6 @@ def delete_page(page_id: str, page_name=""):
     
     url = f"{BASE_URL}/rest/api/content/{page_id}"
 
-    #TODO: Get auth from secrets
     headers = {
     'Authorization': AUTH_TOKEN,
     'User-Agent': 'python'
@@ -33,7 +32,6 @@ def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
     base_url = BASE_URL
     url = f"{BASE_URL}/rest/api/content?spaceKey={space_key}"
 
-    #TODO: Get auth from secrets
     headers = {
     'Authorization': AUTH_TOKEN,
     'User-Agent': 'python'
