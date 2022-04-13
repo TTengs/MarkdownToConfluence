@@ -26,5 +26,5 @@ RUN chmod +x /MarkdownToConfluence/entrypoint.sh
 # #RUN sed $'s/\r$//' /MarkdownToConfluence/convert_all.sh
 # #RUN sed $'s/\r$//' /MarkdownToConfluence/convert.sh
 
-ENTRYPOINT [ "sh", "/MarkdownToConfluence/entrypoint.sh" ]
+ENTRYPOINT [ "sh", "/MarkdownToConfluence/convert_all.sh" ]
 # ENTRYPOINT ["sh", "/MarkdownToConfluence/convert_all.sh"]
