@@ -14,7 +14,7 @@ jobs:
       - name: Conversion step
         env:
           #The not so secret, secret
-          CONFLUENCE_URL: https://at-bachelor.atlassian.net
+          CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
           CONFLUENCE_NAME: 'Anders Larsen'
           CONFLUENCE_SPACE_ID: '~955037829'
           #Det er den her som skal ind i Github secrets
