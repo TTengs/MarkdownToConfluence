@@ -1,11 +1,11 @@
 name: Upload Documentation
 
-on:
+on: [push]
 #  workflow_run:
 #    workflows: ["Run Linting and PyTest"]
-    branches: [push]
-    types:
-      - completed
+#    branches: [main]
+#    types:
+#      - completed
 
 jobs:
   hello_world_job:
