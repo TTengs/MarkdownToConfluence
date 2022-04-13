@@ -5,7 +5,7 @@ def page_exists_in_space(title: str, spaceKey: str) -> bool:
     url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
     'User-Agent': 'python'
     }
     response = requests.request('GET', url, headers=headers)
@@ -22,7 +22,7 @@ def get_page_id(title: str, spaceKey: str) -> str:
     url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     #TODO: Get auth from secrets
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
     'User-Agent': 'python'
     }
     response = requests.request('GET', url, headers=headers)

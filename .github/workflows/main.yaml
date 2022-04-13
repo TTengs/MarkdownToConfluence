@@ -14,9 +14,13 @@ jobs:
       - name: Conversion step
         env:
           #The not so secret, secret
-          #https://at-bachelor.atlassian.net
-          CONFLUENCE_URL: ${{ secrets.CONFLUENCE_URL }}
+          CONFLUENCE_URL: https://at-bachelor.atlassian.net
+          CONFLUENCE_NAME: 'Anders Larsen'
+          CONFLUENCE_SPACE_ID: '~955037829'
+          #Det er den her som skal ind i Github secrets
+          AUTH_TOKEN: 'larse19:zG1kBMbrOOPKYnSRHP4m415B'
+          #${{ secrets.CONFLUENCE_URL }}
         uses: ./ # Uses an action in the root directory
-        id: hello
+        id: Convert
         with:
           fileslocation: './documentation'

@@ -34,7 +34,7 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     url = f"https://at-bachelor.atlassian.net/wiki/rest/api/content/{page_id}"
 
     headers = {
-    'Authorization': 'Basic bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI=',
+    'Authorization': 'larse19:zG1kBMbrOOPKYnSRHP4m415B',
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }
