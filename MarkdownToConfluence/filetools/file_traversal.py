@@ -11,8 +11,7 @@ USERNAME = os.environ.get("CONFLUENCE_NAME")
 
 space_obj = {
                 "id": 33014,
-                "key": SPACE_ID,
-                "name": USERNAME
+                "key": SPACE_ID
             }
         
 # iterate over files in

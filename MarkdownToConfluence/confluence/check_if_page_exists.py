@@ -29,7 +29,6 @@ def get_page_id(title: str, spaceKey: str) -> str:
     'Authorization': authorization_string,
     'User-Agent': 'python'
     }
-    print(authorization_string)
     response = requests.request('GET', url, headers=headers)
     if(response.status_code == 200):
         results = json.loads(response.text)['results']
