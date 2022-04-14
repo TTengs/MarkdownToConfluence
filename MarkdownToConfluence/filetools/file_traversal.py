@@ -1,13 +1,7 @@
-
-# import required module
 import os
 # assign directory
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
 SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
-USERNAME = os.environ.get("CONFLUENCE_NAME")
-
-#TODO removede comment
-#directory = 'documentation'
 
 space_obj = {
                 "key": SPACE_ID

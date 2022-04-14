@@ -1,26 +1,20 @@
-name: Upload Documentation
+# name: Upload Documentation
 
-on: [push]
+# on: [push]
 
-jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: Converting Markdown to Confluence
-    steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Conversion step
-        env:
-          #The not so secret, secret
-          CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
-          CONFLUENCE_NAME: 'Anders Larsen'
-          CONFLUENCE_SPACE_ID: '~955037829'
-          #Det er den her som skal ind i Github secrets
-          #Lige nu er auth token = 'Basic ...', skal lige have fjernet "Basic" måske
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-        uses: ./ # Uses an action in the root directory
-        id: Convert
-        with:
-          fileslocation: './documentation'
+# jobs:
+#   hello_world_job:
+#     runs-on: ubuntu-latest
+#     name: Converting Markdown to Confluence
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Conversion step
+#         env:
+#           CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
+#           CONFLUENCE_SPACE_ID: '~955037829'
+#           AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+#         uses: ./ # Uses an action in the root directory
+#         id: Convert
+#         with:
+#           fileslocation: './documentation'

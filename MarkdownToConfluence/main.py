@@ -7,9 +7,7 @@ import os
 import subprocess
 
 SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
-USERNAME = os.environ.get("CONFLUENCE_NAME")
 
-#TODO: kan 'id' fjernes?
 space_obj = {
         "key": SPACE_ID
     }
@@ -48,6 +46,7 @@ def upload_documentation(path_name:str, root:str):
             response = create_page(path_name, page_name, space_obj) #Create page as top page
 
     if(response.status_code == 200):
+        #TODO: Den skriver det her også selvom at den ikke uploader sider
         print(f"Uploaded {page_name} with {parent_name} as parent")
     else:
         print(f"Error uploading {page_name}. Status code {response.status_code}")
