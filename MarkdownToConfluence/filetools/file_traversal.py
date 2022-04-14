@@ -10,7 +10,6 @@ USERNAME = os.environ.get("CONFLUENCE_NAME")
 #directory = 'documentation'
 
 space_obj = {
-                "id": 33014,
                 "key": SPACE_ID
             }
         

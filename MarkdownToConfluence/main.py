@@ -11,7 +11,6 @@ USERNAME = os.environ.get("CONFLUENCE_NAME")
 
 #TODO: kan 'id' fjernes?
 space_obj = {
-        "id": 33014,
         "key": SPACE_ID
     }
 
