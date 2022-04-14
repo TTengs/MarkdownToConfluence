@@ -7,12 +7,13 @@ import os
 import subprocess
 
 SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
+USERNAME = os.environ.get("CONFLUENCE_NAME")
 
 #TODO: kan 'id' fjernes?
 space_obj = {
         "id": 33014,
         "key": SPACE_ID,
-        "name": "Anders Larsen"
+        "name": USERNAME
     }
 
 def upload_documentation(path_name:str, root:str):

@@ -6,6 +6,8 @@ import sys, os
 BASE_URL = os.environ.get("CONFLUENCE_URL")
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 
+authorization_string = f"Basic {AUTH_TOKEN}"
+
 def create_page(filename: str, title: str, space_obj, parent_id="none"):
     filename = filename.replace(".md", ".html")
     template = {
@@ -46,7 +48,7 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
     url = BASE_URL
 
     headers = {
-    'Authorization': AUTH_TOKEN,
+    'Authorization': authorization_string,
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }

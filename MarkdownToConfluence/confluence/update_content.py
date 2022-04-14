@@ -6,6 +6,8 @@ import os
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 BASE_URL = os.environ.get("CONFLUENCE_URL")
 
+authorization_string = f"Basic {AUTH_TOKEN}"
+
 def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     filename = filename.replace(".md", ".html")
     template = {
@@ -38,7 +40,7 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     url = f"{BASE_URL}/rest/api/content/{page_id}"
 
     headers = {
-    'Authorization': AUTH_TOKEN,
+    'Authorization': authorization_string,
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }

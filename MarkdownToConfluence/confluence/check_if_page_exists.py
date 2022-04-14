@@ -5,10 +5,12 @@ import os
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 BASE_URL = os.environ.get("CONFLUENCE_URL")
 
+authorization_string = f"Basic {AUTH_TOKEN}"
+
 def page_exists_in_space(title: str, spaceKey: str) -> bool:
     url = f"{BASE_URL}/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     headers = {
-    'Authorization': AUTH_TOKEN,
+    'Authorization': authorization_string,
     'User-Agent': 'python'
     }
     response = requests.request('GET', url, headers=headers)
@@ -24,7 +26,7 @@ def page_exists_in_space(title: str, spaceKey: str) -> bool:
 def get_page_id(title: str, spaceKey: str) -> str:
     url = f"{BASE_URL}/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
     headers = {
-    'Authorization': AUTH_TOKEN,
+    'Authorization': authorization_string,
     'User-Agent': 'python'
     }
     response = requests.request('GET', url, headers=headers)
