@@ -1,18 +1,16 @@
 name: 'Markdown To Confluence'
 description: 'Converts the contents of documentation folder to HTML and uploads to Confluence'
 inputs:
-  fileslocation:  # id of input
+  fileslocation:
     description: 'location of documentation'
     required: false
     default: './'
 outputs:
-  status: # id of output
+  status:
     description: 'Status of the converter'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-#  args:
-#    - ${{ inputs.fileslocation }}
 branding:
   icon: "coffee"
   color: "blue"

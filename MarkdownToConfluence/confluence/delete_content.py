@@ -7,12 +7,14 @@ FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
 
+authorization_string = f"Basic {AUTH_TOKEN}"
+
 def delete_page(page_id: str, page_name=""):
     
     url = f"{BASE_URL}/rest/api/content/{page_id}"
 
     headers = {
-    'Authorization': AUTH_TOKEN,
+    'Authorization': authorization_string,
     'User-Agent': 'python'
     }
 
@@ -33,7 +35,7 @@ def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
     url = f"{BASE_URL}/rest/api/content?spaceKey={space_key}"
 
     headers = {
-    'Authorization': AUTH_TOKEN,
+    'Authorization': authorization_string,
     'User-Agent': 'python'
     }
 

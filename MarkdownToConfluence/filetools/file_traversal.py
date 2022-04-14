@@ -1,17 +1,10 @@
-
-# import required module
 import os
 # assign directory
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
 SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
 
-#TODO removede comment
-#directory = 'documentation'
-
 space_obj = {
-                "id": 33014,
-                "key": SPACE_ID,
-                "name": "Anders Larsen"
+                "key": SPACE_ID
             }
         
 # iterate over files in
