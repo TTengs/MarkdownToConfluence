@@ -2,11 +2,11 @@ import requests, json
 from MarkdownToConfluence.filetools import get_all_page_names_in_filesystem
 import sys, os
 
-BASE_URL = os.environ.get("CONFLUENCE_URL")
-#BASE_URL = 'https://at-bachelor.atlassian.net/wiki'
+#BASE_URL = os.environ.get("CONFLUENCE_URL")
+BASE_URL = 'https://at-bachelor.atlassian.net/wiki'
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
-AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
-#AUTH_TOKEN = "bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI="
+#AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+AUTH_TOKEN = "bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI="
 SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
 
 authorization_string = f"Basic {AUTH_TOKEN}"

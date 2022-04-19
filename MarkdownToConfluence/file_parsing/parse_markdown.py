@@ -1,5 +1,5 @@
 import sys
-from .mermaid_parser import parse_mermaid_macro
+from MarkdownToConfluence.file_parsing.mermaid_parser import parse_mermaid_macro
 
 def parse_markdown(filename):
     parse_mermaid_macro(filename)

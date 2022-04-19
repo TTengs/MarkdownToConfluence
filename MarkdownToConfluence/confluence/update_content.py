@@ -46,7 +46,7 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     }
 
     # Get current version
-    get_response = requests.request("GET", f"{BASE_URL}/rest/api/content/{page_id}?expand=version", headers=headers)
+    get_response = requests.request("GET", f"{url}?expand=version", headers=headers)
     version_number = int(json.loads(get_response.text)['version']['number'])
     template['version']['number'] = version_number + 1
 

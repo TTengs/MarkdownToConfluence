@@ -1,1 +1,0 @@
-![mermaid-1](/mnt/e/uni/bachelor/markdowntoconfluence/MarkdownToConfluence/file_parsing/tests/testdocs/mermaid-1.png)

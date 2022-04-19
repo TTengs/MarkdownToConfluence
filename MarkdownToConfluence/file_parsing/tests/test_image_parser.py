@@ -10,10 +10,10 @@ def test_convert_md_img_to_confluence_img():
         f.write('![alt](path/to/image.jpg)\n')
     convert_all_md_img_to_confluence_img("testfile.md")
     with open("testfile.md", "r") as f:
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="alt" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="alt" /></ac:image>'
-    os.remove("testfile.md")
+        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="alt"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="alt"/></ac:image>'
+    #os.remove("testfile.md")
     
