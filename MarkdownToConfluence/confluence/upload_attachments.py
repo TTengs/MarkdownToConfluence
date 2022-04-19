@@ -30,7 +30,7 @@ def upload_attachment(page_title, attactchment_name, filepath):
             response = requests.post(url, headers=headers, files=file)
         else: # Attachment exists, update it
              # Update attachment
-            files = {'file': (f'{attactchment_name}', open(f'./{filepath}', 'rb'))}
+            files = {'file': (f'{attactchment_name}', open(filepath, 'rb'))}
             response = requests.post(f'{url}/{id}/data', headers=headers, files=files)
 
         return response
