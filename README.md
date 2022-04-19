@@ -10,7 +10,7 @@ The necessary environment variables are as follows:
 
 The URL for the, har ingen idé hvad det hedder
 
-`CONFLUENCE_SPACE_ID`
+`CONFLUENCE_SPACE_KEY`
 
 The ID of the space that is being uploaded to.
 
