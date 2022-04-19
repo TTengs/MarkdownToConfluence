@@ -3,8 +3,10 @@ from posixpath import basename, dirname
 
 # Returns "" if path == root
 def get_prefix(path: str, root: str) -> str:
-    if(not os.path.exists(path) or not os.path.exists(root)):
-        raise FileNotFoundError
+    if(not os.path.exists(path)):
+        raise FileNotFoundError(path)
+    if(not os.path.exists(root)):
+        raise FileNotFoundError(root)
     if(path == root):
         return ""
     if(path.endswith("index.md") and "prefix.txt" in os.listdir(dirname(path))): # No prefix for index page in folder with prefix.txt (prefix is only for underpages)
@@ -29,12 +31,12 @@ def get_page_name_from_path(path: str, root: str):
         path += "/index.md"
     path_arr = path.split('/')
     page_name = get_prefix(path, root)
-    file_name = basename(path).replace(".md", "")
-    if(file_name == "index"):
+    file_name = basename(path)
+    if(file_name == "index.md"):
         page_name += path_arr[-2]
     else:
         page_name += file_name
-    return page_name
+    return page_name.strip('.md')
 
 # Returns the page name of the parent of the file in path. Returns default value if no parent exists i system
 # Returns "" if path == root
@@ -47,17 +49,21 @@ def get_parent_name_from_path(path: str, root: str, default="Overview"):
             default = settings["parent_page"]
     if(os.path.isdir(path)): # Assume index.md if path is dir
         path += "/index.md"
+        
     path_arr = path.split('/')
-    file_name = basename(path).replace(".md", "")
+    file_name = basename(path)
     parent_name = ""
-    if(file_name == "index"):
-        if(len(path_arr) > 2 and path_arr[-3] != basename(root)):
-            parent_name = get_prefix(dirname(dirname(path)), root) + path_arr[-3]
-        else:
-            parent_name = default
+
+    if(file_name == "index.md"):
+        parent_path = dirname(dirname(path))
     else:
-        parent_name = get_prefix(path, root) + path_arr[-2]
+        parent_path = dirname(path)
+    if(parent_path != root):
+        parent_name = get_page_name_from_path(parent_path, root)
+    else:
+        parent_name = default
     return parent_name
+
 
 def get_all_md_paths(root: str):
     paths = []      

@@ -5,16 +5,17 @@ ROOT="$INPUT_FILESLOCATION"
 DIR="$(dirname "${PATHNAME}")"
 FILE="$(basename "${PATHNAME}")"
 FILENAME="$(echo ${FILE%.*})"
-#echo "[${PATHNAME}] [${DIR}] [${FILENAME}]"
 BASE_PATH=$(pwd)
 
 #Conversion
-#grep -q "\`\`\`mermaid" "$BASE_PATH/$PATHNAME/index.template.md" && docker run -v "$BASE_PATH"/"$PATHNAME":/data minlag/mermaid-cli -i /data/index.template.md -o /data/index.png
-python3 /MarkdownToConfluence/parse_markdown/parse_markdown.py "$PATHNAME"
-pandoc "$DIR"/"${FILENAME}_final.md" -f markdown -t html -o "$DIR"/"${FILENAME}".html
-rm "$DIR/${FILENAME}_final.md"
+if test -f "$BASE_PATH"/"$PATHNAME"; then
+    #echo "$BASE_PATH"/"$PATHNAME"
+    python3 /MarkdownToConfluence/file_parsing/parse_markdown.py "$PATHNAME"
+    #pandoc "$DIR"/"${FILENAME}_final.md" -f markdown -t html -o "$DIR"/"${FILENAME}".html
 
-#Uploading
-python3 /MarkdownToConfluence/main.py "$PATHNAME" "$ROOT"
-rm "$DIR/${FILENAME}.html"
+    #Uploading
+    python3 /MarkdownToConfluence/main.py "$PATHNAME" "$ROOT"
+    rm "$DIR/${FILENAME}_final.md"
+    rm "$DIR/${FILENAME}.html"
+fi
 

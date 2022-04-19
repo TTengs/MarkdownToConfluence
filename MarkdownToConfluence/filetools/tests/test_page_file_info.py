@@ -85,7 +85,6 @@ def test_get_all_page_names_in_filesystem():
     root= str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'
     testnames = ['DC5.0.0 5 Security', 'DC5.0.0 Configuring CORS', 'DC 5.0', 'DAM Center 5', 'page 1', 'page 1.1', 'abe']
     names = get_all_page_names_in_filesystem(root)
-    print(names)
     assert type(names) is list
     assert collections.Counter(names) == collections.Counter(testnames)
     assert len(names) == len(set(names))

@@ -2,10 +2,12 @@ import requests, json
 from MarkdownToConfluence.filetools import get_all_page_names_in_filesystem
 import sys, os
 
-BASE_URL = os.environ.get("CONFLUENCE_URL")
+#BASE_URL = os.environ.get("CONFLUENCE_URL")
+BASE_URL = 'https://at-bachelor.atlassian.net/wiki'
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
-AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
-SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
+#AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+AUTH_TOKEN = "bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI="
+SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
 
 authorization_string = f"Basic {AUTH_TOKEN}"
 
@@ -31,7 +33,6 @@ def delete_page(page_id: str, page_name=""):
     the exclude arg takes a list of page names, that are not to be deleted, even if they dont exist in the filesystem
 """
 def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
-    base_url = BASE_URL
     url = f"{BASE_URL}/rest/api/content?spaceKey={space_key}"
 
     headers = {
@@ -45,7 +46,7 @@ def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
     if(response.status_code == 200):
         results.extend(response_json['results'])
         while("next" in response_json['_links']):
-            url = base_url + response_json["_links"]["next"]
+            url = BASE_URL + response_json["_links"]["next"]
             response = requests.request("GET", url, headers=headers)
             response_json = json.loads(response.text)
             results.extend(response_json['results'])
@@ -59,4 +60,4 @@ if __name__ == "__main__":
     if(len(sys.argv)> 1):
         delete_non_existing_pages(sys.argv[1], sys.argv[2])
     else:
-        delete_non_existing_pages(SPACE_ID, FILES_PATH)
+        delete_non_existing_pages(SPACE_KEY, FILES_PATH)

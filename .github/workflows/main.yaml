@@ -1,20 +1,20 @@
-# name: Upload Documentation
+name: Upload Documentation
 
-# on: [push]
+on: [merge]
 
-# jobs:
-#   hello_world_job:
-#     runs-on: ubuntu-latest
-#     name: Converting Markdown to Confluence
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3
-#       - name: Conversion step
-#         env:
-#           CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
-#           CONFLUENCE_SPACE_ID: '~955037829'
-#           AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-#         uses: ./ # Uses an action in the root directory
-#         id: Convert
-#         with:
-#           fileslocation: './documentation'
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Converting Markdown to Confluence
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Conversion step
+        env:
+          CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
+          CONFLUENCE_SPACE_KEY: '~955037829'
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        uses: ./ # Uses an action in the root directory
+        id: Convert
+        with:
+          fileslocation: './documentation'

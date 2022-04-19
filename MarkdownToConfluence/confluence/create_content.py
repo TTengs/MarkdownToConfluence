@@ -3,8 +3,8 @@ import codecs
 import requests
 import sys, os
 
-BASE_URL = os.environ.get("CONFLUENCE_URL")
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+BASE_URL = os.environ.get("CONFLUENCE_URL")
 
 authorization_string = f"Basic {AUTH_TOKEN}"
 
@@ -45,7 +45,7 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
     f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
-    url = BASE_URL
+    url = f'{BASE_URL}/rest/api/content'
 
     headers = {
     'Authorization': authorization_string,
@@ -59,7 +59,6 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
     return response
 
 if __name__ == "__main__":
-    print(sys.argv)
     if(len(sys.argv) > 4):
         create_page(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
     else:
