@@ -38,7 +38,7 @@ This then needs to be base64 encoded and added as a github secret with the name 
 - name: Conversion step
         env:
           CONFLUENCE_URL: 'https://space.atlassian.net/wiki'
-          CONFLUENCE_SPACE_ID: '~955037829'
+          CONFLUENCE_SPACE_KEY: '~955037829'
           AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         uses: ./ # Uses an action in the root directory
         id: Convert
