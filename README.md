@@ -12,7 +12,7 @@ The URL for the Atlassian network
 
 `CONFLUENCE_SPACE_KEY`
 
-The ID of the space that is being uploaded to.
+The key of the space that is being uploaded to.
 
 `AUTH_TOKEN`
 
