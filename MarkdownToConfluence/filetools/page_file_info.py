@@ -4,7 +4,7 @@ from posixpath import basename, dirname
 # Returns "" if path == root
 def get_prefix(path: str, root: str) -> str:
     if(not os.path.exists(path) or not os.path.exists(root)):
-        raise FileNotFoundError
+        raise FileNotFoundError(path)
     if(path == root):
         return ""
     if(path.endswith("index.md") and "prefix.txt" in os.listdir(dirname(path))): # No prefix for index page in folder with prefix.txt (prefix is only for underpages)

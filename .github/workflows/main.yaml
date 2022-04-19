@@ -1,6 +1,6 @@
 name: Upload Documentation
 
-on: [push]
+on: [pull-request]
 
 jobs:
   hello_world_job:
