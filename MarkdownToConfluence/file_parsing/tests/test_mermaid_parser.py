@@ -10,5 +10,5 @@ def test_parse_mermaid_macro():
     with open(str(pathlib.Path(__file__).parent.resolve()) + '/testdocs/mermaid_final.md', 'r') as f:
         line = f.readline()
         assert line == f'![mermaid-1]({str(pathlib.Path(__file__).parent.resolve())}/testdocs/mermaid-1.png)'
-    #os.remove(str(pathlib.Path(__file__).parent.resolve()) + '/testdocs/mermaid_final.md')
-    #os.remove(str(pathlib.Path(__file__).parent.resolve()) + '/testdocs/mermaid-1.png')
+    os.remove(str(pathlib.Path(__file__).parent.resolve()) + '/testdocs/mermaid_final.md')
+    os.remove(str(pathlib.Path(__file__).parent.resolve()) + '/testdocs/mermaid-1.png')
