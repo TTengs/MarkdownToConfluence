@@ -8,7 +8,7 @@ The necessary environment variables are as follows:
 
 `CONFLUENCE_URL`
 
-The URL for the, har ingen idé hvad det hedder
+The URL for the Atlassian network
 
 `CONFLUENCE_SPACE_KEY`
 
