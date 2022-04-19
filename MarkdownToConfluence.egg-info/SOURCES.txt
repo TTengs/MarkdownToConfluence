@@ -13,12 +13,13 @@ MarkdownToConfluence/confluence/delete_content.py
 MarkdownToConfluence/confluence/update_content.py
 MarkdownToConfluence/confluence/upload_attachments.py
 MarkdownToConfluence/confluence/tests/__init__.py
+MarkdownToConfluence/file_parsing/__init__.py
+MarkdownToConfluence/file_parsing/mermaid_parser.py
+MarkdownToConfluence/file_parsing/parse_markdown.py
+MarkdownToConfluence/file_parsing/tests/__init__.py
+MarkdownToConfluence/file_parsing/tests/test_mermaid_parser.py
 MarkdownToConfluence/filetools/__init__.py
 MarkdownToConfluence/filetools/file_traversal.py
 MarkdownToConfluence/filetools/page_file_info.py
 MarkdownToConfluence/filetools/tests/__init__.py
 MarkdownToConfluence/filetools/tests/test_page_file_info.py
-MarkdownToConfluence/parse_markdown/__init__.py
-MarkdownToConfluence/parse_markdown/mermaid_parser.py
-MarkdownToConfluence/parse_markdown/parse_markdown.py
-MarkdownToConfluence/parse_markdown/tests/__init__.py
