@@ -1,15 +1,18 @@
 from posixpath import dirname, basename
+from MarkdownToConfluence.file_parsing import attachments
 from confluence import page_exists_in_space, get_page_id
 from confluence import create_page
 from confluence import update_page_content
+from confluence import upload_attachment
+from file_parsing import parse_and_get_attachments
 from filetools.page_file_info import get_page_name_from_path, get_parent_name_from_path
 import os
 import subprocess
 
-SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
+SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
 
 space_obj = {
-        "key": SPACE_ID
+        "key": SPACE_KEY
     }
 
 def upload_documentation(path_name:str, root:str):
@@ -27,6 +30,9 @@ def upload_documentation(path_name:str, root:str):
 
     # Get parent name
     parent_name = get_parent_name_from_path(path_name, root)
+
+    # Get and parse attachments
+    attachments = parse_and_get_attachments(path_name)
 
     #If the page already exists, just update it
     if(page_exists_in_space(page_name, space_obj["key"])): #Deletes page if it already exists TODO: Update existing pages
@@ -48,6 +54,8 @@ def upload_documentation(path_name:str, root:str):
     if(response.status_code == 200):
         #TODO: Den skriver det her også selvom at den ikke uploader sider
         print(f"Uploaded {page_name} with {parent_name} as parent")
+        for attachment in attachments:
+            upload_attachment(page_name, attachment[0], attachment[1])
     else:
         print(f"Error uploading {page_name}. Status code {response.status_code}")
     return response

@@ -1,12 +1,7 @@
 import os
 # assign directory
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
-SPACE_ID = os.environ.get("CONFLUENCE_SPACE_ID")
 
-space_obj = {
-                "key": SPACE_ID
-            }
-        
 # iterate over files in
 # that directory
 def traverse(directory):
