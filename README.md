@@ -40,7 +40,7 @@ This then needs to be base64 encoded and added as a github secret with the name 
           CONFLUENCE_URL: 'https://network.atlassian.net/wiki'
           CONFLUENCE_SPACE_KEY: 'spaceKey'
           AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-        uses: ./ # Uses an action in the root directory
+        uses: TTengs/MarkdownToConfluence@v1.1
         id: Convert
         with:
           fileslocation: './documentation'
