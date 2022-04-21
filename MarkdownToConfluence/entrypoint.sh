@@ -1,9 +1,9 @@
 #!/bin/bash
-for i in ${{ steps.getfile.outputs.files }}
+for i in ${CHANGED_FILES}
 do
     echo $i
 done
 
 echo "-------"
 
-echo ${{ steps.getfile.outputs.files }}
+echo ${CHANGED_FILES}

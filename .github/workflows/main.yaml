@@ -23,6 +23,7 @@ jobs:
           CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
           CONFLUENCE_SPACE_KEY: '~955037829'
           AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          CHANGED_FILES: ${{ steps.getfile.outputs.files }}
         uses: ./ # Uses an action in the root directory
         id: Convert
         with:
