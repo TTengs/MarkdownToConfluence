@@ -1,6 +1,9 @@
 name: Upload Documentation
 
-on: [merge]
+on: 
+  push:
+    paths:
+      - 'documentation/**'
 
 jobs:
   hello_world_job:
@@ -9,6 +12,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
       - name: Conversion step
         env:
           CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'

@@ -14,6 +14,7 @@ SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
 
 space_obj = {
         "key": SPACE_KEY,
+        #TODO SKAL LIGE FIXES???
         "name": "Anders Larsen"
     }
 
