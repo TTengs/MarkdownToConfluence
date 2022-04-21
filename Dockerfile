@@ -14,7 +14,7 @@ FROM ubuntu:latest
 # COPY setup.py /setup.py
 # COPY requirements.txt requirements.txt
 # RUN pip install -r requirements.txt
-# COPY ./MarkdownToConfluence /MarkdownToConfluence
+COPY ./MarkdownToConfluence /MarkdownToConfluence
 # RUN pip install -e .
 
 

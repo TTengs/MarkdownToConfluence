@@ -1,9 +1,8 @@
 name: Upload Documentation
 
-on: 
-  push:
-    paths:
-      - 'documentation/**'
+on: [push]
+#    paths:
+#      - 'documentation/**'
 
 jobs:
   hello_world_job:
@@ -12,9 +11,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
+#        with:
+#          fetch-depth: 0
+      - name: Get changed files
+        id: getfile
+        id: getfile
+        run: |
+          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }}| xargs)"
+#      - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
+      - name: Echo changed files
+        run: |
+        for i in ${{ steps.getfile.outputs.files }}
+          do
+              echo $i
+          done
       - name: Conversion step
         env:
           CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
