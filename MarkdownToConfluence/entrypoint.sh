@@ -1,2 +1,5 @@
 #!/bin/bash
-ls
+for i in ${{ steps.getfile.outputs.files }}
+          do
+              echo $i
+          done
