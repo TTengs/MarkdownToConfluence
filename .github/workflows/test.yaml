@@ -1,6 +1,6 @@
 name: Run Linting and PyTest
 
-on: [pull-request]
+on: [pull_request]
 
 permissions:
   contents: read
