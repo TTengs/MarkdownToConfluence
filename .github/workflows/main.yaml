@@ -21,7 +21,7 @@ jobs:
 #      - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
       - name: Echo changed files
         run: |
-        for i in ${{ steps.getfile.outputs.files }}
+          for i in ${{ steps.getfile.outputs.files }}
           do
               echo $i
           done
