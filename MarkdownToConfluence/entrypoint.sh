@@ -1,9 +1,17 @@
 #!/bin/bash
-for i in ${CHANGED_FILES}
+cd ..
+docsDiff=$(git diff --name-only HEAD^^ HEAD ${INPUT_FILESLOCATION})
+echo $docsDiff
+
+echo "-------"
+
+for i in $docsDiff
 do
     echo $i
 done
 
 echo "-------"
 
-echo ${CHANGED_FILES}
+git diff --name-only HEAD^^ HEAD documentation
+
+#echo ${CHANGED_FILES}
