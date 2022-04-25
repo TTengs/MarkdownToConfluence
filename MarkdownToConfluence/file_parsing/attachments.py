@@ -11,7 +11,14 @@ def parse_and_get_attachments(filename):
             reg = re.match(r'!\[(?P<alt>[^\]]*)\]\((?P<filename>.*?)(?=\"|\))(\"(?P<title>.*)\")?\)', line)
             if (reg != None):
                 name = reg['title'] if reg['title'] != None else reg['alt']
-                path = reg['filename'] if os.path.isabs(reg['filename']) else os.path.join(dirname(filename), basename(reg['filename']))
+                path = ""
+                if(os.path.isabs(reg["filename"])):
+                    path = reg["filename"]
+                elif(os.path.exists(os.path.join(dirname(filename), basename(reg['filename'])))):
+                    path = os.path.join(dirname(filename), basename(reg['filename']))
+                else:
+                    path = os.path.abspath(reg["filename"])
+                print("image path", path)
                 image = convert_md_img_to_confluence_img(line, path)
                 if(image != None):
                     f.write(image)
