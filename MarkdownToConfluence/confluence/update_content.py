@@ -53,4 +53,7 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     # Upload html to confluence
     put_response = requests.request("PUT", url, headers=headers, data=json.dumps(template))
 
+    if(put_response.status_code != 200):
+        print(template['body'])
+
     return(put_response)

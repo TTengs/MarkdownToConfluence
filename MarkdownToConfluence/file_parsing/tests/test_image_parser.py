@@ -1,19 +1,20 @@
-from MarkdownToConfluence.file_parsing.image_parser import convert_all_md_img_to_confluence_img
-import os
+from MarkdownToConfluence.file_parsing.image_parser import convert_md_img_to_confluence_img
+import os, pathlib
 
 def test_convert_md_img_to_confluence_img():
+    root=str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'
+    filepath = f'{root}/images/markdown/image.md'
+    with open(filepath, 'r') as f:
+        lines = f.readlines()
     with open("testfile.md", "w") as f:
-        f.write('![alt](path/to/image.png "title")\n')
-        f.write('![alt](path/to/image.jpg "title")\n')
-        f.write('![alt](path with space/to/image.jpg "title")\n')
-        f.write('![alt](path/to/image.png)\n')
-        f.write('![alt](path/to/image.jpg)\n')
-    convert_all_md_img_to_confluence_img("testfile.md")
+        for line in lines:
+            f.write(convert_md_img_to_confluence_img(line, filepath))
     with open("testfile.md", "r") as f:
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title"/></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title"/></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="title"/></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="alt"/></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image><ri:attachment ri:filename="alt"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt"/></ac:image>'
     #os.remove("testfile.md")
     

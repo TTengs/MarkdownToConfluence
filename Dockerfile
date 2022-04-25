@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y software-properties-common gcc && \
 RUN apt-get install -y python3.6 python3-distutils python3-pip python3-apt python3-venv
 
 RUN apt-get install -y pandoc
+#ffmpeg libsm6 libxext6
 
 RUN python3 -m venv venv
 RUN chmod +x /venv/*
