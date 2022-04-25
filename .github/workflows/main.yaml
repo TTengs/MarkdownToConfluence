@@ -1,6 +1,9 @@
 name: Upload Documentation
 
-on: [pull-request]
+on: 
+  pull_request:
+    branches:
+      - main
 
 jobs:
   hello_world_job:
@@ -13,8 +16,7 @@ jobs:
         env:
           CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
           CONFLUENCE_SPACE_KEY: '~955037829'
-          #AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-          AUTH_TOKEN: 'bGFyc2UxOUBzdHVkZW50LnNkdS5kazpoYVpaSEM5MTFZc0ZUb2pXODV3WTk3Nzg='
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         uses: ./ # Uses an action in the root directory
         id: Convert
         with:
