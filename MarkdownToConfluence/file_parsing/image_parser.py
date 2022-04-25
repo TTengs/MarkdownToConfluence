@@ -1,5 +1,6 @@
 from posixpath import dirname, basename
 import re, os
+from MarkdownToConfluence.filetools import get_abs_path_from_relative
 
 from PIL import Image
 
@@ -8,10 +9,8 @@ def convert_all_md_img_to_confluence_img(filename):
         lines = f.readlines()
     with open(filename, 'w') as f:
         for line in lines:
-            img = re.match(r'!\[(?P<alt>[^\]]*)\]\((?P<filename>.*?)(?=\"|\))(\"(?P<title>.*)\")?\)', line) #RegEx magic
-            path = img['filename'] if os.path.isabs(img['filename']) else os.path.join(dirname(filename), basename(img['filename']))
-            res = convert_md_img_to_confluence_img(line, path)
-            if(line != None):
+            res = convert_md_img_to_confluence_img(line, filename)
+            if(res != None):
                 f.write(res)
             else:
                 f.write(line)
@@ -23,17 +22,19 @@ def convert_all_md_img_to_confluence_img(filename):
                 f.write(line)
             """
 
-def convert_md_img_to_confluence_img(md_image_link: str, image_path: str):
+def convert_md_img_to_confluence_img(md_image_link: str, md_path: str):
     img = re.match(r'!\[(?P<alt>[^\]]*)\]\((?P<filename>.*?)(?=\"|\))(\"(?P<title>.*)\")?\)', md_image_link) #RegEx magic
     if(img != None and (img['filename'].strip().endswith('.png') or img['filename'].strip().endswith('.jpg'))):
         # image = cv2.imread(img['filename'])
         # dimensions = image.shape
         # height = dimensions[0]
         # width = dimensions[1]
-        image = Image.open(image_path)
+        path = get_abs_path_from_relative(img['filename'], md_path)
+        print(md_image_link, md_path, path)
+        image = Image.open(path)
         width, height = image.size
         name = img['title'] if img["title"] != None else img["alt"]
-        return(f'<ac:image ac:original-height="{str(height)}" ac:original-width="{str(width)}"><ri:attachment ri:filename="{name}" ri:version-at-save=\"1\" /></ac:image>\n')
+        return(f'<ac:image ac:original-height="{str(height)}" ac:original-width="{str(width)}"><ri:attachment ri:filename="{name}"/></ac:image>\n')
     else:
         return None
             

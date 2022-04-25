@@ -1,1 +1,1 @@
-![mermaid-1](/mnt/e/uni/bachelor/markdowntoconfluence/MarkdownToConfluence/file_parsing/tests/testdocs/index-1.png)
+![mermaid-1](/mnt/e/UNI/Bachelor/MarkdownToConfluence/MarkdownToConfluence/file_parsing/tests/testdocs/index-1.png)
