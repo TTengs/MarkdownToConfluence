@@ -30,7 +30,6 @@ def convert_md_img_to_confluence_img(md_image_link: str, md_path: str):
         # height = dimensions[0]
         # width = dimensions[1]
         path = get_abs_path_from_relative(img['filename'], md_path)
-        print(md_image_link, md_path, path)
         image = Image.open(path)
         width, height = image.size
         name = img['title'] if img["title"] != None else img["alt"]

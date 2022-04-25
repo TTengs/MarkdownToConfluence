@@ -10,11 +10,11 @@ def test_convert_md_img_to_confluence_img():
         for line in lines:
             f.write(convert_md_img_to_confluence_img(line, filepath))
     with open("testfile.md", "r") as f:
-        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title" ri:version-at-save="1" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title" ri:version-at-save="1" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title" ri:version-at-save="1" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt" ri:version-at-save="1" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt" ri:version-at-save="1" /></ac:image>'
-        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt" ri:version-at-save="1" /></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="title"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt"/></ac:image>'
+        assert f.readline().strip('\n') == '<ac:image ac:original-height="144" ac:original-width="70"><ri:attachment ri:filename="alt"/></ac:image>'
     #os.remove("testfile.md")
     

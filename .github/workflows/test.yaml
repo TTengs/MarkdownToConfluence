@@ -32,3 +32,5 @@ jobs:
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
       run: |
         pytest -v
+      with:
+          fileslocation: './documentation'
