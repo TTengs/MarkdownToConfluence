@@ -1,14 +1,14 @@
 #!/bin/bash
 
-PATH="$(basename ${INPUT_FILESLOCATION})"
+#PATH="$(basename "${INPUT_FILESLOCATION}")"
 #INPUT_FILESLOCATION = './documentation'
-echo $PATH
+#echo $PATH
 ls
-git diff --name-status HEAD^^ HEAD $PATH
-mod="$(git diff --name-only --diff-filter=M HEAD^ HEAD $PATH)"
-cre="$(git diff --name-only --diff-filter=A HEAD^ HEAD $PATH)"
+git diff --name-only HEAD^ HEAD documentation
+mod="$(git diff --name-only --diff-filter=M HEAD^ HEAD documentation)"
+cre="$(git diff --name-only --diff-filter=A HEAD^ HEAD documentation)"
 readarray modDiffs <<< "$mod"
-readarray creDiffs <<< "$cre"
+#readarray creDiffs <<< "$cre"
 
 echo "------Modified-------"
 
@@ -19,13 +19,9 @@ done
 
 echo "------Created-------"
 
-for i in "${creDiffs[@]}";
-do
-    echo $i
-done
-
-echo "-------"
-
-git diff --name-only HEAD^^ HEAD documentation
+#for i in "${creDiffs[@]}";
+#do
+#    echo $i
+#done
 
 #echo ${CHANGED_FILES}
