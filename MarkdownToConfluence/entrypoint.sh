@@ -3,7 +3,7 @@
 #PATH="$(basename "${INPUT_FILESLOCATION}")"
 #INPUT_FILESLOCATION = './documentation'
 #echo $PATH
-docsDiff="$(git diff --name-only HEAD^^ HEAD ./documentation)"
+docsDiff="$(git diff --name-only HEAD^^ HEAD ./documentation | xargs echo )"
 echo $docsDiff
 
 echo "-------"
