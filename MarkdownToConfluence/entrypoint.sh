@@ -3,8 +3,8 @@
 #PATH="$(basename "${INPUT_FILESLOCATION}")"
 #INPUT_FILESLOCATION = './documentation'
 #echo $PATH
-mod="$(git diff --diff-filter=M HEAD^^ HEAD ./documentation)"
-cre="$(git diff --diff-filter=A HEAD^^ HEAD ./documentation)"
+mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ./documentation)"
+cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ./documentation)"
 readarray modDiffs <<< "$mod"
 readarray creDiffs <<< "$cre"
 
