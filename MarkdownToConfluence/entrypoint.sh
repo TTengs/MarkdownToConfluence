@@ -1,6 +1,10 @@
 #!/bin/bash
 cd ..
-docsDiff=$(git diff --name-only HEAD^^ HEAD ${INPUT_FILESLOCATION})
+ls
+#PATH="$(basename "${INPUT_FILESLOCATION}")"
+#INPUT_FILESLOCATION = './documentation'
+#echo $PATH
+docsDiff="$(git diff --name-only HEAD^^ HEAD ./documentation)"
 echo $docsDiff
 
 echo "-------"
