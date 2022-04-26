@@ -1,6 +1,5 @@
 #!/bin/bash
-cd ..
-ls
+
 #PATH="$(basename "${INPUT_FILESLOCATION}")"
 #INPUT_FILESLOCATION = './documentation'
 #echo $PATH
