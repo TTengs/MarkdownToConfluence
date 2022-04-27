@@ -22,9 +22,8 @@ def convert_md_img_to_confluence_img(md_image_link: str, md_path: str):
         path = get_abs_path_from_relative(img['filename'], md_path)
         image = Image.open(path)
         width, height = image.size
-        name = img['title'] if img["title"] != None else img["alt"]
+        name = img['title'] if img["title"] != None else basename(img['filename'])
         globals.attachments.append((name, path))
-        print('image', globals.attachments)
         return(f'<ac:image ac:original-height="{str(height)}" ac:original-width="{str(width)}"><ri:attachment ri:filename="{name}"/></ac:image>\n')
     else:
         return None

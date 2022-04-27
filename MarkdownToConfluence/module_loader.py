@@ -22,7 +22,12 @@ def get_modules(settings_file=None):
                     modules.append(module_name)
                 else:
                     settings = json.load(open(settings_file, 'r'))
-                    if('modules' in settings.keys() and settings['modules'][module_name] == True):
-                        modules.append(module_name)
-
+                    if('modules' in settings.keys()):
+                        if(module_name in settings['modules']):
+                            if(settings['modules'][module_name] == True):
+                                modules.append(module_name)
+                        else: 
+                            modules.append(module_name) # assumes non specified modules, should be added
+                    else:
+                        modules.append(module_name) # Assume all modules should be added, if nothing is specified
     return modules

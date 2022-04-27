@@ -1,3 +1,4 @@
+#TODO remove this file
 from posixpath import dirname, basename
 #from MarkdownToConfluence.modules.image.image_parser import convert_md_img_to_confluence_img
 import re, os
@@ -16,7 +17,7 @@ def parse_and_get_attachments(filename):
                 if(image != None):
                     f.write(image)
                 else:
-                    f.write(line) # TODO: Add support for other types of attachments
+                    f.write(line)
                 path = get_abs_path_from_relative(reg['filename'], filename)
                 attachments.append((name, path))
             else:
