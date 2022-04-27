@@ -5,9 +5,9 @@
 echo $PWD
 ls
 echo "---------TEST----------"
-echo ${github.event.before}
+echo ${GITHUB_REF}
 echo "******"
-echo ${{github.event.after}}
+echo ${GITHUB_HEAD_REF}
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 

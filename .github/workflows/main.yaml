@@ -13,8 +13,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: sut
-        run: git diff
       #- name: din mor
        # run: ls
         #pwd
