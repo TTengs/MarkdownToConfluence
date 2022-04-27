@@ -6,11 +6,11 @@ echo $PWD
 ls
 git diff
 
-mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
-cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
+#mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
+#cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
 
-readarray modDiffs <<< $mod
-readarray -t creDiffs <<< $cre
+#readarray modDiffs <<< $mod
+#readarray -t creDiffs <<< $cre
 
 echo "------Modified-------"
 
