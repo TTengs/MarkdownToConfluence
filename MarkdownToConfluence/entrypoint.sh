@@ -5,7 +5,7 @@
 echo $PWD
 ls
 echo "---------TEST----------"
-echo ${{github.event.before}}
+echo ${github.event.before}
 echo "******"
 echo ${{github.event.after}}
 
