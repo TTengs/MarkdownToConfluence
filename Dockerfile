@@ -11,6 +11,9 @@ FROM ubuntu:latest
 # RUN chmod +x /venv/*
 # RUN . /venv/bin/activate
 
+RUN apt-get update && apt-get install
+RUN apt-get -y install git
+
 # COPY setup.py /setup.py
 # COPY requirements.txt requirements.txt
 # RUN pip install -r requirements.txt
@@ -22,4 +25,4 @@ COPY ./MarkdownToConfluence /MarkdownToConfluence
 # RUN chmod +x /MarkdownToConfluence/convert.sh
 RUN chmod +x /MarkdownToConfluence/entrypoint.sh
 
-ENTRYPOINT [ "sh", "/MarkdownToConfluence/entrypoint.sh" ]
+ENTRYPOINT [ "/MarkdownToConfluence/entrypoint.sh" ]
