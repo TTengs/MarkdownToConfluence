@@ -1,8 +1,8 @@
 from posixpath import dirname, basename
-from MarkdownToConfluence.file_parsing.image_parser import convert_md_img_to_confluence_img
+#from MarkdownToConfluence.modules.image.image_parser import convert_md_img_to_confluence_img
 import re, os
 from MarkdownToConfluence.filetools import get_abs_path_from_relative
-
+"""
 def parse_and_get_attachments(filename):
     attachments = []
     with open(filename, 'r') as f:
@@ -22,3 +22,4 @@ def parse_and_get_attachments(filename):
             else:
                 f.write(line)
     return attachments
+"""

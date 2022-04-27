@@ -1,3 +1,7 @@
 {
-    "parent_page": "Overview"
+    "parent_page": "Overview",
+    "modules": {
+        "mermaid": true,
+        "image": true
+    }
 }

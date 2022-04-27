@@ -1,20 +1,20 @@
+from importlib.resources import path
 from posixpath import dirname, basename
-from MarkdownToConfluence.file_parsing import attachments
 from confluence import page_exists_in_space, get_page_id
 from confluence import create_page
 from confluence import update_page_content
 from confluence import upload_attachment
-from file_parsing import parse_and_get_attachments
+import globals
 from filetools.page_file_info import get_page_name_from_path, get_parent_name_from_path
 import os
 import subprocess
 import markdown
+import module_loader
 
 SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
 
 space_obj = {
         "key": SPACE_KEY,
-        "name": "Anders Larsen"
     }
 
 def upload_documentation(path_name:str, root:str):
@@ -22,8 +22,9 @@ def upload_documentation(path_name:str, root:str):
     # If a directory is given as path, assume index.md as file
     if(os.path.isdir(path_name)):
         path_name += "/index.md"
-    
+
     file_name = basename(path_name).replace(".md", "")
+    temp_file = path_name.replace('.md', '_final.md')
 
     pages = path_name.split('/')
 
@@ -33,11 +34,25 @@ def upload_documentation(path_name:str, root:str):
     # Get parent name
     parent_name = get_parent_name_from_path(path_name, root)
 
+    # Copy into name_final.md
+    with open(path_name, 'r') as i, open(temp_file, 'w') as o:
+        lines = i.readlines()
+        for line in lines:
+            o.write(line)
+
     # Get and parse attachments
-    attachments = parse_and_get_attachments(path_name.replace('.md', '_final.md'))
+    #attachments = parse_and_get_attachments(path_name.replace('.md', '_final.md'))
+    settings_path = f"{os.environ.get('INPUT_FILESLOCATION')}/settings.json"
+    if(os.path.exists(settings_path)):
+        modules = module_loader.get_modules(settings_path)
+    else:
+        modules = module_loader.get_modules()
+    
+    for module in modules:
+        module_loader.run_module(module, temp_file)
 
     # Convert to html
-    with open(path_name.replace('.md', '_final.md'), 'r') as f:
+    with open(temp_file, 'r') as f:
         text = f.read()
         html = markdown.markdown(text)
     with open(path_name.replace('.md', '.html'), 'w') as f:
@@ -67,7 +82,7 @@ def upload_documentation(path_name:str, root:str):
             print(f"Created {page_name} with {parent_name} as parent")
 
     if(response.status_code == 200):
-        for attachment in attachments:
+        for attachment in globals.attachments:
             upload_attachment(page_name, attachment[0], attachment[1])
     else:
         print(f"Error uploading {page_name}. Status code {response.status_code}")
@@ -76,4 +91,5 @@ def upload_documentation(path_name:str, root:str):
 
 if __name__ == "__main__":
     import sys
+    globals.init()
     upload_documentation(sys.argv[1], sys.argv[2])

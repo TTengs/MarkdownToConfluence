@@ -1,8 +1,8 @@
 import sys
-from MarkdownToConfluence.file_parsing.mermaid_parser import parse_mermaid_macro
+import MarkdownToConfluence.modules.mermaid as mermaid
 
 def parse_markdown(filename):
-    parse_mermaid_macro(filename)
+    mermaid.convert(filename)
 
 if __name__ == "__main__":
     parse_markdown(f"{str(sys.argv[1])}")

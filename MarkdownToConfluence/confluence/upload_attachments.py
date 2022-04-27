@@ -32,7 +32,7 @@ def upload_attachment(page_title, attactchment_name, filepath):
              # Update attachment
             files = {'file': (attactchment_name, open(os.path.abspath(filepath), 'rb'))}
             response = requests.post(f'{url}/{id}/data', headers=headers, files=files)
-
+        print(response.status_code)
         if(response.status_code == 200):
             print(f"Uploaded {attactchment_name} as attachment on page {page_title}")
         else:
