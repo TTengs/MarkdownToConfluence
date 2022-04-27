@@ -11,8 +11,8 @@ FROM ubuntu:latest
 # RUN chmod +x /venv/*
 # RUN . /venv/bin/activate
 
-#RUN apt-get update && apt-get install
-#RUN apt-get -y install git
+RUN apt-get update && apt-get install
+RUN apt-get -y install git
 
 # COPY setup.py /setup.py
 # COPY requirements.txt requirements.txt

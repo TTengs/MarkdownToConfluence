@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
-git init
+#git init
 echo $PWD
-ls
-git diff
+ls -al
+git diff --name-only origin/main origin/${GITHUB_HEAD_REF}
 
 #mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
 #cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
