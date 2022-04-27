@@ -5,12 +5,13 @@
 echo $PWD
 ls -al
 echo "cd .git"
-cd .git
+cd .git\refs
 ls
+cat HEAD
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
 unset GIT_DIR
-git diff main feature/diff documentation
+#git diff main feature/diff documentation
 #echo "******"
 #echo ${GITHUB_HEAD_REF}
 
