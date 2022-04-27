@@ -45,7 +45,7 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
     f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
-    url = f'{BASE_URL}/rest/api/content'
+    url = f'{BASE_URL}/wiki/rest/api/content'
 
     headers = {
     'Authorization': authorization_string,

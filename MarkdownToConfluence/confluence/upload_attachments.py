@@ -16,7 +16,7 @@ headers = {
 
 def upload_attachment(page_title, attactchment_name, filepath):
     if(page_exists_in_space(page_title, SPACEKEY)):
-        url = f"{BASE_URL}/rest/api/content/{get_page_id(page_title, SPACEKEY)}/child/attachment"
+        url = f"{BASE_URL}/wiki/rest/api/content/{get_page_id(page_title, SPACEKEY)}/child/attachment"
 
         # Get attachment id
         id = ""
@@ -44,7 +44,7 @@ def upload_attachment(page_title, attactchment_name, filepath):
 """
 def update_attachment_data(page_title, attactchment_name, filepath):
     if(page_exists_in_space(page_title, SPACEKEY)):
-        url = f"{BASE_URL}/rest/api/content/{get_page_id(page_title, SPACEKEY)}/child/attachment"
+        url = f"{BASE_URL}/wiki/rest/api/content/{get_page_id(page_title, SPACEKEY)}/child/attachment"
 
         # Get attachment id
         id = ""

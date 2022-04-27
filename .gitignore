@@ -5,3 +5,5 @@
 venv/
 MarkdownToConfluence.egg-info
 MarkdownToConfluence.egg-info/
+.pytest_cache/
+.pytest_cache

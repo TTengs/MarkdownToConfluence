@@ -10,7 +10,7 @@ BASE_PATH=$(pwd)
 #Conversion
 if test -f "$BASE_PATH"/"$PATHNAME"; then
     #echo "$BASE_PATH"/"$PATHNAME"
-    python3 /MarkdownToConfluence/file_parsing/parse_markdown.py "$PATHNAME"
+    #python3 /MarkdownToConfluence/file_parsing/parse_markdown.py "$PATHNAME"
     #pandoc "$DIR"/"${FILENAME}_final.md" -f markdown -t html -o "$DIR"/"${FILENAME}".html
 
     #Uploading
