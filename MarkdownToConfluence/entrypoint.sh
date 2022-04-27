@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
-
+git init
 echo $PWD
 ls
 git diff
