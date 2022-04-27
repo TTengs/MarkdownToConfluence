@@ -5,7 +5,7 @@
 git init
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-git diff main feature/diff documentation
+git status
 #echo "******"
 #echo ${GITHUB_HEAD_REF}
 
