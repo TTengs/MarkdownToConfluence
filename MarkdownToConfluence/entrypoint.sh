@@ -6,7 +6,7 @@ echo $PWD
 ls
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-git init
+unset GIT_DIR
 git diff main feature/diff documentation
 echo "******"
 #echo ${GITHUB_HEAD_REF}
