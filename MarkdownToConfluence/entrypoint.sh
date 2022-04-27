@@ -2,11 +2,13 @@
 
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
 
+echo $PWD
+
 mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
 cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
 
 readarray modDiffs <<< $mod
-readarray -t creDiffs <<< "$cre"
+readarray -t creDiffs <<< $cre
 
 echo "------Modified-------"
 
@@ -17,7 +19,7 @@ done
 
 echo "------Created-------"
 
-for i in "${creDiffs}";
+for i in "${creDiffs[@]}";
 do
     echo $i
 done
