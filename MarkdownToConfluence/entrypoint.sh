@@ -5,7 +5,9 @@
 echo $PWD
 ls
 echo "---------TEST----------"
-echo ${GITHUB_REF}
+#echo ${GITHUB_REF}
+git fetch origin master:master
+git diff --name-only master
 echo "******"
 echo ${GITHUB_HEAD_REF}
 
