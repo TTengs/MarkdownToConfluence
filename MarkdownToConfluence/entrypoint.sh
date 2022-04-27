@@ -2,16 +2,10 @@
 
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
 #git init
-echo $PWD
-ls -al
-echo "cd .git"
-cd .git
-ls
-cat HEAD
+git init
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-unset GIT_DIR
-#git diff main feature/diff documentation
+git diff main feature/diff documentation
 #echo "******"
 #echo ${GITHUB_HEAD_REF}
 
