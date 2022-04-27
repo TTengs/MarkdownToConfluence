@@ -2,6 +2,6 @@
     "parent_page": "Overview",
     "modules": {
         "mermaid": true,
-        "image": true
+        "jira-tickets": true
     }
 }

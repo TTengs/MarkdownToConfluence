@@ -37,7 +37,7 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
-    url = f"{BASE_URL}/rest/api/content/{page_id}"
+    url = f"{BASE_URL}/wiki/rest/api/content/{page_id}"
 
     headers = {
     'Authorization': authorization_string,

@@ -1,0 +1,6 @@
+![alt](../attachments/image.png "title")
+![alt](./image.png "title")
+![alt](MarkdownToConfluence/utils/tests/testdocs/attachments/image.png "title")
+![alt](../attachments/image.png)
+![alt](./image.png)
+![alt](MarkdownToConfluence/utils/tests/testdocs/attachments/image.png)

@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
@@ -14,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Conversion step
         env:
-          CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
+          CONFLUENCE_URL: 'https://at-bachelor.atlassian.net'
           CONFLUENCE_SPACE_KEY: '~955037829'
           AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         uses: ./ # Uses an action in the root directory

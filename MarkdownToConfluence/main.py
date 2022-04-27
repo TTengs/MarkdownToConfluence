@@ -4,8 +4,9 @@ from confluence import page_exists_in_space, get_page_id
 from confluence import create_page
 from confluence import update_page_content
 from confluence import upload_attachment
+from utils import convert_all_md_img_to_confluence_img
 import globals
-from filetools.page_file_info import get_page_name_from_path, get_parent_name_from_path
+from utils.page_file_info import get_page_name_from_path, get_parent_name_from_path
 import os
 import subprocess
 import markdown
@@ -40,8 +41,7 @@ def upload_documentation(path_name:str, root:str):
         for line in lines:
             o.write(line)
 
-    # Get and parse attachments
-    #attachments = parse_and_get_attachments(path_name.replace('.md', '_final.md'))
+    # Load and run modules
     settings_path = f"{os.environ.get('INPUT_FILESLOCATION')}/settings.json"
     if(os.path.exists(settings_path)):
         modules = module_loader.get_modules(settings_path)
@@ -50,6 +50,9 @@ def upload_documentation(path_name:str, root:str):
     
     for module in modules:
         module_loader.run_module(module, temp_file)
+
+    # Convert images
+    convert_all_md_img_to_confluence_img(temp_file)
 
     # Convert to html
     with open(temp_file, 'r') as f:

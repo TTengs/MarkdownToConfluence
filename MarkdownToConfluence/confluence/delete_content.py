@@ -1,5 +1,5 @@
 import requests, json
-from MarkdownToConfluence.filetools import get_all_page_names_in_filesystem
+from MarkdownToConfluence.utils import get_all_page_names_in_filesystem
 import sys, os
 
 #BASE_URL = os.environ.get("CONFLUENCE_URL")
@@ -13,7 +13,7 @@ authorization_string = f"Basic {AUTH_TOKEN}"
 
 def delete_page(page_id: str, page_name=""):
     
-    url = f"{BASE_URL}/rest/api/content/{page_id}"
+    url = f"{BASE_URL}/wiki/rest/api/content/{page_id}"
 
     headers = {
     'Authorization': authorization_string,
@@ -33,7 +33,7 @@ def delete_page(page_id: str, page_name=""):
     the exclude arg takes a list of page names, that are not to be deleted, even if they dont exist in the filesystem
 """
 def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
-    url = f"{BASE_URL}/rest/api/content?spaceKey={space_key}"
+    url = f"{BASE_URL}/wiki/rest/api/content?spaceKey={space_key}"
 
     headers = {
     'Authorization': authorization_string,
