@@ -4,7 +4,12 @@
 #git init
 echo $PWD
 ls
-git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
+echo "---------TEST----------"
+echo ${{github.event.before}}
+echo "******"
+echo ${{github.event.after}}
+
+#git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
 #mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
 #cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
