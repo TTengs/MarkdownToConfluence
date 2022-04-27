@@ -6,10 +6,9 @@ echo $PWD
 ls
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-git fetch origin master:master
-git diff --name-only master
+git diff main feature/diff documentation
 echo "******"
-echo ${GITHUB_HEAD_REF}
+#echo ${GITHUB_HEAD_REF}
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
