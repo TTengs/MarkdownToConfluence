@@ -6,7 +6,7 @@ git init
 git config --global --add safe.directory /github/workspace
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-git diff --name-only main feature/diff documentation
+git diff
 #echo "******"
 #echo ${GITHUB_HEAD_REF}
 
