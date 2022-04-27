@@ -1,10 +1,11 @@
 #!/bin/bash
 
-git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
-mod="$(git diff --name-only --diff-filter=M HEAD^ HEAD ${INPUT_FILESLOCATION})"
-cre="$(git diff --name-only --diff-filter=A HEAD^ HEAD ${INPUT_FILESLOCATION})"
+#git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
 
-readarray modDiffs <<< "$mod"
+mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
+cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
+
+readarray modDiffs <<< $mod
 readarray -t creDiffs <<< "$cre"
 
 echo "------Modified-------"
