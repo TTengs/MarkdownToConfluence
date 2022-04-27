@@ -1,7 +1,7 @@
 from posixpath import dirname, basename
 import re, os
 from MarkdownToConfluence.utils import get_abs_path_from_relative
-from MarkdownToConfluence import globals
+import MarkdownToConfluence.globals as globals
 
 from PIL import Image
 
