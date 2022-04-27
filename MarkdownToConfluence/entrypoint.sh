@@ -5,7 +5,7 @@
 echo $PWD
 ls -al
 echo "cd .git"
-cd .git/refs
+cd .git
 ls
 cat HEAD
 echo "---------TEST----------"
