@@ -3,8 +3,8 @@
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
 #git init
 echo $PWD
-ls -al
-git diff --name-only origin/main origin/${GITHUB_HEAD_REF}
+ls
+git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }}
 
 #mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
 #cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
