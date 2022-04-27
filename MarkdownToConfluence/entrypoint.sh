@@ -4,7 +4,7 @@
 #git init
 echo $PWD
 ls
-git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }}
+git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
 #mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
 #cre="$(git diff --name-only --diff-filter=A HEAD^^ HEAD ${INPUT_FILESLOCATION})"
