@@ -2,7 +2,7 @@
 
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
 #git init
-git init
+#git init
 git config --global --add safe.directory /github/workspace
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
