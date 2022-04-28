@@ -1,14 +1,13 @@
 #!/bin/bash
 
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
-#git init
-#git init
+
 git config --global --add safe.directory /github/workspace
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-git diff --name-only HEAD^^ HEAD documentation
+git diff --name-only main feature/diff ${INPUT_FILESLOCATION}
 #echo "******"
-#echo ${GITHUB_HEAD_REF}
+echo ${GITHUB_HEAD_REF}
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
