@@ -1,16 +1,16 @@
 #!/bin/bash
 
-#git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
 git init
 git config --global --add safe.directory /github/workspace
-git fetch
+#git fetch
 echo "---------TEST----------"
 
-echo "head ref"
-echo ${GITHUB_HEAD_REF}
 
-git diff --name-only origin/main..${GITHUB_REF_NAME} -- ${INPUT_FILESLOCATION}
+git diff --name-only master.. -- ${INPUT_FILESLOCATION}
 
+echo "----------lol---------"
+
+git diff --name-only master... -- ${INPUT_FILESLOCATION}
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
 #mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
