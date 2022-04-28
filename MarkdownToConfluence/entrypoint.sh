@@ -6,6 +6,9 @@ git config --global --add safe.directory /github/workspace
 git fetch
 echo "---------TEST----------"
 
+echo "head ref"
+echo ${GITHUB_HEAD_REF}
+
 git diff --name-only origin/main..${GITHUB_REF_NAME} -- ${INPUT_FILESLOCATION}
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
