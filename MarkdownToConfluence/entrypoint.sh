@@ -6,9 +6,19 @@ it config --global --add safe.directory /github/workspace
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-git diff --name-only main..$BRANCH -- ${INPUT_FILESLOCATION}
-#echo "******"
-#echo ${GITHUB_HEAD_REF}
+#git diff --name-only $BRANCH -- ${INPUT_FILESLOCATION}
+
+echo "GITHUB HEAD REF:"
+echo ${GITHUB_HEAD_REF}
+
+echo "GITHUB BASE REF:"
+echo ${GITHUB_BASE_REF}
+
+echo "GITHUB REF"
+echo ${GITHUB_REF}
+
+echo "GITHUB REF NAME"
+echo ${GITHUB_REF_NAME}
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
