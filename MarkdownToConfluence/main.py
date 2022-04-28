@@ -5,7 +5,7 @@ from confluence import create_page
 from confluence import update_page_content
 from confluence import upload_attachment
 from utils import convert_all_md_img_to_confluence_img
-import globals
+import MarkdownToConfluence.globals
 from utils.page_file_info import get_page_name_from_path, get_parent_name_from_path
 import os
 import subprocess
@@ -94,5 +94,5 @@ def upload_documentation(path_name:str, root:str):
 
 if __name__ == "__main__":
     import sys
-    globals.init()
+    MarkdownToConfluence.globals.init()
     upload_documentation(sys.argv[1], sys.argv[2])
