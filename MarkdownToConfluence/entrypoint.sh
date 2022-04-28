@@ -6,11 +6,11 @@ git config --global --add safe.directory /github/workspace
 echo "---------TEST----------"
 
 
-git diff --name-only main.. -- ${INPUT_FILESLOCATION}
+git diff --name-only origin/main.. -- ${INPUT_FILESLOCATION}
 
 echo "----------lol---------"
 
-git diff --name-only main... -- ${INPUT_FILESLOCATION}
+git diff --name-only origin/main... -- ${INPUT_FILESLOCATION}
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
 #mod="$(git diff --name-only --diff-filter=M HEAD^^ HEAD ${INPUT_FILESLOCATION})"
