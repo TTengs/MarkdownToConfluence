@@ -2,6 +2,7 @@
     "parent_page": "Overview",
     "modules": {
         "mermaid": true,
-        "jira-tickets": true
+        "jira-tickets": true,
+        "attachment_link": true
     }
 }
