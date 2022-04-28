@@ -3,9 +3,10 @@
 #git diff --name-status HEAD^^ HEAD ${INPUT_FILESLOCATION}
 git init
 it config --global --add safe.directory /github/workspace
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 echo "---------TEST----------"
 #echo ${GITHUB_REF}
-git diff --name-only main..feature/diff -- ${INPUT_FILESLOCATION}
+git diff --name-only main..$BRANCH -- ${INPUT_FILESLOCATION}
 #echo "******"
 #echo ${GITHUB_HEAD_REF}
 
