@@ -3,3 +3,5 @@
     graph
     A[start] --> B[end]
 ```
+
+![test]("./zip_test.zip")

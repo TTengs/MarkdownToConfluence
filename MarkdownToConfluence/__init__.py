@@ -1,1 +1,1 @@
-__all__ = ['utils', 'modules', 'confluence']
+__all__ = ['utils', 'modules', 'confluence', 'globals']
