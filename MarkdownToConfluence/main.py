@@ -85,7 +85,7 @@ def upload_documentation(path_name:str, root:str):
             print(f"Created {page_name} with {parent_name} as parent")
 
     if(response.status_code == 200):
-        for attachment in globals.attachments:
+        for attachment in MarkdownToConfluence.globals.attachments:
             upload_attachment(page_name, attachment[0], attachment[1])
     else:
         print(f"Error uploading {page_name}. Status code {response.status_code}")
