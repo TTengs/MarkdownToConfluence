@@ -29,11 +29,11 @@ while IFS=$'\t' read -r -a tmp ; do
     elif [[ ${tmp[0]} = D* ]]
     then
         echo "---Deleted---"
-        echo ${temp[@]}
+        echo ${tmp[1]}
     elif [[ ${tmp[0]} = A* ]]
     then
         echo "---Added---"
-        echo ${temp[1]}
+        echo ${tmp[1]}
     else
         echo "---Other changes---"
         echo ${tmp[@]}
