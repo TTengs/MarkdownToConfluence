@@ -37,8 +37,6 @@ def check_if_ticket_exists(ticket: str):
         headers=headers,
     )
 
-    #print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
-
     return response.status_code == 200
 
 def run(filename):

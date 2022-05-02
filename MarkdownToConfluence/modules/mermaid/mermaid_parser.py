@@ -3,7 +3,7 @@ from posixpath import dirname
 import requests
 import base64
 
-def parse_mermaid_macro(filename):
+def parse_mermaid_macros(filename):
     if(os.path.isdir(filename)):
         filename += "/index_final.md"
     mermaid_diagram_num = 0
@@ -37,7 +37,7 @@ def parse_mermaid_macro(filename):
                 file.write(line)
 
 def run(filename):
-    return parse_mermaid_macro(filename)
+    parse_mermaid_macros(filename)
 
 
 #parse_mermaid_macro('./documentation/page 3/index.md')
