@@ -41,25 +41,25 @@ The API token generated for the user. We recommend setting this as a GitHub secr
 Without github secrets:
 ```yaml
 - name: Conversion step
-        env:
-          CONFLUENCE_URL: 'https://network.atlassian.net/wiki'
-          CONFLUENCE_SPACE_KEY: 'spaceKey'
-          AUTH_USERNAME: 'your@email.com'
-          AUTH_API_TOKEN: 'PeRsOnalApItOKen'
-        uses: TTengs/MarkdownToConfluence@latest
-        with:
-          fileslocation: './documentation'
+ env:
+  CONFLUENCE_URL: 'https://network.atlassian.net/wiki'
+  CONFLUENCE_SPACE_KEY: 'spaceKey'
+  AUTH_USERNAME: 'your@email.com'
+  AUTH_API_TOKEN: 'PeRsOnalApItOKen'
+ uses: TTengs/MarkdownToConfluence@latest
+ with:
+  fileslocation: './documentation'
 ```
         
 With GitHub secrets
 ```yaml
 - name: Conversion step
-        env:
-          CONFLUENCE_URL: 'https://network.atlassian.net/wiki'
-          CONFLUENCE_SPACE_KEY: 'spaceKey'
-          AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
-          AUTH_API_TOKEN: ${{ secrets.AUTH_API_TOKEN }}
-        uses: TTengs/MarkdownToConfluence@latest
-        with:
-          fileslocation: './documentation'
+ env:
+  CONFLUENCE_URL: 'https://network.atlassian.net/wiki'
+  CONFLUENCE_SPACE_KEY: 'spaceKey'
+  AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
+  AUTH_API_TOKEN: ${{ secrets.AUTH_API_TOKEN }}
+ uses: TTengs/MarkdownToConfluence@latest
+ with:
+  fileslocation: './documentation'
 ```
