@@ -12,7 +12,7 @@ git config --global core.pager "less -FRSX"
 
 #echo "---------test-------"
 #sha=$(git log -n 1 --pretty=format:"%H" origin/main)
-res=$(git --no-pager diff --name-status @ @{upstream} ./documentation) # | sed "s/^/'/;s/$/'/"
+res=$(git --no-pager diff --name-status origin/main ${INPUT_FILESLOCATION}) # | sed "s/^/'/;s/$/'/"
 echo $res
 echo "-------------"
 while IFS=$'\t' read -r -a tmp ; do
