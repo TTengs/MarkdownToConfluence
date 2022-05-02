@@ -19,9 +19,11 @@ The base URL for the Atlassian network. Follows the form: 'https://<your-network
 The key of the space that is being uploaded to. Can be found in the URL for your space. More info [here](https://confluence.atlassian.com/doc/space-keys-829076188.html)
 
 `AUTH_USERNAME`
+        
 The email used for the user connected to the API token. We recommend setting this as a GitHub secret.
         
 `AUTH_API_TOKEN`
+        
 The API token generated for the user. We recommend setting this as a GitHub secret.
 
 ## Inputs
