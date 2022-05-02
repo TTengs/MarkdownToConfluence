@@ -10,7 +10,7 @@ git config --global --add safe.directory .
 #git diff --name-only origin/main... -- ${INPUT_FILESLOCATION}
 
 echo "---------rename-------"
-git --no-pager diff -M -- ${INPUT_FILESLOCATION}
+git --no-pager diff HEAD^ HEAD -M100% ${INPUT_FILESLOCATION}
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
