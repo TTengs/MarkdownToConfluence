@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#git init
+git init
 git config --global --add safe.directory .
 git config --global core.pager "less -FRSX"
 #git fetch
