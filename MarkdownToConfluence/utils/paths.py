@@ -9,9 +9,9 @@ def get_abs_path_from_relative(relative_path: str, source_path: str, root=os.env
     relative_path = relative_path.strip()
     source_path = source_path.strip()
     abs_path = ""
-    print(str(os.path.realpath((os.path.join(_root, source_path, relative_path))).strip()))
-    if(os.path.exists(str(os.path.realpath((os.path.join(_root, source_path, relative_path))).strip()))):
-        abs_path = (os.path.join(_root, source_path, relative_path)).strip()
+    print(str(os.path.realpath((os.path.join(source_path, relative_path))).strip()))
+    if(os.path.exists(str(os.path.realpath((os.path.join(source_path, relative_path))).strip()))):
+        abs_path = (os.path.join(source_path, relative_path)).strip()
     elif(os.path.isabs(relative_path)):
         if(os.fspath(relative_path).startswith(os.getcwd())):
             abs_path = relative_path
