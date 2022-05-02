@@ -10,9 +10,43 @@ git config --global core.pager "less -FRSX"
 #echo "----------lol---------"
 #git diff --name-only origin/main... -- ${INPUT_FILESLOCATION}
 
-echo "---------test-------"
-sha=$(git log -n 1 --pretty=format:"%H" origin/main)
-git --no-pager diff --name-status @ @{upstream} ${INPUT_FILESLOCATION} | sed "s/^/'/;s/$/'/" 
+#echo "---------test-------"
+#sha=$(git log -n 1 --pretty=format:"%H" origin/main)
+res=$(git --no-pager diff --name-status @ @{upstream} ./documentation) # | sed "s/^/'/;s/$/'/"
+
+while IFS=$'\t' read -r -a tmp ; do
+    # Renamed files
+    if [[ ${tmp[0]} = R* ]]
+    then
+        echo "---Renamed---"
+        echo "from ${tmp[2]}" 
+        echo "to ${tmp[1]}"
+    elif [[ ${tmp[0]} = M* ]]
+    then
+        echo "---Modified---"
+        echo ${tmp[1]}
+    elif [[ ${tmp[0]} = D* ]]
+    then
+        echo "---Deleted---"
+        echo ${temp[1]}
+    elif [[ ${tmp[0]} = A* ]]
+    then
+        echo "---Added---"
+        echo ${temp[1]}
+    else
+        echo "---Other changes---"
+        echo ${tmp[@]}
+    fi
+done <<< $res
+
+# readarray arr <<< $res
+
+# for i in "${arr[@]}"; do
+#     readarray changes <<< $i
+#     for j in "${changes[@]}"; do
+#         echo $j
+#     done
+# done
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
