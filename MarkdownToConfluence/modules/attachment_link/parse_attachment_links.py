@@ -16,8 +16,7 @@ def convert_md_attachment_links_to_confluence_attachment_links(line: str, md_pat
     links = re.findall(r'(!\[(?P<alt>[^\]]*)\]\((?P<filename>.*?)(?=\"|\))(\"(?P<title>.*)\")?\))', line)
     new_line = line
     for link in links:
-        print(link)
-        if(link != None and not (link[2].strip().endswith('.png') or link[2].strip().endswith('.jpg'))):
+        if(not (link[2].strip().endswith('.png') or link[2].strip().endswith('.jpg'))):
             path = get_abs_path_from_relative(link[2], md_path)
             name = link[4] if link[4] != '' else basename(link[2])
             MarkdownToConfluence.globals.attachments.append((name, path))
