@@ -10,9 +10,9 @@ git config --global core.pager "less -FRSX"
 #echo "----------lol---------"
 #git diff --name-only origin/main... -- ${INPUT_FILESLOCATION}
 
-echo "---------rename-------"
+echo "---------test-------"
 sha=$(git log -n 1 --pretty=format:"%H" origin/main)
-git --no-pager diff --name-status origin/main.. ${INPUT_FILESLOCATION} | sed "s/^/'/;s/$/'/" 
+git --no-pager diff --name-status @ @{upstream} ${INPUT_FILESLOCATION} | sed "s/^/'/;s/$/'/" 
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
