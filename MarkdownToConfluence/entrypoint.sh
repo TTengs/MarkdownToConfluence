@@ -29,7 +29,7 @@ while IFS=$'\t' read -r -a tmp ; do
     elif [[ ${tmp[0]} = D* ]]
     then
         echo "---Deleted---"
-        echo ${temp[1]}
+        echo ${temp[@]}
     elif [[ ${tmp[0]} = A* ]]
     then
         echo "---Added---"
