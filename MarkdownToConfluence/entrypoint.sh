@@ -3,17 +3,14 @@
 #git init
 git config --global --add safe.directory .
 #git fetch
-echo "---------TEST----------"
+#echo "---------TEST----------"
+#git diff --name-only origin/main.. -- ${INPUT_FILESLOCATION}
 
-
-git diff --name-only origin/main.. -- ${INPUT_FILESLOCATION}
-
-echo "----------lol---------"
-
-git diff --name-only origin/main... -- ${INPUT_FILESLOCATION}
+#echo "----------lol---------"
+#git diff --name-only origin/main... -- ${INPUT_FILESLOCATION}
 
 echo "---------rename-------"
-git diff --diff-filter=R origin/main.. -- ${INPUT_FILESLOCATION}
+git --no-pager diff -M -- ${INPUT_FILESLOCATION}
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
