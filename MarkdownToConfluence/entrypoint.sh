@@ -2,6 +2,7 @@
 
 #git init
 git config --global --add safe.directory .
+git config --global core.pager "less -FRSX"
 #git fetch
 #echo "---------TEST----------"
 #git diff --name-only origin/main.. -- ${INPUT_FILESLOCATION}
@@ -10,7 +11,7 @@ git config --global --add safe.directory .
 #git diff --name-only origin/main... -- ${INPUT_FILESLOCATION}
 
 echo "---------rename-------"
-git --no-pager diff HEAD^ HEAD -M100% ${INPUT_FILESLOCATION}
+git --no-pager diff HEAD^ HEAD -M100% ${INPUT_FILESLOCATION} | sed "s/^/'/;s/$/'/" 
 
 #git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
 
