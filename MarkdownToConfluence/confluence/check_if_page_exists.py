@@ -1,7 +1,9 @@
 from urllib.parse import quote
 import requests, json
 import os
-from requests.auth import HTTPBasicAuth 
+from requests.auth import HTTPBasicAuth
+
+from MarkdownToConfluence.confluence.PageNotFoundError import PageNotFoundError 
 
 BASE_URL = os.environ.get("CONFLUENCE_URL")
 AUTH_USERNAME = os.environ.get("AUTH_USERNAME")
@@ -23,6 +25,7 @@ def page_exists_in_space(title: str, spaceKey: str) -> bool:
             return False
     else:
         print(response.text)
+        return False
 
 def get_page_id(title: str, spaceKey: str) -> str:
     url = f"{BASE_URL}/wiki/rest/api/content?spaceKey={spaceKey}&title={quote(title)}"
@@ -35,6 +38,6 @@ def get_page_id(title: str, spaceKey: str) -> str:
         if(len(results) > 0):
             return results[0]['id']
         else:
-            return 'Page does not exist'
+            raise PageNotFoundError
     else:
         print(response.text)
