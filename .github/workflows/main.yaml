@@ -21,4 +21,4 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: Convert
         with:
-          fileslocation: './documentation'
+          fileslocation: 'documentation'

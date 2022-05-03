@@ -4,10 +4,10 @@ git init
 git config --global --add safe.directory /github/workspace
 git config --global core.pager "less -FRSX"
 git fetch
-#git diff --name-status origin/main ${INPUT_FILESLOCATION}
+
 echo "Checking for changes"
 echo ""
-git status --porcelain ${INPUT_FILESLOCATION}
+
 if [[ $(git diff origin/main ${INPUT_FILESLOCATION}) ]]; then
     res=$(git --no-pager diff --name-status origin/main ${INPUT_FILESLOCATION})
     ReMoFilesArrOLD=()
