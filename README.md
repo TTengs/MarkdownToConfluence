@@ -12,7 +12,7 @@ The necessary environment variables are as follows:
 
 `CONFLUENCE_URL`
 
-The base URL for the Atlassian network. Follows the form: 'https://<your-network-name>.atlassian.net'
+The base URL for the Atlassian network. Follows the form: 'https://[your-network-name].atlassian.net'
 
 `CONFLUENCE_SPACE_KEY`
 
