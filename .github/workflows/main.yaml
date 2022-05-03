@@ -1,9 +1,11 @@
 name: Upload Documentation
 
-on:
-  pull_request:
-    branches:
-      - main
+# on:
+#   pull_request:
+#     branches:
+#       - main
+
+on: [push]
 
 
 jobs:
