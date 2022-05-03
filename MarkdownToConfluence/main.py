@@ -74,7 +74,7 @@ def upload_documentation(path_name:str, root:str):
             print(e)
     #Else, create the page
     else:
-        if(parent_name != "none"): #Create page as a child page, if there is a parent
+        if(parent_name != ""): #Create page as a child page, if there is a parent
             try:
                 if(not page_exists_in_space(parent_name, SPACE_KEY)): #If the parent page doesn't exists, create it
                     print(f"uploading parent: {parent_name}")
