@@ -1,5 +1,6 @@
 import os, json
 from posixpath import basename
+import pathlib
 
 def run_module(module_name: str, filename=None):
     name = "modules." + module_name
@@ -11,7 +12,7 @@ def run_module(module_name: str, filename=None):
 
 def get_modules(settings_file=None):
     modules = []
-    modules_location = './MarkdownToConfluence/modules'
+    modules_location = str(pathlib.Path(__file__).parent.resolve()) + '/modules'
     for filename in os.listdir(modules_location):
         f = os.path.join(modules_location, filename)
         # checking if it is a file
