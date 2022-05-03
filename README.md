@@ -63,3 +63,40 @@ With GitHub secrets
  with:
   fileslocation: './documentation'
 ```
+
+---
+
+# Writing Documentation
+
+## Page structure
+The structure of the markdown files in the filesystem, dictates the structure of the pages on confluence.
+
+All files should be located in a single folder, which is the one specified in [fileslocation](#fileslocation). This folder will not contain any markdown files (if so, they won't be recognized as pages), but only folders, a [prefix](./doc/prefix.md)- and [settings-file](./doc/settings.md). Every subfolder under this folder, will be considered a page, these are referenced later as a "folderpage".
+
+A folderpage can contain other folderpages, as well as markdown files. The file containing the content of the folderpage, __MUST__ be named "index.md". Any other markdown files inside the folderpage, will be considered as a child page.
+
+A child page can also be defined by another folderpage inside a folderpage. This is only recommended, if you need child pages for that folderpage as well. Otherwise, we recommend simply using multiple markdown files.
+
+### Page naming
+The name of a folderpage dicates the name of the page in confluence.
+
+Folderpages with multiple markdown files, will contain child pages named after the name of the markdown file.
+
+Any folderpage can contain a [prefix.txt](./doc/prefix.md) file, dictating the prefix for all it's child pages.
+
+### Example
+The following filestructure:
+
+![filesystem](./doc/images/filestructure.PNG)
+
+Will look like this, once uploaded to Confluence:
+
+![pagestructure](./doc/images/pagestructure.PNG)
+
+## Modules
+This tools comes with a number of modules, which add extra markdown syntax, specialized for Confluence and other tools.
+
+- [Jira Tickets](./doc/modules/jira-tickets.md)
+- [Attachments](./doc/modules/attachments.md)
+- [Mermaid.js](./doc/modules/mermaid.md)
+- [Table of Contents](./doc/modules/table-of-contents.md)
