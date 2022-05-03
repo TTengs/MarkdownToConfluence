@@ -30,7 +30,7 @@ The API token generated for the user. We recommend setting this as a GitHub secr
 
 ### `fileslocation`
 
-**Required** The path from the root of your repository, to the folder containing the markdown documentation. Default `.\`.
+**Required** The path from the root of your repository, to the folder containing the markdown documentation. Default `./`.
 
 ## Outputs
 
