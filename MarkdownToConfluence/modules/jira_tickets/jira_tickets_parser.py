@@ -14,7 +14,7 @@ def parse_ticket(line: str) -> str:
     tickets = re.findall(r'\d+-[A-Z]+(?!-?[a-zA-Z]{1,10})', line[::-1]) #official atlassian regex magic
     new_line = line
     for ticket in tickets:
-        if(check_if_ticket_exists): # TODO: Raise warning in pipeline
+        if(check_if_ticket_exists(ticket)): # TODO: Raise warning in pipeline
             ticket = ticket[::-1]
             ticket_tag = f"<ac:structured-macro ac:name='jira'><ac:parameter ac:name='columns'>key,summary,type,created,updated,due,assignee,reporter,priority,status,resolution</ac:parameter><ac:parameter ac:name='key'>{ticket}</ac:parameter> </ac:structured-macro>"
             new_line = new_line.replace(ticket, ticket_tag)
