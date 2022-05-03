@@ -94,7 +94,7 @@ Will look like this, once uploaded to Confluence:
 ![pagestructure](./doc/images/pagestructure.PNG)
 
 ## Modules
-This tools comes with a number of modules, which add extra markdown syntax, specialized for Confluence and other tools.
+This tool comes with a number of modules, which add extra markdown syntax, specialized for Confluence and other tools.
 
 - [Jira Tickets](./doc/modules/jira-tickets.md)
 - [Attachments](./doc/modules/attachments.md)
