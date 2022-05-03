@@ -5,7 +5,7 @@ This action converts your markdown files into the specified Atlassian Confluence
 
 # Setup
 ## API User Token
-First you need to create an API token for the user, you want to use for the action. We recommend that you create a new user, that is only used for this action, in order to get the full benefits from the action. See [here](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) for how to set up your API token.
+First you need to create an API token for the user, you want to use for the action. We recommend that you create a new user, that is only used for this action, in order to get the full benefits from the action. This user should also have full permission to make changes on the space. See [here](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/) for how to set up your API token.
 
 ## Environment Variables
 The necessary environment variables are as follows: 
