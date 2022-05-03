@@ -100,3 +100,4 @@ This tool comes with a number of modules, which add extra markdown syntax, speci
 - [Attachments](./doc/modules/attachments.md)
 - [Mermaid.js](./doc/modules/mermaid.md)
 - [Table of Contents](./doc/modules/table-of-contents.md)
+- [Trello Boards](./doc/modules/trello-boards.md)
