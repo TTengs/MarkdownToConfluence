@@ -1,12 +1,14 @@
 import json
 import codecs
 import requests
-import os
+import os, base64
+from requests.auth import HTTPBasicAuth
 
-AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 BASE_URL = os.environ.get("CONFLUENCE_URL")
+AUTH_USERNAME = os.environ.get("AUTH_USERNAME")
+AUTH_API_TOKEN = os.environ.get("AUTH_API_TOKEN")
 
-authorization_string = f"Basic {AUTH_TOKEN}"
+auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 
 def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     filename = filename.replace(".md", ".html")
@@ -40,18 +42,17 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     url = f"{BASE_URL}/wiki/rest/api/content/{page_id}"
 
     headers = {
-    'Authorization': authorization_string,
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }
 
     # Get current version
-    get_response = requests.request("GET", f"{url}?expand=version", headers=headers)
+    get_response = requests.request("GET", f"{url}?expand=version", headers=headers, auth=auth)
     version_number = int(json.loads(get_response.text)['version']['number'])
     template['version']['number'] = version_number + 1
 
     # Upload html to confluence
-    put_response = requests.request("PUT", url, headers=headers, data=json.dumps(template))
+    put_response = requests.request("PUT", url, headers=headers, data=json.dumps(template), auth=auth)
 
     if(put_response.status_code != 200):
         print(template['body'])
