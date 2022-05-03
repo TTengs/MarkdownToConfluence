@@ -58,7 +58,7 @@ All files
 echo "Modified files"
 for i in "${modFilesArr[@]}"
 do
-    if ["$i" == "*.md"]; then
+    if ["$i" == *.md]; then
         bash ./MarkdownToConfluence/convert.sh "$i"
     fi
 done
