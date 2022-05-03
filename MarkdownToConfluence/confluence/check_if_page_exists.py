@@ -38,6 +38,7 @@ def get_page_id(title: str, spaceKey: str) -> str:
         if(len(results) > 0):
             return results[0]['id']
         else:
-            raise PageNotFoundError
+            raise PageNotFoundError(title, spaceKey)
     else:
         print(response.text)
+        raise PageNotFoundError(title, spaceKey)

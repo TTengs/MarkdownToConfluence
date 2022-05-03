@@ -70,8 +70,8 @@ def upload_documentation(path_name:str, root:str):
             response = update_page_content(path_name, page_name, page_id, space_obj)
             if(response.status_code == 200):
                 print(f"Updated {page_name} with {parent_name} as parent")
-        except PageNotFoundError:
-            print(PageNotFoundError(page_name, SPACE_KEY))
+        except PageNotFoundError as e:
+            print(e)
     #Else, create the page
     else:
         if(parent_name != "none"): #Create page as a child page, if there is a parent
@@ -84,8 +84,8 @@ def upload_documentation(path_name:str, root:str):
                         subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(dirname(path_name))}/index.md"])
                 parent_id = get_page_id(parent_name, SPACE_KEY)
                 response = create_page(path_name, page_name, space_obj, parent_id)
-            except PageNotFoundError:
-                print(PageNotFoundError(page_name, SPACE_KEY))
+            except PageNotFoundError as e:
+                print(e)
         else:
             response = create_page(path_name, page_name, space_obj) #Create page as top page
         if(response.status_code == 200):
