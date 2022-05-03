@@ -8,7 +8,7 @@ git diff --name-status origin/main ${INPUT_FILESLOCATION}
 echo "Checking for changes"
 echo ""
 git status --porcelain ${INPUT_FILESLOCATION}
-if [[ $(git diff --quiet origin/main ${INPUT_FILESLOCATION}) ]]; then
+if [[ $(git diff origin/main ${INPUT_FILESLOCATION}) ]]; then
     res=$(git --no-pager diff --name-status origin/main ${INPUT_FILESLOCATION})
     ReMoFilesArrOLD=()
     ReMoFilesArrNEW=()
