@@ -3,8 +3,8 @@
 git init
 git config --global --add safe.directory /github/workspace
 git config --global core.pager "less -FRSX"
-git fetch
-git diff --name-status origin/main ${INPUT_FILESLOCATION}
+
+#git diff --name-status origin/main ${INPUT_FILESLOCATION}
 echo "Checking for changes"
 echo ""
 git status --porcelain ${INPUT_FILESLOCATION}
@@ -59,7 +59,7 @@ echo "Modified files"
 for i in "${modFilesArr[@]}"
 do
     echo $i
-    bash ./MarkdownToConfluence/Convert.sh "$i"
+    bash ./MarkdownToConfluence/convert.sh "$i"
 done
 
 echo "Added files"
