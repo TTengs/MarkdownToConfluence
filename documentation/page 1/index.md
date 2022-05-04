@@ -4,4 +4,3 @@ bare lige en hurtig test for at se om en page bliver bredere når man skriver en
 
 ![graph](documentation/attachments/index-1.png)
 
-dqwdwqd
