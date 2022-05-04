@@ -5,6 +5,8 @@ FROM ubuntu:latest
 
 # RUN apt-get install -y python3.6 python3-distutils python3-pip python3-apt python3-venv
 
+RUN apt-get update && apt-get install -y git
+
 # RUN apt-get install -y pandoc
 #ffmpeg libsm6 libxext6
 
