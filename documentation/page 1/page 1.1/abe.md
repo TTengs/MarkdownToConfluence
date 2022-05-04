@@ -2,4 +2,4 @@
 # page abe
 
 VIRKER DET HER!?
-theis er bøgse
+anders er nød

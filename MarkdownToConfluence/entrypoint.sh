@@ -62,39 +62,45 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
         echo "There are no changes to documentation"
     fi
     
-    echo "Modified or changed files"
-    for file in "${changedFilesArr[@]}"
-    do
-        if [[ $file == *.md ]]; then
-            bash ./MarkdownToConfluence/convert.sh "$file"
-        else
-            echo "Couldn't upload ${file}"
-        fi
-    done
+    if [[ ${#changedFilesArr[@]} -eq 0 ]]; then
+        echo "Modified or changed files"
+        for file in "${changedFilesArr[@]}"
+        do
+            if [[ $file == *.md ]]; then
+                bash ./MarkdownToConfluence/convert.sh "$file"
+            else
+                echo "Couldn't upload ${file}"
+            fi
+        done
+    fi
 
-    echo "Deleted files"
-    for i in "${delFilesArr[@]}"
-    do
-        if [[ $file == *.md ]]; then
-            # python3 ./MarkdownToConfluence/confluence/delete_content.py $file
-            echo "Tried deleting page ${file}"
-        elif [[ $file == *settings.json ]]; then
-            bash ./MarkdownToConfluence/convert_all.sh
-        else
-            echo "${file} might not have been deleted"
-        fi
-    done
+    if [[ ${#delFilesArr[@]} -eq 0 ]]; then
+        echo "Deleted files"
+        for i in "${delFilesArr[@]}"
+        do
+            if [[ $file == *.md ]]; then
+                # python3 ./MarkdownToConfluence/confluence/delete_content.py $file
+                echo "Tried deleting page ${file}"
+            elif [[ $file == *settings.json ]]; then
+                bash ./MarkdownToConfluence/convert_all.sh
+            else
+                echo "${file} might not have been deleted"
+            fi
+        done
+    fi
 
-    echo "Renamed/Moved files"
-    for i in "${ReMoFilesArrOLD[@]}"
-    do
-        if [[ $file == *.md ]]; then
-            # python3 ./MarkdownToConfluence/confluence/update_content.py $ReMoFilesArrOLD[i] ReMoFilesArrNEW[i]
-            echo "Tried moving page ${file}"
-        elif [[ $file == *settings.json ]]; then
-            bash ./MarkdownToConfluence/convert_all.sh
-        else
-            echo "${file} might not have been moved/renamed"
-        fi
-    done
+    if [[ ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
+        echo "Renamed/Moved files"
+        for i in "${ReMoFilesArrOLD[@]}"
+        do
+            if [[ $file == *.md ]]; then
+                # python3 ./MarkdownToConfluence/confluence/update_content.py $ReMoFilesArrOLD[i] ReMoFilesArrNEW[i]
+                echo "Tried moving page ${file}"
+            elif [[ $file == *settings.json ]]; then
+                bash ./MarkdownToConfluence/convert_all.sh
+            else
+                echo "${file} might not have been moved/renamed"
+            fi
+        done
+    fi
 fi
