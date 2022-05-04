@@ -1,0 +1,1 @@
+from .table_of_contents_parser import run

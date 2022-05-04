@@ -1,26 +1,25 @@
 import requests, json
-from MarkdownToConfluence.filetools import get_all_page_names_in_filesystem
-import sys, os
+from MarkdownToConfluence.utils import get_all_page_names_in_filesystem
+import sys, os, base64
+from requests.auth import HTTPBasicAuth
 
-#BASE_URL = os.environ.get("CONFLUENCE_URL")
-BASE_URL = 'https://at-bachelor.atlassian.net/wiki'
+BASE_URL = os.environ.get("CONFLUENCE_URL")
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
-#AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
-AUTH_TOKEN = "bGFyc2UxOUBzdHVkZW50LnNkdS5kazp6RzFrQk1ick9PUEtZblNSSFA0bTQxNUI="
 SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
+AUTH_USERNAME = os.environ.get("AUTH_USERNAME")
+AUTH_API_TOKEN = os.environ.get("AUTH_API_TOKEN")
 
-authorization_string = f"Basic {AUTH_TOKEN}"
+auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 
 def delete_page(page_id: str, page_name=""):
     
-    url = f"{BASE_URL}/rest/api/content/{page_id}"
+    url = f"{BASE_URL}/wiki/rest/api/content/{page_id}"
 
     headers = {
-    'Authorization': authorization_string,
     'User-Agent': 'python'
     }
 
-    response = requests.request('DELETE', url, headers=headers)
+    response = requests.request('DELETE', url, headers=headers, auth=auth)
 
     if(response.status_code == 204):
         print(f"Deleted {page_id} {page_name}")
@@ -33,21 +32,20 @@ def delete_page(page_id: str, page_name=""):
     the exclude arg takes a list of page names, that are not to be deleted, even if they dont exist in the filesystem
 """
 def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
-    url = f"{BASE_URL}/rest/api/content?spaceKey={space_key}"
+    url = f"{BASE_URL}/wiki/rest/api/content?spaceKey={space_key}"
 
     headers = {
-    'Authorization': authorization_string,
     'User-Agent': 'python'
     }
 
     results = []
-    response = requests.request("GET", url, headers=headers)
+    response = requests.request("GET", url, headers=headers, auth=auth)
     response_json = json.loads(response.text)
     if(response.status_code == 200):
         results.extend(response_json['results'])
         while("next" in response_json['_links']):
             url = BASE_URL + response_json["_links"]["next"]
-            response = requests.request("GET", url, headers=headers)
+            response = requests.request("GET", url, headers=headers, auth=auth)
             response_json = json.loads(response.text)
             results.extend(response_json['results'])
         

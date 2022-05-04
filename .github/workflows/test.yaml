@@ -2,9 +2,6 @@ name: Run PyTest
 
 on: [push]
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,16 +16,16 @@ jobs:
         apt-get update && apt-get install -y python3-venv
         python3 -m venv venv
         . venv/bin/activate
-        python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install -e .
     - name: Test with pytest
       env:
         CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
         CONFLUENCE_SPACE_KEY: '~955037829'
-        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
+        AUTH_API_TOKEN: ${{ secrets.AUTH_API_TOKEN }}
         INPUT_FILESLOCATION: './documentation'
       run: |
         . venv/bin/activate
         pip install -e .
-        pytest -v
+        python3 -m pytest -v

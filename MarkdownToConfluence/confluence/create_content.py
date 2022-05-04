@@ -1,12 +1,14 @@
 import json
 import codecs
 import requests
-import sys, os
+import sys, os, base64
+from requests.auth import HTTPBasicAuth
 
-AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
 BASE_URL = os.environ.get("CONFLUENCE_URL")
+AUTH_USERNAME = os.environ.get("AUTH_USERNAME")
+AUTH_API_TOKEN = os.environ.get("AUTH_API_TOKEN")
 
-authorization_string = f"Basic {AUTH_TOKEN}"
+auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 
 def create_page(filename: str, title: str, space_obj, parent_id="none"):
     filename = filename.replace(".md", ".html")
@@ -45,16 +47,15 @@ def create_page(filename: str, title: str, space_obj, parent_id="none"):
     f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
-    url = f'{BASE_URL}/rest/api/content'
+    url = f'{BASE_URL}/wiki/rest/api/content'
 
     headers = {
-    'Authorization': authorization_string,
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }
 
     # Upload html to confluence
-    response = requests.request("POST", url, headers=headers, data=json.dumps(template))
+    response = requests.request("POST", url, headers=headers, data=json.dumps(template), auth=auth)
 
     return response
 
