@@ -23,3 +23,5 @@ jobs:
         id: Convert
         with:
           fileslocation: './documentation'
+          target-branch: ${{ github.base_ref }}
+

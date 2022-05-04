@@ -1,2 +1,2 @@
 #!/bin/bash
-ls
+echo ${INPUT_TARGET-BRANCH}

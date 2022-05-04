@@ -5,6 +5,9 @@ inputs:
     description: 'location of documentation'
     required: false
     default: './'
+  target-branch:
+    required: false
+    default: 'peter'
 outputs:
   status:
     description: 'Status of the converter'
