@@ -61,8 +61,10 @@ def upload_documentation(path_name:str, root:str):
         html = markdown.markdown(text)
     with open(path_name.replace('.md', '.html'), 'w') as f:
         f.write(html)
-    print(os.environ.get("INPUT_SHOULD_UPLOAD"))
-    if(os.environ.get("INPUT_SHOULD_UPLOAD")):
+
+    print(os.environ.get("INPUT_SHOULD_UPLOAD") == 'false')
+    
+    if(os.environ.get("INPUT_SHOULD_UPLOAD") == 'true'):
             
         #print(f"Uploading {page_name} with {parent_name} as parent")
         #If the page already exists, just update it
