@@ -42,7 +42,7 @@ def get_page_name_from_path(path: str, root: str):
 
 # Returns the page name of the parent of the file in path. Returns default value if no parent exists i system
 # Returns "" if path == root
-def get_parent_name_from_path(path: str, root: str, default="Overview"):
+def get_parent_name_from_path(path: str, root: str, default=""):
     if(path == root):
         return ""
     if("settings.json" in os.listdir(root)):

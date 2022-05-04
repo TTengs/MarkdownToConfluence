@@ -3,4 +3,5 @@ This change is only thing i push
 BAC-74
 this ticket, BAC-77, is within a line
 
-sweet sea men
+Trello board:
+https://trello.com/b/199TqwVE/project-guide
