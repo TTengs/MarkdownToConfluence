@@ -7,6 +7,6 @@ printenv
 chmod -x ${GITHUB_EVENT_PATH}
 before=$(jq .before ${GITHUB_EVENT_PATH})
 after=$(jq .after ${GITHUB_EVENT_PATH})
-git diff --name-status ${before}..${after} './documentation'
+git diff --name-status ${before}..${after} -- './documentation'
 #echo ${GITHUB_EVENT_PATH} |  python3 -c "import sys, json; print(json.load(sys.stdin)['before'])"
 #cat ${GITHUB_EVENT_PATH} |  python3 -c "import sys, json; print(json.load(sys.stdin)['after'])"
