@@ -1,6 +1,6 @@
 name: Upload Documentation
 
-on: [pull_request]
+on: [push]
  # pull_request:
  #   branches:
 #      - main
