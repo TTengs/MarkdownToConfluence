@@ -1,5 +1,6 @@
 import re
 import requests, json, os
+from requests.auth import HTTPBasicAuth
 
 def parse_tickets(filename: str):
     with open(filename, 'r') as f:
@@ -23,10 +24,11 @@ def parse_ticket(line: str) -> str:
 def check_if_ticket_exists(ticket: str):
     base_url = os.environ.get('CONFLUENCE_URL')
     url = f'{base_url}/rest/api/3/issue/{ticket}'
-    auth = os.environ.get('AUTH_TOKEN') # TODO: change using username and token with; from requests.auth import HTTPBasicAuth
+    username = os.environ.get('AUTH_USERNAME')
+    token = os.environ.get('AUTH_API_TOKEN')
+    auth = HTTPBasicAuth(username, token)
 
     headers = {
-        'Authorization': auth,
         'Content-Type': 'application/json; charset=utf-8',
         'User-Agent': 'python'
     }
@@ -35,6 +37,7 @@ def check_if_ticket_exists(ticket: str):
         "GET",
         url,
         headers=headers,
+        auth=auth
     )
 
     return response.status_code == 200
