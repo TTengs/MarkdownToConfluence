@@ -3,4 +3,5 @@ git init
 git config --global --add safe.directory /github/workspace
 git config --global core.pager "less -FRSX"
 git fetch -q
-git diff --name-only origin/${GITHUB_BASE_REF} './documentation'
+#git diff --name-status origin/${GITHUB_BASE_REF} './documentation'
+printenv
