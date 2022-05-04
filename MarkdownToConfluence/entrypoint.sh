@@ -62,7 +62,7 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
         echo "There are no changes to documentation"
     fi
     
-    if [[ ${#changedFilesArr[@]} -eq 0 ]]; then
+    if [[ ! ${#changedFilesArr[@]} -eq 0 ]]; then
         echo "Modified or changed files"
         for file in "${changedFilesArr[@]}"
         do
@@ -74,7 +74,7 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
         done
     fi
 
-    if [[ ${#delFilesArr[@]} -eq 0 ]]; then
+    if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
         echo "Deleted files"
         for i in "${delFilesArr[@]}"
         do
@@ -89,7 +89,7 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
         done
     fi
 
-    if [[ ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
+    if [[ ! ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
         echo "Renamed/Moved files"
         for i in "${ReMoFilesArrOLD[@]}"
         do
