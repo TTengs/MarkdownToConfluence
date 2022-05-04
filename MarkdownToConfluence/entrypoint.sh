@@ -13,7 +13,7 @@ if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF} ${INPUT_FILESLOCATION})
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     echo "I push"
-    res=$(git --no-pager diff --name-status HEAD^ -- ${INPUT_FILESLOCATION})
+    res=$(git --no-pager diff --name-status ${INPUT_FILESLOCATION})
     echo "res:${res}yes"
 fi
 
