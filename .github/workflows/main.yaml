@@ -17,7 +17,8 @@ jobs:
         env:
           CONFLUENCE_URL: 'https://at-bachelor.atlassian.net'
           CONFLUENCE_SPACE_KEY: '~955037829'
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
+          AUTH_API_TOKEN: ${{ secrets.AUTH_API_TOKEN }}
         uses: ./ # Uses an action in the root directory
         id: Convert
         with:

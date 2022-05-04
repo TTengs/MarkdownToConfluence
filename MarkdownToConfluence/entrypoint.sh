@@ -58,13 +58,13 @@ All files
 echo "Modified files"
 for file in "${modFilesArr[@]}"
 do
-    if [ "${file: -3}" == ".md" ]; then
+    if [[ $file == *.md ]]; then
         bash ./MarkdownToConfluence/convert.sh "$file"
     fi
 done
 
-echo "Added files"
-for i in "${addedFilesArr[@]}"
-do
-    echo $i
-done
+#echo "Added files"
+#for i in "${addedFilesArr[@]}"
+#do
+#    echo $i
+#done
