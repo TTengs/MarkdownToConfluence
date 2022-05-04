@@ -1,4 +1,4 @@
 #!/bin/bash
-echo ${INPUT_TARGET-BRANCH}
-echo ${INPUT_SOURCE-BRANCH}
-echo $(printenv)
+echo ${GITHUB_BASE_REF}
+echo ${GITHUB_HEAD_REF}
+#echo $(printenv)
