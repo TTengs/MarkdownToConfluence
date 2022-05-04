@@ -8,9 +8,9 @@ git fetch -q
 echo "Checking for changes"
 echo ""
 res=""
-if [[ $(${GITHUB_EVENT_NAME}) == pull_request ]]; then
+if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF} ${INPUT_FILESLOCATION})
-elif [[ $(${GITHUB_EVENT_NAME}) == push ]]; then
+elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     res=$(git --no-pager diff --name-status HEAD ${INPUT_FILESLOCATION})
 fi
 
