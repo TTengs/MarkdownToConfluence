@@ -1,2 +1,0 @@
-sårn der
-awdawd

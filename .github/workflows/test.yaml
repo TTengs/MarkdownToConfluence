@@ -1,6 +1,6 @@
 name: Run PyTest
 
-on: [pull_request]
+on: [push]
 
 jobs:
   build:

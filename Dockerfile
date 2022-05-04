@@ -21,4 +21,4 @@ RUN chmod +x /MarkdownToConfluence/convert_all.sh
 RUN chmod +x /MarkdownToConfluence/convert.sh
 RUN chmod +x /MarkdownToConfluence/entrypoint.sh
 
-ENTRYPOINT [ "/MarkdownToConfluence/entrypoint.sh" ]
+ENTRYPOINT [ "sh", "/MarkdownToConfluence/convert_all.sh" ]

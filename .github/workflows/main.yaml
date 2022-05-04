@@ -1,9 +1,9 @@
 name: Upload Documentation
 
-on: [push]
-#  push:
-#    branches:
-#      - testPR
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   markdown_to_confluence_job:
