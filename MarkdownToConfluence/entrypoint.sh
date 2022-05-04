@@ -1,4 +1,3 @@
 #!/bin/bash
-echo ${GITHUB_BASE_REF}
-echo ${GITHUB_HEAD_REF}
+echo "$(git diff --name-only origin/${GITHUB_BASE_REF} './documentation')"
 #echo $(printenv)
