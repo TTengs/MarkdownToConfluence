@@ -1,9 +1,7 @@
 #!/bin/bash
-
 git init
 git config --global --add safe.directory /github/workspace
 git config --global core.pager "less -FRSX"
-#chmod -x ${GITHUB_EVENT_PATH}
 
 before=$(jq .before ${GITHUB_EVENT_PATH} | tr -d '"')
 after=${GITHUB_SHA} | tr -d '"'
@@ -16,6 +14,7 @@ res=""
 if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     echo "I PR"
     res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF} ${INPUT_FILESLOCATION})
+    #Find warnings
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     echo "I push"
     res=$(git --no-pager diff --name-status ${before}..${after} -- ${INPUT_FILESLOCATION})
