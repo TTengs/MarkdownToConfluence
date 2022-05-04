@@ -14,7 +14,7 @@ if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     echo "I push"
     res=$(git --no-pager diff --name-status HEAD ${INPUT_FILESLOCATION})
-    echo $res
+    echo "res:${res}yes"
 fi
 
 if [[ res != "" ]]; then
