@@ -8,8 +8,8 @@ git fetch
 echo "Checking for changes"
 echo ""
 
-if [[ $(git diff origin/main ${INPUT_FILESLOCATION}) ]]; then
-    res=$(git --no-pager diff --name-status origin/main ${INPUT_FILESLOCATION})
+if [[ $(git diff origin/${GITHUB_BASE_REF} ${INPUT_FILESLOCATION}) ]]; then
+    res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF} ${INPUT_FILESLOCATION})
     ReMoFilesArrOLD=()
     ReMoFilesArrNEW=()
     delFilesArr=()
@@ -59,7 +59,8 @@ echo "Modified files"
 for file in "${modFilesArr[@]}"
 do
     if [[ $file == *.md ]]; then
-        bash ./MarkdownToConfluence/convert.sh "$file"
+        echo $file
+        #bash ./MarkdownToConfluence/convert.sh "$file"
     fi
 done
 
