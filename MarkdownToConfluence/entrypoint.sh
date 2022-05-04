@@ -17,7 +17,7 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     echo "res:${res}yes"
 fi
 
-if [[ res != "" ]]; then
+if [[ $res != "" ]]; then
     ReMoFilesArrOLD=()
     ReMoFilesArrNEW=()
     delFilesArr=()
