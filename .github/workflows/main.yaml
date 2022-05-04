@@ -5,21 +5,20 @@ on:
     branches:
       - main
 
-
 jobs:
-  hello_world_job:
+  markdown_to_confluence_job:
     runs-on: ubuntu-latest
     name: Converting Markdown to Confluence
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Conversion step
-        env:
-          CONFLUENCE_URL: 'https://at-bachelor.atlassian.net'
-          CONFLUENCE_SPACE_KEY: '~955037829'
-          AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
-          AUTH_API_TOKEN: ${{ secrets.AUTH_API_TOKEN }}
         uses: ./ # Uses an action in the root directory
         id: Convert
         with:
-          fileslocation: './documentation'
+          fileslocation: 'documentation'
+          should_upload: true
+          confluence_url: 'https://at-bachelor.atlassian.net'
+          confluence_space_key: '~955037829'
+          auth_username: ${{ secrets.AUTH_USERNAME }}
+          auth_api_token: ${{ secrets.AUTH_API_TOKEN }}

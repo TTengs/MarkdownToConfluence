@@ -3,11 +3,11 @@ from MarkdownToConfluence.utils import get_all_page_names_in_filesystem
 import sys, os, base64
 from requests.auth import HTTPBasicAuth
 
-BASE_URL = os.environ.get("CONFLUENCE_URL")
+BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
-SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
-AUTH_USERNAME = os.environ.get("AUTH_USERNAME")
-AUTH_API_TOKEN = os.environ.get("AUTH_API_TOKEN")
+SPACE_KEY = os.environ.get("INPUT_CONFLUENCE_SPACE_KEY")
+AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
+AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
 
 auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 

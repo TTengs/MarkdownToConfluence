@@ -13,7 +13,7 @@ import subprocess
 import markdown
 import module_loader
 
-SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
+SPACE_KEY = os.environ.get("INPUT_CONFLUENCE_SPACE_KEY")
 
 space_obj = {
         "key": SPACE_KEY,
@@ -62,43 +62,49 @@ def upload_documentation(path_name:str, root:str):
     with open(path_name.replace('.md', '.html'), 'w') as f:
         f.write(html)
 
-    #print(f"Uploading {page_name} with {parent_name} as parent")
-    #If the page already exists, just update it
-    if(page_exists_in_space(page_name, SPACE_KEY)):
-        try:
-            page_id = get_page_id(page_name, SPACE_KEY)
-            response = update_page_content(path_name, page_name, page_id, space_obj)
-            if(response.status_code == 200):
-                print(f"Updated {page_name} with {parent_name} as parent")
-        except PageNotFoundError as e:
-            print(e)
-    #Else, create the page
-    else:
-        if(parent_name != ""): #Create page as a child page, if there is a parent
+    print(os.environ.get("INPUT_SHOULD_UPLOAD") == 'false')
+
+    if(os.environ.get("INPUT_SHOULD_UPLOAD") == 'true'):
+            
+        #print(f"Uploading {page_name} with {parent_name} as parent")
+        #If the page already exists, just update it
+        if(page_exists_in_space(page_name, SPACE_KEY)):
             try:
-                if(not page_exists_in_space(parent_name, SPACE_KEY)): #If the parent page doesn't exists, create it
-                    print(f"uploading parent: {parent_name}")
-                    if(file_name != "index"):
-                        subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(path_name)}/index.md"])
-                    else:
-                        subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(dirname(path_name))}/index.md"])
-                parent_id = get_page_id(parent_name, SPACE_KEY)
-                response = create_page(path_name, page_name, space_obj, parent_id)
+                page_id = get_page_id(page_name, SPACE_KEY)
+                response = update_page_content(path_name, page_name, page_id, space_obj)
+                if(response.status_code == 200):
+                    print(f"Updated {page_name} with {parent_name} as parent")
             except PageNotFoundError as e:
                 print(e)
+        #Else, create the page
         else:
-            response = create_page(path_name, page_name, space_obj) #Create page as top page
-        if(response.status_code == 200):
-            print(f"Created {page_name} with {parent_name} as parent")
+            if(parent_name != ""): #Create page as a child page, if there is a parent
+                try:
+                    if(not page_exists_in_space(parent_name, SPACE_KEY)): #If the parent page doesn't exists, create it
+                        print(f"uploading parent: {parent_name}")
+                        if(file_name != "index"):
+                            subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(path_name)}/index.md"])
+                        else:
+                            subprocess.call(["bash", "/MarkdownToConfluence/convert.sh", f"{dirname(dirname(path_name))}/index.md"])
+                    parent_id = get_page_id(parent_name, SPACE_KEY)
+                    response = create_page(path_name, page_name, space_obj, parent_id)
+                except PageNotFoundError as e:
+                    print(e)
+            else:
+                response = create_page(path_name, page_name, space_obj) #Create page as top page
+            if(response.status_code == 200):
+                print(f"Created {page_name} with {parent_name} as parent")
 
-    if(response.status_code == 200):
-        for attachment in MarkdownToConfluence.globals.attachments:
-            upload_attachment(page_name, attachment[0], attachment[1])
+        if(response.status_code == 200):
+            for attachment in MarkdownToConfluence.globals.attachments:
+                upload_attachment(page_name, attachment[0], attachment[1])
+        else:
+            print(f"Error uploading {page_name}. Status code {response.status_code}")
+            print(response.text)
+            sys.exit(1)
+        return response
     else:
-        print(f"Error uploading {page_name}. Status code {response.status_code}")
-        print(response.text)
-        sys.exit(1)
-    return response
+        print("Skipped uploading")
 
 if __name__ == "__main__":
     import sys
