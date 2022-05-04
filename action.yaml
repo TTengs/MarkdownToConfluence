@@ -8,6 +8,9 @@ inputs:
   target-branch:
     required: false
     default: 'peter'
+  source-branch:
+    required: false
+    default: 'peter'
 outputs:
   status:
     description: 'Status of the converter'

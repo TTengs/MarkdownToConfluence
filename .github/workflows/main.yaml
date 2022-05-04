@@ -24,4 +24,6 @@ jobs:
         with:
           fileslocation: './documentation'
           target-branch: ${{ github.base_ref }}
+          source-branch: ${{ github.head_ref }}
+          
 
