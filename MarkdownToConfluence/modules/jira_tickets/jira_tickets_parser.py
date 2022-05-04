@@ -22,10 +22,10 @@ def parse_ticket(line: str) -> str:
     return new_line
 
 def check_if_ticket_exists(ticket: str):
-    base_url = os.environ.get('CONFLUENCE_URL')
+    base_url = os.environ.get('INPUT_CONFLUENCE_URL')
     url = f'{base_url}/rest/api/3/issue/{ticket}'
-    username = os.environ.get('AUTH_USERNAME')
-    token = os.environ.get('AUTH_API_TOKEN')
+    username = os.environ.get('INPUT_AUTH_USERNAME')
+    token = os.environ.get('INPUT_AUTH_API_TOKEN')
     auth = HTTPBasicAuth(username, token)
 
     headers = {

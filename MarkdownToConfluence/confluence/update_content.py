@@ -4,9 +4,9 @@ import requests
 import os, base64
 from requests.auth import HTTPBasicAuth
 
-BASE_URL = os.environ.get("CONFLUENCE_URL")
-AUTH_USERNAME = os.environ.get("AUTH_USERNAME")
-AUTH_API_TOKEN = os.environ.get("AUTH_API_TOKEN")
+BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
+AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
+AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
 
 auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 

@@ -3,10 +3,10 @@ from .check_if_page_exists import page_exists_in_space, get_page_id
 from .PageNotFoundError import PageNotFoundError
 from requests.auth import HTTPBasicAuth
 
-BASE_URL = os.environ.get("CONFLUENCE_URL")
-SPACEKEY = os.environ.get("CONFLUENCE_SPACE_KEY")
-AUTH_USERNAME = os.environ.get("AUTH_USERNAME")
-AUTH_API_TOKEN = os.environ.get("AUTH_API_TOKEN")
+BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
+SPACEKEY = os.environ.get("INPUT_CONFLUENCE_SPACE_KEY")
+AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
+AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
 
 auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 

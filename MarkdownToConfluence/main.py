@@ -13,7 +13,7 @@ import subprocess
 import markdown
 import module_loader
 
-SPACE_KEY = os.environ.get("CONFLUENCE_SPACE_KEY")
+SPACE_KEY = os.environ.get("INPUT_CONFLUENCE_SPACE_KEY")
 
 space_obj = {
         "key": SPACE_KEY,
@@ -63,7 +63,7 @@ def upload_documentation(path_name:str, root:str):
         f.write(html)
 
     print(os.environ.get("INPUT_SHOULD_UPLOAD") == 'false')
-    
+
     if(os.environ.get("INPUT_SHOULD_UPLOAD") == 'true'):
             
         #print(f"Uploading {page_name} with {parent_name} as parent")
