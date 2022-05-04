@@ -1,9 +1,9 @@
 name: Upload Documentation
 
-on:
-  push:
-    branches:
-      - testPR
+on: [push]
+#  push:
+#    branches:
+#      - testPR
 
 
 jobs:
@@ -23,3 +23,4 @@ jobs:
         id: Convert
         with:
           fileslocation: 'documentation'
+          should_upload: false

@@ -5,6 +5,10 @@ inputs:
     description: 'location of documentation'
     required: false
     default: './'
+  should_upload:
+    description: 'Should PR upload docs?'
+    required: true
+    type: boolean
 outputs:
   status:
     description: 'Status of the converter'

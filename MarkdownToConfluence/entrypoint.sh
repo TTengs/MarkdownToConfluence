@@ -71,7 +71,7 @@ for file in "${modFilesArr[@]}"
 do
     if [[ $file == *.md ]]; then
         echo $file
-        #bash ./MarkdownToConfluence/convert.sh "$file"
+        bash ./MarkdownToConfluence/convert.sh "$file"
     fi
 done
 
