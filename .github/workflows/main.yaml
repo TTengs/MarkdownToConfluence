@@ -23,7 +23,5 @@ jobs:
         id: Convert
         with:
           fileslocation: './documentation'
-          target-branch: $GITHUB_BASE_REF
-          source-branch: $GITHUB_HEAD_REF
           
 
