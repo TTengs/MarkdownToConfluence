@@ -11,7 +11,7 @@ FROM ubuntu:latest
 # RUN chmod +x /venv/*
 # RUN . /venv/bin/activate
 
-RUN apt-get update && apt-get -y install git
+RUN apt-get update && apt-get -y install git jq
 
 #COPY setup.py /setup.py
 #COPY requirements.txt requirements.txt
