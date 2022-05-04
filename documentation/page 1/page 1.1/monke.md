@@ -2,4 +2,3 @@
 
 VIRKER DET HER!?
 Monke banana
-mommY?
