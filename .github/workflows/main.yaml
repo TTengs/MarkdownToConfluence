@@ -1,9 +1,9 @@
 name: Upload Documentation
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - testPR
 
 
 jobs:
@@ -22,4 +22,4 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: Convert
         with:
-          fileslocation: './documentation'
+          fileslocation: 'documentation'
