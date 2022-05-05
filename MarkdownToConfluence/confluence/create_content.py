@@ -20,11 +20,9 @@ def create_page(filename: str):
     auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
     MarkdownToConfluence.globals.init()
 
-    print(os.environ['INPUT_FILESLOCATION'], ROOT)
-
     page_name, parent_name = convert_markdown.convert(filename, ROOT)
 
-    if(confluence_utils.page_exists_in_space(confluence_utils.get_page_id(page_name, SPACEKEY))):
+    if(confluence_utils.page_exists_in_space(page_name, SPACEKEY)):
         return "Page already exists"
 
     print(f"Creating {page_name} with {parent_name} as parent")
