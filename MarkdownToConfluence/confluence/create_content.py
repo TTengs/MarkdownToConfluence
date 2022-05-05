@@ -10,15 +10,14 @@ import MarkdownToConfluence.globals
 from MarkdownToConfluence.confluence.create_empty_page import create_empty_page
 from MarkdownToConfluence.confluence.upload_attachments import upload_attachment
 
-BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
-AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
-AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
-SPACEKEY = os.environ.get('INPUT_CONFLUENCE_SPACE_KEY')
-ROOT = os.environ.get('INPUT_FILESLOCATION')
-
-auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 
 def create_page(filename: str):
+    BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
+    AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
+    AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
+    SPACEKEY = os.environ.get('INPUT_CONFLUENCE_SPACE_KEY')
+    ROOT = os.environ.get('INPUT_FILESLOCATION')
+    auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
     MarkdownToConfluence.globals.init()
 
     print(os.environ['INPUT_FILESLOCATION'], ROOT)
