@@ -53,9 +53,9 @@ def create_page(filename: str):
                 }
             ]
         else:
-            if(parent_name == MarkdownToConfluence.globals.settings['parent_name']):
-                print("Parent didnt exist, creating empty parent at root of space: " + parent_name)
-                create_empty_page(parent_name)
+            if('parent_name' in MarkdownToConfluence.globals.settings.keys() and parent_name == MarkdownToConfluence.globals.settings['parent_name']):
+                    print("Parent didnt exist, creating empty parent at root of space: " + parent_name)
+                    create_empty_page(parent_name)
             else:
                 print("Parent didnt exist, creating parent: " + parent_name)
                 create_page(get_parent_path_from_child(filename))

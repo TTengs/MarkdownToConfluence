@@ -1,24 +1,52 @@
-import json
+import json, sys
 import codecs
 import requests
 import os, base64
 from requests.auth import HTTPBasicAuth
+from MarkdownToConfluence.confluence import convert_markdown
+from MarkdownToConfluence.utils.page_file_info import get_page_name_from_path, get_parent_path_from_child
+from MarkdownToConfluence.confluence import confluence_utils
+import MarkdownToConfluence.globals
+from MarkdownToConfluence.confluence.create_content import create_page
+from MarkdownToConfluence.confluence.create_empty_page import create_empty_page
+from MarkdownToConfluence.confluence.upload_attachments import upload_attachment
 
-BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
-AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
-AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
 
-auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
+def update_page_content(filename: str, old_filename=""):
+    BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
+    AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
+    AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
+    SPACE_KEY = os.environ.get("INPUT_CONFLUENCE_SPACE_KEY")
+    ROOT = os.environ.get("INPUT_FILESLOCATION")
+    MarkdownToConfluence.globals.init()
 
-def update_page_content(filename: str, title: str, page_id: str, space_obj,):
+    auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
+
+    old_page_name = ""
+    page_name, parent_name = convert_markdown.convert(filename, ROOT)
+
+    if(old_filename != ""):
+        if(not os.path.exists(old_filename)):
+            with open(old_filename, 'w') as old: # create the file temporaily to get names
+                old.write(" ")
+            old_page_name = get_page_name_from_path(old_filename, ROOT)
+            page_id = confluence_utils.get_page_id(old_page_name, SPACE_KEY)
+            os.remove(old_filename)
+        else:
+            old_page_name = get_page_name_from_path(old_filename, ROOT)
+    else:
+        page_id = confluence_utils.get_page_id(page_name, SPACE_KEY)
+
     filename = filename.replace(".md", ".html")
     template = {
         "version" : {
             "number": 0,
         },
-        "title": title,
+        "title": page_name,
         "type": "page",
-        "space": space_obj,
+        "space": {
+            "key": SPACE_KEY
+        },
         "body": {
                 "storage": {
                     "value": "",
@@ -26,6 +54,21 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
                 }
             }
     }
+
+    if(old_filename != "" or parent_name != ""):
+        if(confluence_utils.page_exists_in_space(parent_name, SPACE_KEY)):
+            template['ancestors'] = [
+                {
+                    "id": confluence_utils.get_page_id(parent_name),
+                }
+            ]
+        else:
+            if('parent_name' in MarkdownToConfluence.globals.settings.keys() and parent_name == MarkdownToConfluence.globals.settings['parent_name']):
+                    print("Parent didnt exist, creating empty parent at root of space: " + parent_name)
+                    create_empty_page(parent_name)
+            else:
+                print("Parent didnt exist, creating parent: " + parent_name)
+                create_page(get_parent_path_from_child(filename))
 
     # Remove <!DOCTYPE html> from html file
     with open(f"{filename}", "r") as f:
@@ -54,7 +97,13 @@ def update_page_content(filename: str, title: str, page_id: str, space_obj,):
     # Upload html to confluence
     put_response = requests.request("PUT", url, headers=headers, data=json.dumps(template), auth=auth)
 
-    if(put_response.status_code != 200):
-        print(template['body'])
-
-    return(put_response)
+    if(put_response.status_code == 200):
+        for attachment in MarkdownToConfluence.globals.attachments:
+            upload_attachment(page_name, attachment[0], attachment[1])
+        print(f"Created {page_name} with {parent_name} as parent")
+    else:
+        print(f"Error uploading {page_name}. Status code {put_response.status_code}")
+        print(put_response.text)
+        sys.exit(1)
+    
+    return put_response
