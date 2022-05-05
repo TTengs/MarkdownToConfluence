@@ -52,12 +52,12 @@ def get_all_pages_in_space(space_key: str):
     results = []
     response = requests.request("GET", url, headers=headers, auth=auth)
     if(response.status_code == 200):
-        print(response)
-        print(response.text)
+        #print(response)
+        #print(response.text)
         response_json = json.loads(response.text)
         results.extend(response_json['results'])
         while("next" in response_json['_links']):
-            url = BASE_URL + response_json["_links"]["next"]
+            url = BASE_URL + '/wiki/' + response_json["_links"]["next"]
             response = requests.request("GET", url, headers=headers, auth=auth)
             response_json = json.loads(response.text)
             results.extend(response_json['results'])
