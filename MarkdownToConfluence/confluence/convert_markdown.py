@@ -39,7 +39,7 @@ def convert(filename: str, root: str):
     # Convert to html
     with open(temp_file, 'r') as f:
         text = f.read()
-        html = markdown.markdown(text)
+        html = markdown.markdown(text, extensions=['markdown.extensions.tables', 'markdown.extensions.fenced_code'])
     with open(filename.replace('.md', '.html'), 'w') as f:
         f.write(html)
 

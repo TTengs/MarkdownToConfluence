@@ -31,4 +31,5 @@ def get_modules(settings_file=None):
                             modules.append(module_name) # assumes non specified modules, should be added
                     else:
                         modules.append(module_name) # Assume all modules should be added, if nothing is specified
+
     return modules

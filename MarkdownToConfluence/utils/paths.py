@@ -1,7 +1,9 @@
 import os
 from posixpath import dirname, basename
 
-def get_abs_path_from_relative(relative_path: str, source_path: str, root=os.environ.get('INPUT_FILESLOCATION')):
+def get_abs_path_from_relative(relative_path: str, source_path: str, root=""):
+    if(root == ""):
+        root = os.environ.get('INPUT_FILESLOCATION')
     _root = os.path.abspath(root)
     if(os.path.isfile(source_path)):
         source_path = dirname(source_path)
