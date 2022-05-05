@@ -5,3 +5,4 @@ from .delete_content import delete_page
 from .update_content import update_page_content
 from .upload_attachments import upload_attachment
 from .PageNotFoundError import PageNotFoundError
+from .convert_markdown import convert

@@ -3,7 +3,7 @@ from posixpath import basename
 import pathlib
 
 def run_module(module_name: str, filename=None):
-    name = "modules." + module_name
+    name = "MarkdownToConfluence.modules." + module_name
     mod = __import__(name, fromlist=[''])
     if(filename != None):
         return mod.run(filename)
