@@ -13,7 +13,7 @@ def reset_confluence():
     yield
     k.stop()
 
-@mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": test_docs})
+#@mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": test_docs})
 def test_create_page():
     from MarkdownToConfluence.confluence.create_content import create_page
     print(os.environ['INPUT_FILESLOCATION'])
