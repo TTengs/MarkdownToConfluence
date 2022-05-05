@@ -7,7 +7,7 @@ import MarkdownToConfluence.globals
 
 @pytest.fixture(autouse=True)
 def before():
-    MarkdownToConfluence.globals.init()
+    MarkdownToConfluence.globals.init(str(pathlib.Path(__file__).parent.resolve()) + '/testdocs/settings.json')
     yield
 
 

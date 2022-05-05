@@ -7,7 +7,6 @@ from unittest import mock
 def run_before():
     MarkdownToConfluence.globals.init()
     yield
-    MarkdownToConfluence.globals.init()
 
 @mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'})
 def test_convert_md_attachment_links_to_confluence_attachment_links():
