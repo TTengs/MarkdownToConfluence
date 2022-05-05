@@ -11,10 +11,15 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.6"
-    - name: Install dependencies
-      run: |
-        apt-get update && apt-get install python3-venv
-        python3 -m venv venv
+    - uses: syphar/restore-virtualenv@v1
+    id: cache-virtualenv
+    - uses: syphar/restore-pip-download-cache@v1
+      if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+      # the package installation will only be executed when the
+      # requirements-files have changed.
+    - run: pip install -r requirements.txt
+      if: steps.cache-virtualenv.outputs.cache-hit != 'true'
+
     - name: Test with pytest
       env:
         INPUT_CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
@@ -24,8 +29,5 @@ jobs:
         INPUT_FILESLOCATION: 'documentation'
         INPUT_SHOULD_UPLOAD: false
       run: |
-        . venv/bin/activate
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
         python3 -m pytest --collect-only
         python3 -m pytest -v
