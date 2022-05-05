@@ -45,6 +45,8 @@ def get_page_id(title: str, spaceKey: str) -> str:
 def get_all_pages_in_space(space_key: str):
     url = f"{BASE_URL}/wiki/rest/api/content?spaceKey={space_key}"
 
+    print(url)
+
     headers = {
     'User-Agent': 'python'
     }

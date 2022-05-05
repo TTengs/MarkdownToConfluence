@@ -6,7 +6,7 @@ test_docs = str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'
 @pytest.fixture(autouse=True)
 def reset_confluence():
     from MarkdownToConfluence.confluence.delete_content import delete_all_pages_in_space
-    
+
     delete_all_pages_in_space(os.environ.get('INPUT_CONFLUENCE_SPACE_KEY'))
     yield
 
