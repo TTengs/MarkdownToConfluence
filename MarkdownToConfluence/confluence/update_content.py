@@ -59,7 +59,7 @@ def update_page_content(filename: str, old_filename=""):
         if(confluence_utils.page_exists_in_space(parent_name, SPACE_KEY)):
             template['ancestors'] = [
                 {
-                    "id": confluence_utils.get_page_id(parent_name),
+                    "id": confluence_utils.get_page_id(parent_name, SPACE_KEY),
                 }
             ]
         else:
