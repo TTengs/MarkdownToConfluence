@@ -24,4 +24,5 @@ jobs:
         INPUT_FILESLOCATION: 'documentation'
         INPUT_SHOULD_UPLOAD: false
       run: |
+        python3 -m pytest --collect-only
         python3 -m pytest -v
