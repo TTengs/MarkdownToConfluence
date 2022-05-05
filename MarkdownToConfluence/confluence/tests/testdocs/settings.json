@@ -1,5 +1,5 @@
 {
-    "parent_page": "Overview",
+    "parent_page": "",
     "modules": {
         "mermaid": true,
         "jira-tickets": true,

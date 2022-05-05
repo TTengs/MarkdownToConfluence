@@ -2,6 +2,7 @@ import requests, json
 from MarkdownToConfluence.utils import get_all_page_names_in_filesystem
 import sys, os, base64
 from requests.auth import HTTPBasicAuth
+from confluence_utils import get_all_pages_in_space
 
 BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
@@ -59,3 +60,8 @@ if __name__ == "__main__":
         delete_non_existing_pages(sys.argv[1], sys.argv[2])
     else:
         delete_non_existing_pages(SPACE_KEY, FILES_PATH)
+
+def delete_all_pages_in_space(space_key):
+    pages = get_all_pages_in_space(space_key)
+    for page in pages:
+        delete_page(page['id'])

@@ -87,3 +87,8 @@ def get_all_page_names_in_filesystem(root: str):
         page_names.append(name)
     return page_names
 
+def get_parent_path_from_child(child_path: str):
+    if(basename(child_path) != "index.md"):
+        return dirname(child_path)
+    else:
+        return dirname(dirname(child_path))
