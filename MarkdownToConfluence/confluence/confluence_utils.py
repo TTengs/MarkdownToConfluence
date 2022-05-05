@@ -63,6 +63,8 @@ def get_all_pages_in_space(space_key: str):
             if(response.status_code == 200):
                 response_json = json.loads(response.text)
                 results.extend(response_json['results'])
+            else:
+                break
 
     else:
         print(response)
