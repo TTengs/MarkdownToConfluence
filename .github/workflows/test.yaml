@@ -13,8 +13,8 @@ jobs:
         python-version: "3.6"
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        apt-get update && apt-get install python3-venv
+        python3 -m venv venv
     - name: Test with pytest
       env:
         INPUT_CONFLUENCE_URL: 'https://at-bachelor.atlassian.net/wiki'
@@ -24,5 +24,8 @@ jobs:
         INPUT_FILESLOCATION: 'documentation'
         INPUT_SHOULD_UPLOAD: false
       run: |
+        . venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
         python3 -m pytest --collect-only
         python3 -m pytest -v
