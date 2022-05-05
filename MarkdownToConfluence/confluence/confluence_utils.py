@@ -45,8 +45,6 @@ def get_page_id(title: str, spaceKey: str) -> str:
 def get_all_pages_in_space(space_key: str):
     url = f"{BASE_URL}/wiki/rest/api/content?spaceKey={space_key}"
 
-    print(url)
-
     headers = {
     'User-Agent': 'python'
     }
@@ -54,6 +52,7 @@ def get_all_pages_in_space(space_key: str):
     results = []
     response = requests.request("GET", url, headers=headers, auth=auth)
     if(response.status_code == 200):
+        print(response)
         response_json = json.loads(response.text)
         results.extend(response_json['results'])
         while("next" in response_json['_links']):
