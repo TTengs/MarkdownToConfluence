@@ -21,6 +21,8 @@ auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 def create_page(filename: str):
     MarkdownToConfluence.globals.init()
 
+    print(os.environ['INPUT_FILESLOCATION'], ROOT)
+
     page_name, parent_name = convert_markdown.convert(filename, ROOT)
 
     if(confluence_utils.page_exists_in_space(confluence_utils.get_page_id(page_name, SPACEKEY))):
