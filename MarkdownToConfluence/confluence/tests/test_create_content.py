@@ -7,9 +7,15 @@ test_docs = str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'
 def reset_confluence():
     from MarkdownToConfluence.confluence.delete_content import delete_all_pages_in_space
 
+    if(not os.environ['INPUT_CONFLUENCE_SPACE_KEY']):
+        k = mock.patch.dict(os.environ, {"INPUT_CONFLUENCE_SPACE_KEY": 'MAR', "INPUT_FILESLOCATION": test_docs})
+        k.start()
+    else:
+        k = mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": test_docs})
+        k.start()
+
     delete_all_pages_in_space(os.environ.get('INPUT_CONFLUENCE_SPACE_KEY'))
-    k = mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": test_docs})
-    k.start()
+    
     yield
     k.stop()
 
@@ -21,3 +27,6 @@ def test_create_page():
         file.write('# testfile')
     response = create_page(f'{test_docs}/testfile.md')
     assert response.status_code == 200
+
+    from MarkdownToConfluence.confluence.confluence_utils import page_exists_in_space
+    assert page_exists_in_space('testfile', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
