@@ -3,4 +3,5 @@ requests==2.22.0
 urllib3==1.25.8
 Markdown==3.3.6
 Pillow>=8.4.0
+-e git+https://github.com/TTengs/MarkdownToConfluence.git@3f2695fd2f83b30a0faff034be71f4b1f4448603#egg=MarkdownToConfluence
 #opencv-python==4.5.5.64
