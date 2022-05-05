@@ -3,12 +3,12 @@ import codecs
 import requests
 import sys, os, base64
 from requests.auth import HTTPBasicAuth
-import convert_markdown
+import MarkdownToConfluence.confluence.convert_markdown as convert_markdown
 import MarkdownToConfluence.confluence.confluence_utils as confluence_utils
 from MarkdownToConfluence.utils import get_parent_path_from_child
 import MarkdownToConfluence.globals
-from create_empty_page import create_empty_page
-from upload_attachments import upload_attachment
+from MarkdownToConfluence.confluence.create_empty_page import create_empty_page
+from MarkdownToConfluence.confluence.upload_attachments import upload_attachment
 
 BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
 AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")

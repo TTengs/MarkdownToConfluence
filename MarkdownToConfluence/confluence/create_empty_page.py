@@ -1,12 +1,8 @@
 import json
-import codecs
 import requests
-import sys, os, base64
+import os
 from requests.auth import HTTPBasicAuth
-import convert_markdown
 import MarkdownToConfluence.confluence.confluence_utils as confluence_utils
-from MarkdownToConfluence.utils import get_parent_path_from_child
-import MarkdownToConfluence.globals
 
 BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
 AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")

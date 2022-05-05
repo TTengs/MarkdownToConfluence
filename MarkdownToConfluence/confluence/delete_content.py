@@ -2,7 +2,7 @@ import requests, json
 from MarkdownToConfluence.utils import get_all_page_names_in_filesystem
 import sys, os, base64
 from requests.auth import HTTPBasicAuth
-from confluence_utils import get_all_pages_in_space
+from MarkdownToConfluence.confluence.confluence_utils import get_all_pages_in_space
 
 BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")

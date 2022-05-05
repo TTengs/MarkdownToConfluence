@@ -1,4 +1,4 @@
-from ..convert_markdown import convert
+from MarkdownToConfluence.confluence.convert_markdown import convert
 import pathlib, os
 import pytest
 from unittest import mock
