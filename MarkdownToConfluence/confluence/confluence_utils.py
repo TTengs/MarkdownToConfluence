@@ -57,7 +57,7 @@ def get_all_pages_in_space(space_key: str):
         response_json = json.loads(response.text)
         results.extend(response_json['results'])
         while("next" in response_json['_links']):
-            url = BASE_URL + '/wiki/' + response_json["_links"]["next"]
+            url = BASE_URL + '/wiki' + response_json["_links"]["next"]
             response = requests.request("GET", url, headers=headers, auth=auth)
             print(response, response.text)
             if(response.status_code == 200):
