@@ -55,5 +55,5 @@ def test_update_page_content():
 
     response = update_page_content(testfile3, testfile2)
     assert response.status_code == 200
-    assert page_exists_in_space('testfile3', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
+    assert page_exists_in_space('testfile', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
     assert page_exists_in_space('testfile2', os.environ['INPUT_CONFLUENCE_SPACE_KEY']) == False
