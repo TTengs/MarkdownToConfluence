@@ -21,6 +21,6 @@ jobs:
           fileslocation: 'documentation'
           should_upload: true
           confluence_url: 'https://at-bachelor.atlassian.net'
-          confluence_space_key: 'MAR'
+          confluence_space_key: 'BP'
           auth_username: ${{ secrets.AUTH_USERNAME }}
           auth_api_token: ${{ secrets.AUTH_API_TOKEN }}
