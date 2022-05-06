@@ -13,7 +13,7 @@ from MarkdownToConfluence.confluence.upload_attachments import upload_attachment
 
 def create_page(filename: str):
     if(os.path.isdir(filename)):
-        filename = os.path.join(filename, '/index.md')
+        filename = os.path.join(filename, 'index.md')
     print("Create: ", filename)
     BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
     AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
