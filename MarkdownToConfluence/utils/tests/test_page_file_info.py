@@ -9,8 +9,8 @@ import MarkdownToConfluence.globals
 
 @pytest.fixture(autouse=True)
 def before():
-    MarkdownToConfluence.globals.init()
     k = mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'})
+    MarkdownToConfluence.globals.init()
     k.start()
     
     yield
