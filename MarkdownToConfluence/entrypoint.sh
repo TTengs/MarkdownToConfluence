@@ -19,7 +19,7 @@ if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     #bash ./MarkdownToConfluence/convert_all.sh men som bare kun converter og smider warnings uden at uploade
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     echo "On push"
-    res=$(git --no-pager diff --name-status ${before}...${after} -- ${INPUT_FILESLOCATION})
+    res=$(git --no-pager diff --name-status ${before}..${after} -- ${INPUT_FILESLOCATION})
 fi
 
 if [[ $res != "" ]]; then
