@@ -1,5 +1,5 @@
 import requests, json, os, base64
-from .check_if_page_exists import page_exists_in_space, get_page_id
+from .confluence_utils import page_exists_in_space, get_page_id
 from .PageNotFoundError import PageNotFoundError
 from requests.auth import HTTPBasicAuth
 

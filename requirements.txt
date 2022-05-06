@@ -1,6 +1,7 @@
-pytest>=7.0.0
+pytest==7.1.1
 requests==2.22.0
 urllib3==1.25.8
 Markdown==3.3.6
 Pillow>=8.4.0
+-e .
 #opencv-python==4.5.5.64

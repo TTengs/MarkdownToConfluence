@@ -18,14 +18,23 @@ if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     #bash ./MarkdownToConfluence/convert_all.sh men som bare kun converter og smider warnings uden at uploade
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     echo "On push"
-    res=$(git --no-pager diff --name-status ${before}..${after} -- ${INPUT_FILESLOCATION})
+    res=$(git --no-pager diff --name-status ${before}...${after} -- ${INPUT_FILESLOCATION})
+fi
 
-    if [[ $res != "" ]]; then
+if [[ $res != "" ]]; then
     ReMoFilesArrOLD=()
     ReMoFilesArrNEW=()
     delFilesArr=()
     changedFilesArr=()
+    addedFilesArr=()
+    settingsFile=()
     while IFS=$'\t' read -r -a tmp ; do
+        if [[ ${tmp[1]} == *settings.json || ${tmp[2]} == *settings.json ]]; then
+            echo "Changes to settings.json found, converting all files."
+            python3 /MarkdownToConfluence/confluence/delete_content.py --all
+            bash ./MarkdownToConfluence/create_all.sh
+            exit 0
+        fi
         # Renamed or moved files
         if [[ ${tmp[0]} = R* ]]; then
             echo "---Renamed/Moved---"
@@ -49,58 +58,53 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
         elif [[ ${tmp[0]} = A* ]]; then
             echo "---Added---"
             echo ${tmp[1]}
-            changedFilesArr+=("${tmp[1]}")
-        elif [[ ${tmp[1]} || ${tmp[2]} == *settings.json ]]; then
-            echo "Changes to settings.json found, converting all files."
-            bash ./MarkdownToConfluence/convert_all.sh
+            addedFilesArr+=("${tmp[1]}")
         else
             echo "---Other changes---"
             echo ${tmp[@]}
         fi
     done <<< $res
-    else
-        echo "There are no changes to documentation"
-    fi
-    
-    if [[ ! ${#changedFilesArr[@]} -eq 0 ]]; then
-        echo "Modified or changed files"
-        for file in "${changedFilesArr[@]}"
-        do
-            if [[ $file == *.md ]]; then
-                bash ./MarkdownToConfluence/convert.sh "$file"
-            else
-                echo "Couldn't upload ${file}"
-            fi
-        done
-    fi
 
     if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
-        echo "Deleted files"
+        printf "\nDeleting files:"
         for i in "${delFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
-                # python3 ./MarkdownToConfluence/confluence/delete_content.py $file
-                echo "Tried deleting page ${file}"
-            elif [[ $file == *settings.json ]]; then
-                bash ./MarkdownToConfluence/convert_all.sh
+                python3 /MarkdownToConfluence/confluence/delete_content.py $file
             else
                 echo "${file} might not have been deleted"
             fi
         done
     fi
 
+    if [[ ! ${#changedFilesArr[@]} -eq 0 ]]; then
+        printf "\nUpdating modified files"
+        for file in "${changedFilesArr[@]}"
+        do
+            if [[ $file == *.md ]]; then
+                python3 /MarkdownToConfluence/confluence/update_content.py "${file}"
+            else
+                echo "Couldn't upload ${file}"
+            fi
+        done
+    fi
+
+
     if [[ ! ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
-        echo "Renamed/Moved files"
+        printf "\nRenameing or moving files"
         for i in "${ReMoFilesArrOLD[@]}"
         do
             if [[ $file == *.md ]]; then
-                # python3 ./MarkdownToConfluence/confluence/update_content.py $ReMoFilesArrOLD[i] ReMoFilesArrNEW[i]
-                echo "Tried moving page ${file}"
-            elif [[ $file == *settings.json ]]; then
-                bash ./MarkdownToConfluence/convert_all.sh
+                python3 /MarkdownToConfluence/confluence/update_content.py "${ReMoFilesArrOLD[i]}" "${ReMoFilesArrNEW[i]}"
             else
                 echo "${file} might not have been moved/renamed"
             fi
         done
     fi
+
+    #printf "\nRemoving excess pages"
+    #python3 /MarkdownToConfluence/confluence/delete_content.py --clean
+
+else
+    echo "There are no changes to documentation"
 fi

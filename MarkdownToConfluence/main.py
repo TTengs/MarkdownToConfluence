@@ -6,6 +6,7 @@ from confluence import create_page
 from confluence import update_page_content
 from confluence import upload_attachment
 from utils import convert_all_md_img_to_confluence_img
+import  MarkdownToConfluence.confluence.convert_markdown as conver_markdown
 import MarkdownToConfluence.globals
 from utils.page_file_info import get_page_name_from_path, get_parent_name_from_path
 import os
@@ -25,44 +26,7 @@ def upload_documentation(path_name:str, root:str):
     if(os.path.isdir(path_name)):
         path_name += "/index.md"
 
-    file_name = basename(path_name).replace(".md", "")
-    temp_file = path_name.replace('.md', '_final.md')
-
-    pages = path_name.split('/')
-
-    # Get page name
-    page_name = get_page_name_from_path(path_name, root)
-
-    # Get parent name
-    parent_name = get_parent_name_from_path(path_name, root)
-
-    # Copy into name_final.md
-    with open(path_name, 'r') as i, open(temp_file, 'w') as o:
-        lines = i.readlines()
-        for line in lines:
-            o.write(line)
-
-    # Load and run modules
-    settings_path = f"{os.environ.get('INPUT_FILESLOCATION')}/settings.json"
-    if(os.path.exists(settings_path)):
-        modules = module_loader.get_modules(settings_path)
-    else:
-        modules = module_loader.get_modules()
-    
-    for module in modules:
-        module_loader.run_module(module, temp_file)
-
-    # Convert images
-    convert_all_md_img_to_confluence_img(temp_file)
-
-    # Convert to html
-    with open(temp_file, 'r') as f:
-        text = f.read()
-        html = markdown.markdown(text)
-    with open(path_name.replace('.md', '.html'), 'w') as f:
-        f.write(html)
-
-    print(os.environ.get("INPUT_SHOULD_UPLOAD") == 'false')
+    page_name, parent_name = conver_markdown.convert(path_name, root)
 
     if(os.environ.get("INPUT_SHOULD_UPLOAD") == 'true'):
             
