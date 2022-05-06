@@ -70,10 +70,7 @@ if [[ $res != "" ]]; then
         for i in "${delFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
-                python3 ./MarkdownToConfluence/confluence/delete_content.py $file
-                #echo "Tried deleting page ${file}"
-            elif [[ $file == *settings.json ]]; then
-                bash ./MarkdownToConfluence/convert_all.sh
+                python3 /MarkdownToConfluence/confluence/delete_content.py $file
             else
                 echo "${file} might not have been deleted"
             fi
@@ -86,7 +83,6 @@ if [[ $res != "" ]]; then
         do
             if [[ $file == *.md ]]; then
                 python3 /MarkdownToConfluence/confluence/update_content.py "${file}"
-                #bash ./MarkdownToConfluence/convert.sh "$file"
             else
                 echo "Couldn't upload ${file}"
             fi
@@ -99,8 +95,7 @@ if [[ $res != "" ]]; then
         for i in "${ReMoFilesArrOLD[@]}"
         do
             if [[ $file == *.md ]]; then
-                python3 ./MarkdownToConfluence/confluence/update_content.py "${ReMoFilesArrOLD[i]}" "${ReMoFilesArrNEW[i]}"
-                #echo "Tried moving page ${file}"
+                python3 /MarkdownToConfluence/confluence/update_content.py "${ReMoFilesArrOLD[i]}" "${ReMoFilesArrNEW[i]}"
             else
                 echo "${file} might not have been moved/renamed"
             fi

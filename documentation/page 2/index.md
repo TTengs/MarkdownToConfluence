@@ -17,9 +17,10 @@ This is test text
 
 https://trello.com/b/hfnwef/dqjqwd
 
+[test](./zip_test.zip)
+
 ```mermaid
 graph
 A[start] --> B[end]
 ```
 
-[test](./zip_test.zip)
