@@ -53,7 +53,7 @@ if [[ $res != "" ]]; then
             echo "---Added---"
             echo ${tmp[1]}
             addedFilesArr+=("${tmp[1]}")
-        elif [[ ${tmp[1]} || ${tmp[2]} == *settings.json ]]; then
+        elif [[ ${tmp[1]} == *settings.json || ${tmp[2]} == *settings.json ]]; then
             echo "Changes to settings.json found, converting all files."
             python3 ./MarkdownToConfluence/confluence/delete_content --all
             #bash ./MarkdownToConfluence/convert_all.sh
