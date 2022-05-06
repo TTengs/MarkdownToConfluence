@@ -4,7 +4,7 @@ import requests
 import os, base64
 from requests.auth import HTTPBasicAuth
 from MarkdownToConfluence.confluence import convert_markdown
-from MarkdownToConfluence.utils.page_file_info import get_page_name_from_path, get_parent_path_from_child
+from MarkdownToConfluence.utils.page_file_info import get_page_name_from_path, get_parent_name_from_path, get_parent_path_from_child
 from MarkdownToConfluence.confluence import confluence_utils
 import MarkdownToConfluence.globals
 from MarkdownToConfluence.confluence.create_content import create_page
@@ -34,10 +34,12 @@ def update_page_content(filename: str, old_filename=""):
             os.remove(old_filename)
         else:
             old_page_name = get_page_name_from_path(old_filename, ROOT)
+            old_parent_name = get_parent_name_from_path(old_filename, ROOT)
     else:
         page_id = confluence_utils.get_page_id(page_name, SPACE_KEY)
 
-    print(f"Updating page {page_id} with title {page_name} and {parent_name} as parent")
+
+    print(f"Updating page {page_id} with title {page_name}")
 
     filename = filename.replace(".md", ".html")
     template = {
@@ -56,7 +58,7 @@ def update_page_content(filename: str, old_filename=""):
                 }
             }
     }
-
+    """
     if(parent_name != ""):
         if(confluence_utils.page_exists_in_space(parent_name, SPACE_KEY)):
             template['ancestors'] = [
@@ -71,7 +73,7 @@ def update_page_content(filename: str, old_filename=""):
             else:
                 print("Parent didnt exist, creating parent: " + parent_name)
                 create_page(get_parent_path_from_child(filename))
-
+    """
     # Remove <!DOCTYPE html> from html file
     with open(f"{filename}", "r") as f:
         lines = f.readlines()
@@ -84,12 +86,19 @@ def update_page_content(filename: str, old_filename=""):
     f = codecs.open(f"{filename}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
+
     url = f"{BASE_URL}/wiki/rest/api/content/{page_id}"
 
     headers = {
     'Content-Type': 'application/json; charset=utf-8',
     'User-Agent': 'python'
     }
+
+    if(old_parent_name != parent_name):
+        move_url = f"{BASE_URL}/wiki/rest/api/content/{page_id}/move/append/{confluence_utils.get_page_id(parent_name)}"
+        move_response = requests.request("PUT", move_url, headers=headers, auth=auth)
+        if(move_response.status_code == 200):
+            print(f"Moved page {page_name} from {old_parent_name} to {parent_name}")
 
     # Get current version
     get_response = requests.request("GET", f"{url}?expand=version", headers=headers, auth=auth)
@@ -102,7 +111,7 @@ def update_page_content(filename: str, old_filename=""):
     if(put_response.status_code == 200):
         for attachment in MarkdownToConfluence.globals.attachments:
             upload_attachment(page_name, attachment[0], attachment[1])
-        print(f"Updated page {page_id} with title {page_name} and {parent_name} as parent")
+        print(f"Updated page {page_id} with title {page_name}")
         MarkdownToConfluence.globals.reset()
     else:
         print(f"Error uploading {page_name}. Status code {put_response.status_code}")
