@@ -59,14 +59,15 @@ def update_page_content(filename: str, old_filename=""):
                 }
             }
     }
-    """
+    
     if(parent_name != ""):
         if(confluence_utils.page_exists_in_space(parent_name, SPACE_KEY)):
-            template['ancestors'] = [
-                {
-                    "id": confluence_utils.get_page_id(parent_name, SPACE_KEY),
-                }
-            ]
+            pass
+        #     template['ancestors'] = [
+        #         {
+        #             "id": confluence_utils.get_page_id(parent_name, SPACE_KEY),
+        #         }
+        #     ]
         else:
             if('parent_name' in MarkdownToConfluence.globals.settings.keys() and parent_name == MarkdownToConfluence.globals.settings['parent_name']):
                     print("Parent didnt exist, creating empty parent at root of space: " + parent_name)
@@ -74,7 +75,7 @@ def update_page_content(filename: str, old_filename=""):
             else:
                 print("Parent didnt exist, creating parent: " + parent_name)
                 create_page(get_parent_path_from_child(filename))
-    """
+    
     # Remove <!DOCTYPE html> from html file
     with open(f"{filename}", "r") as f:
         lines = f.readlines()
