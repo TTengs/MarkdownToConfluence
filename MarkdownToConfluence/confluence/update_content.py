@@ -123,3 +123,9 @@ def update_page_content(filename: str, old_filename=""):
         sys.exit(1)
     
     return put_response
+
+if __name__ == "__main__":
+    if(len(sys.argv) == 2):
+        update_page_content(sys.argv[1])
+    elif(len(sys.argv) == 3):
+        update_page_content(sys.argv[1], sys.argv[2])

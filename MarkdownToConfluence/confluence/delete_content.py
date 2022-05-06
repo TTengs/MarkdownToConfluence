@@ -1,5 +1,6 @@
 import requests, json
-from MarkdownToConfluence.utils import get_all_page_names_in_filesystem
+from MarkdownToConfluence.utils import get_all_page_names_in_filesystem, get_page_name_from_path
+import MarkdownToConfluence.confluence.confluence_utils as confluence_utils
 import sys, os, base64
 from requests.auth import HTTPBasicAuth
 from MarkdownToConfluence.confluence.confluence_utils import get_all_pages_in_space
@@ -11,6 +12,12 @@ AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
 AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
 
 auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
+
+def delete_page_from_file(filename: str):
+    page_name = get_page_name_from_path(filename)
+    if(confluence_utils.page_exists_in_space(page_name)):
+        page_id = confluence_utils.get_page_id(page_name)
+        return delete_page(page_id)
 
 def delete_page(page_id: str, page_name=""):
     
@@ -55,13 +62,17 @@ def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
             if (result['title'] not in pages_in_filesystem and result['title'] not in exclude):
                 delete_page(result['id'], result['title'])
     
-if __name__ == "__main__":
-    if(len(sys.argv)> 1):
-        delete_non_existing_pages(sys.argv[1], sys.argv[2])
-    else:
-        delete_non_existing_pages(SPACE_KEY, FILES_PATH)
 
 def delete_all_pages_in_space(space_key):
     pages = get_all_pages_in_space(space_key)
     for page in pages:
         delete_page(page['id'])
+
+
+if __name__ == "__main__":
+    if(sys.argv[1] == '--all'):
+        delete_all_pages_in_space(os.environ.get('INPUT_CONFLUENCE_SPACE_KEY'))
+    elif(sys.argv[1] == '--clean'):
+        delete_non_existing_pages(sys.argv[2], sys.argv[3])
+    else:
+        delete_page_from_file(sys.argv[1])

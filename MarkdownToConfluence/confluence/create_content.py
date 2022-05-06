@@ -99,7 +99,4 @@ def create_page(filename: str):
     return response
 
 if __name__ == "__main__":
-    if(len(sys.argv) > 4):
-        create_page(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-    else:
-        create_page(sys.argv[1], sys.argv[2], sys.argv[3])
+    create_page(sys.argv[1])
