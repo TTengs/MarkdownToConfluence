@@ -47,6 +47,7 @@ def get_parent_name_from_path(path: str, root: str, default=""):
     if(path == root):
         return ""
     settings = MarkdownToConfluence.globals.settings
+    print(settings)
     if("parent_page" in settings.keys()):
         default = settings["parent_page"]
     if(os.path.isdir(path)): # Assume index.md if path is dir
@@ -59,6 +60,9 @@ def get_parent_name_from_path(path: str, root: str, default=""):
         parent_path = dirname(dirname(path))
     else:
         parent_path = dirname(path)
+
+    print(parent_path)
+
     if(parent_path != root):
         parent_name = get_page_name_from_path(parent_path, root)
     else:
