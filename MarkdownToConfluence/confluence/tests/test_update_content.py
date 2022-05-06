@@ -14,7 +14,7 @@ def reset_confluence():
     delete_all_pages_in_space(os.environ.get('INPUT_CONFLUENCE_SPACE_KEY'))
     
     yield
-    
+
     k.stop()
 
 def test_update_page_content():
@@ -22,22 +22,22 @@ def test_update_page_content():
     from MarkdownToConfluence.confluence.create_content import create_page
     from MarkdownToConfluence.confluence.confluence_utils import page_exists_in_space
 
-    with open(f'{test_docs}/testfile.md', 'w') as file:
+    with open(f'{test_docs}/CRUD/testfile.md', 'w') as file:
         file.write('# testfile')
-    create_page(f'{test_docs}/testfile.md')
+    create_page(f'{test_docs}/CRUD/testfile.md')
 
-    with open(f'{test_docs}/testfile.md', 'w') as file:
+    with open(f'{test_docs}/CRUD/testfile.md', 'w') as file:
         file.write('# testfile as changed')
-    response = update_page_content(f'{test_docs}/testfile.md')
+    response = update_page_content(f'{test_docs}/CRUD/testfile.md')
 
     assert response.status_code == 200
     assert page_exists_in_space('testfile', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
 
-    with open(f'{test_docs}/testfile2.md', 'w') as file:
+    with open(f'{test_docs}/CRUD/testfile2.md', 'w') as file:
         file.write('# testfile2')
-    os.remove(f'{test_docs}/testfile.md')
+    os.remove(f'{test_docs}/CRUD/testfile.md')
 
-    response = update_page_content(f'{test_docs}/testfile2.md', f'{test_docs}/testfile.md')
+    response = update_page_content(f'{test_docs}/CRUD/testfile2.md', f'{test_docs}/CRUD/testfile.md')
     assert response.status_code == 200
     assert page_exists_in_space('testfile2', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
     assert page_exists_in_space('testfile', os.environ['INPUT_CONFLUENCE_SPACE_KEY']) == False

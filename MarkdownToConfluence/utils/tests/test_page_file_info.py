@@ -3,6 +3,18 @@ import pytest
 import collections
 import os
 from MarkdownToConfluence.utils.page_file_info import get_page_name_from_path, get_parent_name_from_path, get_prefix, get_all_md_paths, get_all_page_names_in_filesystem
+import pytest
+from unittest import mock
+
+@pytest.fixture(autouse=True)
+def before():
+    
+    k = mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'})
+    k.start()
+    
+    yield
+    k.stop()
+
 
 def test_get_prefix():
     root=str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'
