@@ -29,6 +29,12 @@ if [[ $res != "" ]]; then
     addedFilesArr=()
     settingsFile=()
     while IFS=$'\t' read -r -a tmp ; do
+        if [[ ${tmp[1]} == *settings.json || ${tmp[2]} == *settings.json ]]; then
+            echo "Changes to settings.json found, converting all files."
+            python3 ./MarkdownToConfluence/confluence/delete_content --all
+            #bash ./MarkdownToConfluence/convert_all.sh
+            exit 0
+        fi
         # Renamed or moved files
         if [[ ${tmp[0]} = R* ]]; then
             echo "---Renamed/Moved---"
@@ -53,11 +59,6 @@ if [[ $res != "" ]]; then
             echo "---Added---"
             echo ${tmp[1]}
             addedFilesArr+=("${tmp[1]}")
-        elif [[ ${tmp[1]} == *settings.json || ${tmp[2]} == *settings.json ]]; then
-            echo "Changes to settings.json found, converting all files."
-            python3 ./MarkdownToConfluence/confluence/delete_content --all
-            #bash ./MarkdownToConfluence/convert_all.sh
-            exit 0
         else
             echo "---Other changes---"
             echo ${tmp[@]}
