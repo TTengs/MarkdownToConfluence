@@ -57,7 +57,7 @@ def update_page_content(filename: str, old_filename=""):
             }
     }
 
-    if(old_filename != "" or parent_name != ""):
+    if(parent_name != ""):
         if(confluence_utils.page_exists_in_space(parent_name, SPACE_KEY)):
             template['ancestors'] = [
                 {
