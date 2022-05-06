@@ -19,12 +19,15 @@ if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
     echo "On push"
     res=$(git --no-pager diff --name-status ${before}..${after} -- ${INPUT_FILESLOCATION})
+fi
 
-    if [[ $res != "" ]]; then
+if [[ $res != "" ]]; then
     ReMoFilesArrOLD=()
     ReMoFilesArrNEW=()
     delFilesArr=()
     changedFilesArr=()
+    addedFilesArr=()
+    settingsFile=()
     while IFS=$'\t' read -r -a tmp ; do
         # Renamed or moved files
         if [[ ${tmp[0]} = R* ]]; then
@@ -49,19 +52,33 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
         elif [[ ${tmp[0]} = A* ]]; then
             echo "---Added---"
             echo ${tmp[1]}
-            changedFilesArr+=("${tmp[1]}")
+            addedFilesArr+=("${tmp[1]}")
         elif [[ ${tmp[1]} || ${tmp[2]} == *settings.json ]]; then
             echo "Changes to settings.json found, converting all files."
-            bash ./MarkdownToConfluence/convert_all.sh
+            python3 ./MarkdownToConfluence/confluence/delete_content --all
+            #bash ./MarkdownToConfluence/convert_all.sh
+            exit 0
         else
             echo "---Other changes---"
             echo ${tmp[@]}
         fi
     done <<< $res
-    else
-        echo "There are no changes to documentation"
+
+    if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
+        echo "Deleted files"
+        for i in "${delFilesArr[@]}"
+        do
+            if [[ $file == *.md ]]; then
+                python3 ./MarkdownToConfluence/confluence/delete_content.py $file
+                #echo "Tried deleting page ${file}"
+            elif [[ $file == *settings.json ]]; then
+                bash ./MarkdownToConfluence/convert_all.sh
+            else
+                echo "${file} might not have been deleted"
+            fi
+        done
     fi
-    
+
     if [[ ! ${#changedFilesArr[@]} -eq 0 ]]; then
         echo "Modified or changed files"
         for file in "${changedFilesArr[@]}"
@@ -74,20 +91,6 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
         done
     fi
 
-    if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
-        echo "Deleted files"
-        for i in "${delFilesArr[@]}"
-        do
-            if [[ $file == *.md ]]; then
-                # python3 ./MarkdownToConfluence/confluence/delete_content.py $file
-                echo "Tried deleting page ${file}"
-            elif [[ $file == *settings.json ]]; then
-                bash ./MarkdownToConfluence/convert_all.sh
-            else
-                echo "${file} might not have been deleted"
-            fi
-        done
-    fi
 
     if [[ ! ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
         echo "Renamed/Moved files"
@@ -103,4 +106,6 @@ elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
             fi
         done
     fi
+else
+    echo "There are no changes to documentation"
 fi

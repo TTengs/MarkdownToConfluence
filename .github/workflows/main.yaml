@@ -1,9 +1,11 @@
 name: Upload Documentation
 
-on:
-  pull_request:
-    branches:
-      - main
+# on:
+#   pull_request:
+#     branches:
+#       - main
+
+on: [push]
 
 jobs:
   markdown_to_confluence_job:
@@ -19,6 +21,6 @@ jobs:
           fileslocation: 'documentation'
           should_upload: true
           confluence_url: 'https://at-bachelor.atlassian.net'
-          confluence_space_key: '~955037829'
+          confluence_space_key: 'MAR'
           auth_username: ${{ secrets.AUTH_USERNAME }}
           auth_api_token: ${{ secrets.AUTH_API_TOKEN }}
