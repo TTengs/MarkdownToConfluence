@@ -96,7 +96,7 @@ def update_page_content(filename: str, old_filename=""):
     }
 
     if(old_parent_name != parent_name):
-        move_url = f"{BASE_URL}/wiki/rest/api/content/{page_id}/move/append/{confluence_utils.get_page_id(parent_name)}"
+        move_url = f"{BASE_URL}/wiki/rest/api/content/{page_id}/move/append/{confluence_utils.get_page_id(parent_name, SPACE_KEY)}"
         move_response = requests.request("PUT", move_url, headers=headers, auth=auth)
         if(move_response.status_code == 200):
             print(f"Moved page {page_name} from {old_parent_name} to {parent_name}")
