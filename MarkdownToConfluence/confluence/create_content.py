@@ -52,7 +52,7 @@ def create_page(filename: str):
         if(confluence_utils.page_exists_in_space(parent_name, SPACEKEY)):
             template['ancestors'] = [
                 {
-                    "id": confluence_utils.get_page_id(parent_name),
+                    "id": confluence_utils.get_page_id(parent_name, SPACEKEY),
                 }
             ]
         else:
