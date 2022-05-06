@@ -31,7 +31,7 @@ if [[ $res != "" ]]; then
     while IFS=$'\t' read -r -a tmp ; do
         if [[ ${tmp[1]} == *settings.json || ${tmp[2]} == *settings.json ]]; then
             echo "Changes to settings.json found, converting all files."
-            python3 ./MarkdownToConfluence/confluence/delete_content --all
+            python3 /MarkdownToConfluence/confluence/delete_content --all
             #bash ./MarkdownToConfluence/convert_all.sh
             exit 0
         fi
