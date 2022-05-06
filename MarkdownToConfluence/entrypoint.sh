@@ -4,16 +4,17 @@ git config --global --add safe.directory /github/workspace
 git config --global core.pager "less -FRSX"
 
 before=$(jq .before ${GITHUB_EVENT_PATH} | tr -d '"')
-after=${GITHUB_SHA} | tr -d '"'
+after=${GITHUB_SHA}
 
 git fetch origin ${before} --depth=1
+git fetch origin ${GITHUB_BASE_REF} --depth=1
 
 echo "Checking for changes"
 echo ""
 res=""
 if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     echo "On pull request"
-    res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF}...${after} -- ${INPUT_FILESLOCATION})
+    res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF} -- ${INPUT_FILESLOCATION})
     #Find warnings
     #bash ./MarkdownToConfluence/convert_all.sh men som bare kun converter og smider warnings uden at uploade
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
