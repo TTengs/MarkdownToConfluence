@@ -102,7 +102,7 @@ def update_page_content(filename: str, old_filename=""):
     if(put_response.status_code == 200):
         for attachment in MarkdownToConfluence.globals.attachments:
             upload_attachment(page_name, attachment[0], attachment[1])
-        print(f"Created {page_name} with {parent_name} as parent")
+        print(f"Updated page {page_id} with title {page_name} and {parent_name} as parent")
         MarkdownToConfluence.globals.reset()
     else:
         print(f"Error uploading {page_name}. Status code {put_response.status_code}")
