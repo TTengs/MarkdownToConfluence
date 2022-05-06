@@ -12,6 +12,7 @@ from MarkdownToConfluence.confluence.upload_attachments import upload_attachment
 
 
 def create_page(filename: str):
+    print("Create: ", Sfilename)
     BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
     AUTH_USERNAME = os.environ.get("INPUT_AUTH_USERNAME")
     AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
