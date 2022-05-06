@@ -45,7 +45,18 @@ def create_page(filename: str):
                     "value": "",
                     "representation": "storage"
                 }
+        },
+        "metadata": {
+            "properties": {
+                "editor": {"value":"v2"},
+                "content_appearance_draft": {
+                    "value": "full-width"
+                },
+                "content_appearance_published": {
+                    "value": "full-width"
+                }
             }
+        }
     }
 
     if(parent_name != ""):
