@@ -16,9 +16,9 @@ AUTH_API_TOKEN = os.environ.get("INPUT_AUTH_API_TOKEN")
 auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 
 def delete_page_from_file(filename: str):
-    page_name = get_page_name_from_path(filename)
-    if(confluence_utils.page_exists_in_space(page_name)):
-        page_id = confluence_utils.get_page_id(page_name)
+    page_name = get_page_name_from_path(filename, FILES_PATH)
+    if(confluence_utils.page_exists_in_space(page_name, SPACE_KEY)):
+        page_id = confluence_utils.get_page_id(page_name, SPACE_KEY)
         return delete_page(page_id)
 
 def delete_page(page_id: str, page_name=""):
