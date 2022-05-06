@@ -54,6 +54,8 @@ def get_parent_name_from_path(path: str, root: str, default=""):
     if(os.path.isdir(path)): # Assume index.md if path is dir
         path = os.path.join(path, "index.md")
         
+    print("default: ", default)
+        
     file_name = basename(path)
     parent_name = ""
 

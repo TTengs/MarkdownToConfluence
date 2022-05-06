@@ -24,6 +24,7 @@ def create_page(filename: str):
     MarkdownToConfluence.globals.init()
 
     page_name, parent_name = convert_markdown.convert(filename, ROOT)
+    attachments = MarkdownToConfluence.globals.attachments
 
     if(confluence_utils.page_exists_in_space(page_name, SPACEKEY)):
         return "Page already exists"
@@ -86,7 +87,7 @@ def create_page(filename: str):
     response = requests.request("POST", url, headers=headers, data=json.dumps(template), auth=auth)
 
     if(response.status_code == 200):
-        for attachment in MarkdownToConfluence.globals.attachments:
+        for attachment in attachments:
             upload_attachment(page_name, attachment[0], attachment[1])
         print(f"Created {page_name} with {parent_name} as parent")
         MarkdownToConfluence.globals.reset()
