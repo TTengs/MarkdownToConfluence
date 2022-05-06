@@ -62,7 +62,6 @@ def get_all_descendants(parent_page: str, space_key: str):
             while("next" in response_json['_links']):
                 url = response_json["_links"]["base"] + response_json["_links"]["next"]
                 response = requests.request("GET", url, headers=headers, auth=auth)
-                print(response, response.text)
                 if(response.status_code == 200):
                     response_json = json.loads(response.text)
                     results.extend(response_json['results'])
@@ -91,7 +90,6 @@ def get_all_pages_in_space(space_key: str):
         while("next" in response_json['_links']):
             url = BASE_URL + '/wiki' + response_json["_links"]["next"]
             response = requests.request("GET", url, headers=headers, auth=auth)
-            print(response, response.text)
             if(response.status_code == 200):
                 response_json = json.loads(response.text)
                 results.extend(response_json['results'])

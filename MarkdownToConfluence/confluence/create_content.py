@@ -49,19 +49,19 @@ def create_page(filename: str):
     }
 
     if(parent_name != ""):
-        if(confluence_utils.page_exists_in_space(parent_name, SPACEKEY)):
-            template['ancestors'] = [
-                {
-                    "id": confluence_utils.get_page_id(parent_name, SPACEKEY),
-                }
-            ]
-        else:
+        if(not confluence_utils.page_exists_in_space(parent_name, SPACEKEY)):
             if('parent_name' in MarkdownToConfluence.globals.settings.keys() and parent_name == MarkdownToConfluence.globals.settings['parent_name']):
                     print("Parent didnt exist, creating empty parent at root of space: " + parent_name)
                     create_empty_page(parent_name)
             else:
                 print("Parent didnt exist, creating parent: " + parent_name)
                 create_page(get_parent_path_from_child(filename))
+            
+        template['ancestors'] = [
+            {
+                "id": confluence_utils.get_page_id(parent_name, SPACEKEY),
+            }
+        ]
 
     html_file = filename.replace(".md", ".html")
     # Remove <!DOCTYPE html> from html file
