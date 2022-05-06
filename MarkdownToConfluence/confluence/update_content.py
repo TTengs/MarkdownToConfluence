@@ -23,6 +23,7 @@ def update_page_content(filename: str, old_filename=""):
     auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
 
     old_page_name = ""
+    old_parent_name = ""
     page_name, parent_name = convert_markdown.convert(filename, ROOT)
 
     if(old_filename != ""):
