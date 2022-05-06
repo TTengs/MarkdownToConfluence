@@ -66,7 +66,7 @@ if [[ $res != "" ]]; then
     done <<< $res
 
     if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
-        echo "Deleted files"
+        printf "\nDeleting files:"
         for i in "${delFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
@@ -81,11 +81,12 @@ if [[ $res != "" ]]; then
     fi
 
     if [[ ! ${#changedFilesArr[@]} -eq 0 ]]; then
-        echo "Modified or changed files"
+        printf "\nUpdating modified files"
         for file in "${changedFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
-                bash ./MarkdownToConfluence/convert.sh "$file"
+                python3 /MarkdownToConfluence/confluence/update_content.py "${file}"
+                #bash ./MarkdownToConfluence/convert.sh "$file"
             else
                 echo "Couldn't upload ${file}"
             fi
@@ -94,19 +95,21 @@ if [[ $res != "" ]]; then
 
 
     if [[ ! ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
-        echo "Renamed/Moved files"
+        printf "\nRenameing or moving files"
         for i in "${ReMoFilesArrOLD[@]}"
         do
             if [[ $file == *.md ]]; then
-                # python3 ./MarkdownToConfluence/confluence/update_content.py $ReMoFilesArrOLD[i] ReMoFilesArrNEW[i]
-                echo "Tried moving page ${file}"
-            elif [[ $file == *settings.json ]]; then
-                bash ./MarkdownToConfluence/convert_all.sh
+                python3 ./MarkdownToConfluence/confluence/update_content.py "${ReMoFilesArrOLD[i]}" "${ReMoFilesArrNEW[i]}"
+                #echo "Tried moving page ${file}"
             else
                 echo "${file} might not have been moved/renamed"
             fi
         done
     fi
+
+    printf "\nRemoving excess pages"
+    python3 /MarkdownToConfluence/confluence/delete_content.py --clear 
+
 else
     echo "There are no changes to documentation"
 fi
