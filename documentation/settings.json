@@ -1,5 +1,5 @@
 {
-    "parent_page": "DAM Center 5",
+    "parent_page": "Overview",
     "modules": {
         "mermaid": true,
         "jira-tickets": true,
