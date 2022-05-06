@@ -91,7 +91,7 @@ def get_all_page_names_in_filesystem(root: str):
     return page_names
 
 def get_parent_path_from_child(child_path: str):
-    print('Get parent name: ', child_path)
+    print('Get parent name: ', child_path, basename(child_path))
     if(basename(child_path).strip() != "index.md"):
         return dirname(child_path)
     else:
