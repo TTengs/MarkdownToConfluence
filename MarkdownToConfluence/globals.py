@@ -11,6 +11,7 @@ def init(settings_path=""):
                 settings = None
     else:
         settings = json.load(open(settings_path))
+    print(settings)
 
 def reset():
     global attachments
