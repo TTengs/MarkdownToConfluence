@@ -102,8 +102,8 @@ if [[ $res != "" ]]; then
         done
     fi
 
-    printf "\nRemoving excess pages"
-    python3 /MarkdownToConfluence/confluence/delete_content.py --clean
+    #printf "\nRemoving excess pages"
+    #python3 /MarkdownToConfluence/confluence/delete_content.py --clean
 
 else
     echo "There are no changes to documentation"
