@@ -14,6 +14,7 @@ def reset_confluence():
     delete_all_pages_in_space(os.environ.get('INPUT_CONFLUENCE_SPACE_KEY'))
     
     yield
+    
     k.stop()
 
 def test_update_page_content():

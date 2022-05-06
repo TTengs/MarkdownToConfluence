@@ -37,6 +37,8 @@ def update_page_content(filename: str, old_filename=""):
     else:
         page_id = confluence_utils.get_page_id(page_name, SPACE_KEY)
 
+    print(f"Updating page {page_id} with title {page_name} and {parent_name} as parent")
+
     filename = filename.replace(".md", ".html")
     template = {
         "version" : {
