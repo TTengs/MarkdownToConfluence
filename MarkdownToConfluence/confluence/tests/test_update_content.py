@@ -24,7 +24,9 @@ def test_update_page_content():
 
     testfile = f'{test_docs}/CRUD/testfile.md'
     testfile2 = f'{test_docs}/CRUD/testfile2.md'
+    testfile3 = f'{test_docs}/CRUD2/testfile.md'
 
+    # Update content only
     with open(testfile, 'w') as file:
         file.write('# testfile')
     create_page(testfile)
@@ -36,6 +38,7 @@ def test_update_page_content():
     assert response.status_code == 200
     assert page_exists_in_space('testfile', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
 
+    # Update title
     with open(testfile2, 'w') as file:
         file.write('# testfile2')
     os.remove(testfile)
@@ -44,3 +47,13 @@ def test_update_page_content():
     assert response.status_code == 200
     assert page_exists_in_space('testfile2', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
     assert page_exists_in_space('testfile', os.environ['INPUT_CONFLUENCE_SPACE_KEY']) == False
+
+    #Update parent
+    with open(testfile3, 'w') as  file:
+        file.write("# CRUD2 testifle")
+    os.remove(testfile2)
+
+    response = update_page_content(testfile3, testfile2)
+    assert response.status_code == 200
+    assert page_exists_in_space('testfile3', os.environ['INPUT_CONFLUENCE_SPACE_KEY'])
+    assert page_exists_in_space('testfile2', os.environ['INPUT_CONFLUENCE_SPACE_KEY']) == False
