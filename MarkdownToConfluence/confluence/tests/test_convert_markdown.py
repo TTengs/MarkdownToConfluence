@@ -9,6 +9,8 @@ def before():
     
     MarkdownToConfluence.globals.init(str(pathlib.Path(__file__).parent.resolve()) + '/testdocs/settings.json')
     yield
+    MarkdownToConfluence.globals.reset()
+
 
 
 @mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'})
