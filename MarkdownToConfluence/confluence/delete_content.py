@@ -4,6 +4,7 @@ import MarkdownToConfluence.confluence.confluence_utils as confluence_utils
 import sys, os, base64
 from requests.auth import HTTPBasicAuth
 from MarkdownToConfluence.confluence.confluence_utils import get_all_pages_in_space
+import MarkdownToConfluence.globals
 
 BASE_URL = os.environ.get("INPUT_CONFLUENCE_URL")
 FILES_PATH = os.environ.get("INPUT_FILESLOCATION")
@@ -64,7 +65,16 @@ def delete_non_existing_pages(space_key: str, root: str, exclude=['Overview']):
     
 
 def delete_all_pages_in_space(space_key):
-    pages = get_all_pages_in_space(space_key)
+    MarkdownToConfluence.globals.init()
+    settings = MarkdownToConfluence.globals.settings
+    parent_page = ""
+    if(settings != None):
+        if('parent_page' in settings.keys()):
+            parent_page = settings['parent_page']
+    if(parent_page == ""):
+        pages = get_all_pages_in_space(space_key)
+    else:
+        pages = confluence_utils.get_all_descendants(parent_page, space_key)
     for page in pages:
         delete_page(page['id'])
 

@@ -42,6 +42,38 @@ def get_page_id(title: str, spaceKey: str) -> str:
         print(response.text)
         raise PageNotFoundError(title, spaceKey)
 
+def get_all_descendants(parent_page: str, space_key: str):
+    if(page_exists_in_space(parent_page, space_key)):
+        page_id = get_page_id(parent_page, space_key)
+
+        url = f"{BASE_URL}/wiki/rest/api/content/{page_id}/descendant/page"
+
+        headers = {
+        'User-Agent': 'python'
+        }
+
+        results = []
+        response = requests.request("GET", url, headers=headers, auth=auth)
+        if(response.status_code == 200):
+            #print(response)
+            #print(response.text)
+            response_json = json.loads(response.text)
+            results.extend(response_json['results'])
+            while("next" in response_json['_links']):
+                url = response_json["_links"]["base"] + response_json["_links"]["next"]
+                response = requests.request("GET", url, headers=headers, auth=auth)
+                print(response, response.text)
+                if(response.status_code == 200):
+                    response_json = json.loads(response.text)
+                    results.extend(response_json['results'])
+                else:
+                    break
+        else:
+            print(response)
+
+        return results
+    raise PageNotFoundError(parent_page, space_key)
+
 def get_all_pages_in_space(space_key: str):
     url = f"{BASE_URL}/wiki/rest/api/content?spaceKey={space_key}"
 
