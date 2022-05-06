@@ -33,7 +33,7 @@ if [[ $res != "" ]]; then
         if [[ ${tmp[1]} == *settings.json || ${tmp[2]} == *settings.json ]]; then
             echo "Changes to settings.json found, converting all files."
             python3 /MarkdownToConfluence/confluence/delete_content.py --all
-            bash ./MarkdownToConfluence/create_all.sh
+            bash /MarkdownToConfluence/create_all.sh
             exit 0
         fi
         # Renamed or moved files
