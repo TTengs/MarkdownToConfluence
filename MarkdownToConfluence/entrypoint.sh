@@ -13,7 +13,7 @@ echo ""
 res=""
 if [[ ${GITHUB_EVENT_NAME} == "pull_request" ]]; then
     echo "On pull request"
-    res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF}...${GITHUB_HEAD_REF} -- ${INPUT_FILESLOCATION})
+    res=$(git --no-pager diff --name-status origin/${GITHUB_BASE_REF}...${after} -- ${INPUT_FILESLOCATION})
     #Find warnings
     #bash ./MarkdownToConfluence/convert_all.sh men som bare kun converter og smider warnings uden at uploade
 elif [[ ${GITHUB_EVENT_NAME} == "push" ]]; then
