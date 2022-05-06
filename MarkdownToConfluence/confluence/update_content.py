@@ -31,11 +31,13 @@ def update_page_content(filename: str, old_filename=""):
             with open(old_filename, 'w') as old: # create the file temporaily to get names
                 old.write(" ")
             old_page_name = get_page_name_from_path(old_filename, ROOT)
+            old_parent_name = get_parent_name_from_path(old_filename, ROOT)
             page_id = confluence_utils.get_page_id(old_page_name, SPACE_KEY)
             os.remove(old_filename)
         else:
             old_page_name = get_page_name_from_path(old_filename, ROOT)
             old_parent_name = get_parent_name_from_path(old_filename, ROOT)
+            page_id = confluence_utils.get_page_id(old_page_name, SPACE_KEY)
     else:
         page_id = confluence_utils.get_page_id(page_name, SPACE_KEY)
 
