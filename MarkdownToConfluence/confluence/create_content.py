@@ -31,7 +31,6 @@ def create_page(filename: str):
 
     print(f"Creating {page_name} with {parent_name} as parent")
 
-    filename = filename.replace(".md", ".html")
     template = {
         "version" : {
             "number": 1
@@ -64,16 +63,17 @@ def create_page(filename: str):
                 print("Parent didnt exist, creating parent: " + parent_name)
                 create_page(get_parent_path_from_child(filename))
 
+    html_file = filename.replace(".md", ".html")
     # Remove <!DOCTYPE html> from html file
-    with open(f"{filename}", "r") as f:
+    with open(f"{html_file}", "r") as f:
         lines = f.readlines()
-    with open(f"{filename}", "w") as f:
+    with open(f"{html_file}", "w") as f:
         for line in lines:
             if line.strip("\n") != "<!DOCTYPE html>":
                 f.write(line)
 
     # Load html file into template
-    f = codecs.open(f"{filename}", 'r', encoding='utf-8')
+    f = codecs.open(f"{html_file}", 'r', encoding='utf-8')
     template['body']['storage']['value'] = f.read()
 
     url = f'{BASE_URL}/wiki/rest/api/content'
