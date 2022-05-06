@@ -2,8 +2,10 @@ import os, markdown
 import MarkdownToConfluence.module_loader as module_loader
 from MarkdownToConfluence.utils import convert_all_md_img_to_confluence_img
 from MarkdownToConfluence.utils.page_file_info import get_page_name_from_path, get_parent_name_from_path
+import MarkdownToConfluence.globals
 
 def convert(filename: str, root: str):
+    MarkdownToConfluence.globals.init()
      # If a directory is given as path, assume index.md as file
     if(os.path.isdir(filename)):
         filename += "/index.md"
@@ -24,11 +26,7 @@ def convert(filename: str, root: str):
             o.write(line)
 
     # Load and run modules
-    settings_path = f"{os.environ.get('INPUT_FILESLOCATION')}/settings.json"
-    if(os.path.exists(settings_path)):
-        modules = module_loader.get_modules(settings_path)
-    else:
-        modules = module_loader.get_modules()
+    modules = module_loader.get_modules()
     
     for module in modules:
         module_loader.run_module(module, temp_file)

@@ -86,6 +86,7 @@ def create_page(filename: str):
         for attachment in MarkdownToConfluence.globals.attachments:
             upload_attachment(page_name, attachment[0], attachment[1])
         print(f"Created {page_name} with {parent_name} as parent")
+        MarkdownToConfluence.globals.reset()
     else:
         print(f"Error uploading {page_name}. Status code {response.status_code}")
         print(response.text)
