@@ -1,9 +1,9 @@
 {
+    "parent_page": "",
     "modules": {
         "mermaid": true,
         "jira-tickets": true,
         "attachment_link": true,
         "table_of_contents": true
-    },
-    "parent_page": ""
+    }
 }

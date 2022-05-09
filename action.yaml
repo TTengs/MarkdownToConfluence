@@ -21,6 +21,11 @@ inputs:
   auth_api_token:
     description: 'The authentication token from the user pushing changes to Confluence'
     required: true
+  is_preview:
+    description: "Set to 'true' if this workflow should only create a preview of the changed files, in the given space"
+    required: false
+    default: false
+    type: boolean
 outputs:
   status:
     description: 'Status of the converter'
