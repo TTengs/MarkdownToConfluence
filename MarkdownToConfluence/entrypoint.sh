@@ -82,7 +82,7 @@ if [[ $res != "" ]]; then
     fi
 
     if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
-        printf "\nDeleting files:"
+        printf "\nDeleting pages:"
         for i in "${delFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
@@ -93,8 +93,20 @@ if [[ $res != "" ]]; then
         done
     fi
 
+    if [[ ! ${#addedFilesArr[@]} -eq 0 ]]; then
+        printf "\nCreating pages:"
+        for i in "${addedFilesArr[@]}"
+        do
+            if [[ $file == *.md ]]; then
+                python3 /MarkdownToConfluence/confluence/create_content.py $file
+            else
+                echo "${file} might not have been created"
+            fi
+        done
+    fi
+
     if [[ ! ${#changedFilesArr[@]} -eq 0 ]]; then
-        printf "\nUpdating modified files"
+        printf "\nUpdating modified pages"
         for file in "${changedFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
@@ -107,7 +119,7 @@ if [[ $res != "" ]]; then
 
 
     if [[ ! ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
-        printf "\nRenameing or moving files"
+        printf "\nRenaming or moving pages"
         for i in "${ReMoFilesArrOLD[@]}"
         do
             if [[ $file == *.md ]]; then
