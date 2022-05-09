@@ -37,11 +37,14 @@ if [[ $res != "" ]]; then
             exit 0
         fi
         if [[ ${INPUT_IS_PREVIEW} == true ]]; then
+            echo "IS PREVIEW"
             if [[ ${tmp[0]} != D* ]]; then
                 if [[ ${tmp[0]} = R* ]]; then
                     addedFilesArr+=("${tmp[2]}")
+                    echo "${tmp[2]}"
                 else
                     addedFilesArr+=("${tmp[1]}")
+                    echo "${tmp[2]}"
                 fi
             fi
         # Renamed or moved files
