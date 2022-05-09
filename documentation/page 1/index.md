@@ -44,7 +44,6 @@ start-depth=3
 search_bar=true
 ```
 
-
 ## Trello boards
 
 https://trello.com/b/199TqwVE/project-guide
