@@ -60,7 +60,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Conversion step
-        uses: TTengs/MarkdownToConfluence@v2.1
+        uses: TTengs/MarkdownToConfluence@v2.2.4
         with:
           fileslocation: './documentation'
           should_upload: false
@@ -80,7 +80,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Conversion step
-        uses: TTengs/MarkdownToConfluence@2.1
+        uses: TTengs/MarkdownToConfluence@2.2.4
         with:
           fileslocation: './documentation'
           should_upload: false
