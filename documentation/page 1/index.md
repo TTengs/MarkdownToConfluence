@@ -41,6 +41,7 @@ BAC-77
 
 ```TOC
 start-depth=3
+search_bar=true
 ```
 
 
