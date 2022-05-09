@@ -37,7 +37,7 @@ if [[ $res != "" ]]; then
             exit 0
         fi
         if [[ ${INPUT_IS_PREVIEW} == true ]]; then
-            echo "IS PREVIEW ${tmp}"
+            echo "IS PREVIEW ${tmp[@]}"
             if [[ ${tmp[0]} != D* ]]; then
                 if [[ ${tmp[0]} = R* ]]; then
                     addedFilesArr+=("${tmp[2]}")
@@ -83,7 +83,7 @@ if [[ $res != "" ]]; then
 
     if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
         printf "\nDeleting pages:"
-        for i in "${delFilesArr[@]}"
+        for file in "${delFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
                 python3 /MarkdownToConfluence/confluence/delete_content.py $file
@@ -95,7 +95,7 @@ if [[ $res != "" ]]; then
 
     if [[ ! ${#addedFilesArr[@]} -eq 0 ]]; then
         printf "\nCreating pages:"
-        for i in "${addedFilesArr[@]}"
+        for file in "${addedFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
                 python3 /MarkdownToConfluence/confluence/create_content.py $file
@@ -120,7 +120,7 @@ if [[ $res != "" ]]; then
 
     if [[ ! ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
         printf "\nRenaming or moving pages"
-        for i in "${ReMoFilesArrOLD[@]}"
+        for file in "${ReMoFilesArrOLD[@]}"
         do
             if [[ $file == *.md ]]; then
                 python3 /MarkdownToConfluence/confluence/update_content.py "${ReMoFilesArrOLD[i]}" "${ReMoFilesArrNEW[i]}"
