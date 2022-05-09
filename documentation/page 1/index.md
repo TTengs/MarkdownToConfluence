@@ -40,7 +40,6 @@ BAC-77
 ## Table of contents
 
 ```TOC
-root=DAM Center 5
 start-depth=3
 ```
 
