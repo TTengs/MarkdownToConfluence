@@ -86,7 +86,7 @@ if [[ $res != "" ]]; then
         for file in "${delFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
-                python3 /MarkdownToConfluence/confluence/delete_content.py $file
+                python3 /MarkdownToConfluence/confluence/delete_content.py "${file}"
             else
                 echo "${file} might not have been deleted"
             fi
@@ -98,7 +98,7 @@ if [[ $res != "" ]]; then
         for file in "${addedFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
-                python3 /MarkdownToConfluence/confluence/create_content.py $file
+                python3 /MarkdownToConfluence/confluence/create_content.py "${file}"
             else
                 echo "${file} might not have been created"
             fi
