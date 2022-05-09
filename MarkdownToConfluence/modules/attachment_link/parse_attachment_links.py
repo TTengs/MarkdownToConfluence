@@ -13,7 +13,7 @@ def convert_all_md_attachment_links_to_confluence_attachment_links(filename):
             f.write(res)
 
 def convert_md_attachment_links_to_confluence_attachment_links(line: str, md_path: str):
-    links = re.findall(r'(!\[(?P<alt>[^\]]*)\]\((?P<filename>.*?)(?=\"|\))(\"(?P<title>.*)\")?\))', line)
+    links = re.findall(r'(\[(?P<alt>[^\]]*)\]\((?P<filename>.*?)(?=\"|\))(\"(?P<title>.*)\")?\))', line)
     new_line = line
     for link in links:
         if(not (link[2].strip().endswith('.png') or link[2].strip().endswith('.jpg'))):

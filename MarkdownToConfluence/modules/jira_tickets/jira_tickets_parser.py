@@ -15,17 +15,17 @@ def parse_ticket(line: str) -> str:
     tickets = re.findall(r'\d+-[A-Z]+(?!-?[a-zA-Z]{1,10})', line[::-1]) #official atlassian regex magic
     new_line = line
     for ticket in tickets:
-        if(check_if_ticket_exists(ticket)): # TODO: Raise warning in pipeline
+        if(check_if_ticket_exists(ticket[::-1])): # TODO: Raise warning in pipeline
             ticket = ticket[::-1]
             ticket_tag = f"<ac:structured-macro ac:name='jira'><ac:parameter ac:name='columns'>key,summary,type,created,updated,due,assignee,reporter,priority,status,resolution</ac:parameter><ac:parameter ac:name='key'>{ticket}</ac:parameter> </ac:structured-macro>"
             new_line = new_line.replace(ticket, ticket_tag)
     return new_line
 
 def check_if_ticket_exists(ticket: str):
-    base_url = os.environ.get('CONFLUENCE_URL')
+    base_url = os.environ.get('INPUT_CONFLUENCE_URL')
     url = f'{base_url}/rest/api/3/issue/{ticket}'
-    username = os.environ.get('AUTH_USERNAME')
-    token = os.environ.get('AUTH_API_TOKEN')
+    username = os.environ.get('INPUT_AUTH_USERNAME')
+    token = os.environ.get('INPUT_AUTH_API_TOKEN')
     auth = HTTPBasicAuth(username, token)
 
     headers = {

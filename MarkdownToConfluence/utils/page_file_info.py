@@ -1,5 +1,6 @@
 import os, json
 from posixpath import basename, dirname
+import MarkdownToConfluence.globals
 
 # Returns "" if path == root
 def get_prefix(path: str, root: str) -> str:
@@ -30,7 +31,7 @@ def get_page_name_from_path(path: str, root: str):
     if(path == root):
         return ""
     if(os.path.isdir(path)): # Assume index.md if path is dir
-        path += "/index.md"
+        path = os.path.join(path, "index.md")
     path_arr = path.split('/')
     page_name = get_prefix(path, root)
     file_name = basename(path)
@@ -45,14 +46,14 @@ def get_page_name_from_path(path: str, root: str):
 def get_parent_name_from_path(path: str, root: str, default=""):
     if(path == root):
         return ""
-    if("settings.json" in os.listdir(root)):
-        settings = json.load(open(root + "/settings.json"))
+    settings = MarkdownToConfluence.globals.settings
+
+    if(settings != None):
         if("parent_page" in settings.keys()):
             default = settings["parent_page"]
     if(os.path.isdir(path)): # Assume index.md if path is dir
-        path += "/index.md"
+        path = os.path.join(path, "index.md")
         
-    path_arr = path.split('/')
     file_name = basename(path)
     parent_name = ""
 
@@ -60,10 +61,12 @@ def get_parent_name_from_path(path: str, root: str, default=""):
         parent_path = dirname(dirname(path))
     else:
         parent_path = dirname(path)
+
     if(parent_path != root):
         parent_name = get_page_name_from_path(parent_path, root)
     else:
         parent_name = default
+
     return parent_name
 
 
@@ -87,3 +90,9 @@ def get_all_page_names_in_filesystem(root: str):
         page_names.append(name)
     return page_names
 
+def get_parent_path_from_child(child_path: str):
+    print('Get parent name: ', child_path, basename(child_path))
+    if(basename(child_path).strip() != "index.md"):
+        return dirname(child_path)
+    else:
+        return dirname(dirname(child_path))

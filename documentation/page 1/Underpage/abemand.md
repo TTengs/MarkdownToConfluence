@@ -1,4 +1,5 @@
 # page abe
 
 VIRKER DET HER!?
-abemand
+anders er nød
+Jeg mener det
