@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "documentation/**"
+      - "./documentation/**"
 
 jobs:
   markdown_to_confluence_job:

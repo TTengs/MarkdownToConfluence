@@ -47,6 +47,3 @@ start-depth=3
 ## Trello boards
 
 https://trello.com/b/199TqwVE/project-guide
-
-
-
