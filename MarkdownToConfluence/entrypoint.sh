@@ -36,8 +36,16 @@ if [[ $res != "" ]]; then
             bash /MarkdownToConfluence/create_all.sh
             exit 0
         fi
+        if [[ ${INPUT_IS_PREVIEW} == true ]]; then
+            if [[ ${tmp[0]} != D* ]]; then
+                if [[ ${tmp[0]} = R* ]]; then
+                    addedFilesArr+=("${tmp[2]}")
+                else
+                    addedFilesArr+=("${tmp[1]}")
+                fi
+            fi
         # Renamed or moved files
-        if [[ ${tmp[0]} = R* ]]; then
+        elif [[ ${tmp[0]} = R* ]]; then
             echo "---Renamed/Moved---"
             echo "from ${tmp[1]}"
             echo "to ${tmp[2]}"
@@ -65,6 +73,10 @@ if [[ $res != "" ]]; then
             echo ${tmp[@]}
         fi
     done <<< $res
+
+    if [[ ${INPUT_IS_PREVIEW} == true ]]; then
+        python3 /MarkdownToConfluence/confluence/delete_content.py --all
+    fi
 
     if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
         printf "\nDeleting files:"
