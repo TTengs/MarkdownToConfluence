@@ -26,6 +26,13 @@ B-->C
 C-->A
 ```
 
+## Code blocks
+
+```javascript
+let hello = "Hello World"
+console.log(hello)
+```
+
 ## Jira tickets and issues
 
 BAC-77
@@ -37,12 +44,6 @@ root=DAM Center 5
 start-depth=3
 ```
 
-## Code blocks
-
-```javascript
-let hello = "Hello World"
-console.log(hello)
-```
 
 ## Trello boards
 
