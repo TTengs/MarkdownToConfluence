@@ -37,7 +37,7 @@ if [[ $res != "" ]]; then
             exit 0
         fi
         if [[ ${INPUT_IS_PREVIEW} == true ]]; then
-            echo "IS PREVIEW"
+            echo "IS PREVIEW ${tmp}"
             if [[ ${tmp[0]} != D* ]]; then
                 if [[ ${tmp[0]} = R* ]]; then
                     addedFilesArr+=("${tmp[2]}")
