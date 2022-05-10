@@ -11,15 +11,19 @@ First you need to create an API token for the user, you want to use for the acti
 
 `fileslocation`
 
-**Required** 
+**Optional** 
 
 The path from the root of your repository, to the folder containing the markdown documentation. Default `./`.
 
+---
+
 `should_upload`
 
-**Required** 
+**Optional** 
 
-A boolean value determining whether the action if run on a push event should upload. 
+A boolean value determining whether the action if run on a push event should upload. Defaults to 'true'
+
+---
 
 `confluence_url`
 
@@ -27,26 +31,41 @@ A boolean value determining whether the action if run on a push event should upl
 
 The base URL for the Atlassian network. Follows the form: 'https://[your-network-name].atlassian.net'
 
+---
+
 `confluence_space_key`
 
 **Required**
 
 The key of the space that is being uploaded to. Can be found in the URL for your space. More info [here](https://confluence.atlassian.com/doc/space-keys-829076188.html)
 
+---
+
 `auth_username`
 
 **Required**
 
 The email used for the user connected to the API token. We recommend setting this as a GitHub secret.
-        
+
+---
+
 `auth_api_token`
 
 **Required**
 
 The API token generated for the user. We recommend setting this as a GitHub secret.
-## Outputs
 
-### Ikke lige nogle indtil nu
+---
+
+`is_preview`
+
+**Optional**
+
+Determines weather or not this worklow should only upload a preview. When uploading a preview, make sure to use a dedicated preview space. A preview only showcases the nescesarry pages to show the pages that have been made changes to. 
+
+Ex. If a the only change that has been made, is to a child page of some other page, then the parent page and child page will be uploaded, and the rest of the space will be empty.
+
+--- 
 
 ## Example usage
 
@@ -60,14 +79,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Conversion step
-        uses: TTengs/MarkdownToConfluence@v2.2.4
+        uses: TTengs/MarkdownToConfluence@v3
         with:
           fileslocation: './documentation'
-          should_upload: false
+          should_upload: true
           confluence_url: 'https://network.atlassian.net/wiki'
           confluence_space_key: 'spaceKey'
           auth_username: 'your@email.com'
           auth_api_token: 'PeRsOnalApItOKen'
+          is_preview: false
 ```
 
 With GitHub secrets
@@ -80,14 +100,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Conversion step
-        uses: TTengs/MarkdownToConfluence@2.2.4
+        uses: TTengs/MarkdownToConfluence@v3
         with:
           fileslocation: './documentation'
-          should_upload: false
+          should_upload: true
           confluence_url: 'https://network.atlassian.net/wiki'
           confluence_space_key: 'spaceKey'
           auth_username: ${{ secrets.AUTH_USERNAME }}
           auth_api_token: ${{ secrets.AUTH_API_TOKEN }}
+          is_preview: false
 ```
 
 ---
