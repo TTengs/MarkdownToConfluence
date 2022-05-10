@@ -4,11 +4,14 @@ from urllib.parse import quote
 from os import path
 from requests.auth import HTTPBasicAuth
 
-SPACE_KEY = 'BP'
-BASE_URL = 'https://at-bachelor.atlassian.net'
-AUTH_USERNAME = "theistengs@gmail.com"
-AUTH_API_TOKEN = "ijlaqRE2JBLjFRnQrPOl15D9"
-DOCS_FOLDER_NAME = "TESTer"
+SPACE_KEY = 'space key'
+BASE_URL = 'https:// 'network name' .atlassian.net'
+AUTH_USERNAME = 'user email'
+AUTH_API_TOKEN = 'Super secret api token'
+DOCS_FOLDER_NAME = "Name of folder to place docs into" #if left empty, the script will create a folder called "docs"
+
+#If this GET_DOCS_FOLDER is set to true, the script will try to find a page on the space that is equal to DOCS_FOLDER_NAME 
+#and only download the pages under
 GET_DOCS_FOLDER = False
 
 auth = HTTPBasicAuth(AUTH_USERNAME, AUTH_API_TOKEN)
