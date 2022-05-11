@@ -32,7 +32,7 @@ outputs:
     description: 'Status of the converter'
 runs:
   using: 'docker'
-  image: 'larse19/markdown-to-confluence'
+  image: 'Dockerfile'
 branding:
   icon: "book"
   color: "blue"
