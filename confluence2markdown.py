@@ -5,7 +5,7 @@ from os import path
 from requests.auth import HTTPBasicAuth
 
 SPACE_KEY = 'space key'
-BASE_URL = 'https:// 'network name' .atlassian.net'
+BASE_URL = 'https:// network name .atlassian.net'
 AUTH_USERNAME = 'user email'
 AUTH_API_TOKEN = 'Super secret api token'
 DOCS_FOLDER_NAME = "Name of folder to place docs into" #if left empty, the script will create a folder called "docs"
@@ -158,6 +158,8 @@ def pathReplacer(page: str):
     page = page.replace(">", "")
     page = page.replace("|", "")
     page = page.replace(":", "")
+    if (page[-1] == "."):
+        page = page[:-1]
     return page.replace("/", "%")
 
 if __name__ == "__main__":
