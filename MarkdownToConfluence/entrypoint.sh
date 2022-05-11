@@ -36,8 +36,19 @@ if [[ $res != "" ]]; then
             bash /MarkdownToConfluence/create_all.sh
             exit 0
         fi
+        if [[ ${INPUT_IS_PREVIEW} == true ]]; then
+            echo "IS PREVIEW ${tmp[@]}"
+            if [[ ${tmp[0]} != D* ]]; then
+                if [[ ${tmp[0]} = R* ]]; then
+                    addedFilesArr+=("${tmp[2]}")
+                    echo "${tmp[2]}"
+                else
+                    addedFilesArr+=("${tmp[1]}")
+                    echo "${tmp[2]}"
+                fi
+            fi
         # Renamed or moved files
-        if [[ ${tmp[0]} = R* ]]; then
+        elif [[ ${tmp[0]} = R* ]]; then
             echo "---Renamed/Moved---"
             echo "from ${tmp[1]}"
             echo "to ${tmp[2]}"
@@ -66,20 +77,36 @@ if [[ $res != "" ]]; then
         fi
     done <<< $res
 
+    if [[ ${INPUT_IS_PREVIEW} == true ]]; then
+        python3 /MarkdownToConfluence/confluence/delete_content.py --all
+    fi
+
     if [[ ! ${#delFilesArr[@]} -eq 0 ]]; then
-        printf "\nDeleting files:"
-        for i in "${delFilesArr[@]}"
+        printf "\nDeleting pages:"
+        for file in "${delFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
-                python3 /MarkdownToConfluence/confluence/delete_content.py $file
+                python3 /MarkdownToConfluence/confluence/delete_content.py "${file}"
             else
                 echo "${file} might not have been deleted"
             fi
         done
     fi
 
+    if [[ ! ${#addedFilesArr[@]} -eq 0 ]]; then
+        printf "\nCreating pages:"
+        for file in "${addedFilesArr[@]}"
+        do
+            if [[ $file == *.md ]]; then
+                python3 /MarkdownToConfluence/confluence/create_content.py "${file}"
+            else
+                echo "${file} might not have been created"
+            fi
+        done
+    fi
+
     if [[ ! ${#changedFilesArr[@]} -eq 0 ]]; then
-        printf "\nUpdating modified files"
+        printf "\nUpdating modified pages"
         for file in "${changedFilesArr[@]}"
         do
             if [[ $file == *.md ]]; then
@@ -92,8 +119,8 @@ if [[ $res != "" ]]; then
 
 
     if [[ ! ${#ReMoFilesArrOLD[@]} -eq 0 ]]; then
-        printf "\nRenameing or moving files"
-        for i in "${ReMoFilesArrOLD[@]}"
+        printf "\nRenaming or moving pages"
+        for file in "${ReMoFilesArrOLD[@]}"
         do
             if [[ $file == *.md ]]; then
                 python3 /MarkdownToConfluence/confluence/update_content.py "${ReMoFilesArrOLD[i]}" "${ReMoFilesArrNEW[i]}"
