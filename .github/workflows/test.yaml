@@ -1,9 +1,11 @@
 name: Run PyTest
 
-on:
-  push:
-    branches-ignore:
-      - main
+# on:
+#   push:
+#     branches-ignore:
+#       - main
+
+on: [pull-request]
 
 jobs:
   tests:
