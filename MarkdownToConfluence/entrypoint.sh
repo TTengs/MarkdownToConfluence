@@ -3,7 +3,6 @@ git init
 git config --global --add safe.directory /github/workspace
 git config --global core.pager "less -FRSX"
 
-echo $(cat ${GITHUB_EVENT_PATH})
 before=$(jq .before ${GITHUB_EVENT_PATH} | tr -d '"')
 after=${GITHUB_SHA}
 

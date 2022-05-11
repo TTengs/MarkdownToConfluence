@@ -21,9 +21,7 @@ jobs:
         id: Convert
         with:
           fileslocation: 'documentation'
-          should_upload: false
           confluence_url: 'https://at-bachelor.atlassian.net'
           confluence_space_key: 'MAR'
           auth_username: ${{ secrets.AUTH_USERNAME }}
           auth_api_token: ${{ secrets.AUTH_API_TOKEN }}
-          is_preview: true
