@@ -68,28 +68,6 @@ Ex. If a the only change that has been made, is to a child page of some other pa
 --- 
 
 ## Example usage
-
-Without github secrets:
-```yaml
-jobs:
-  markdown_to_confluence_job:
-    runs-on: ubuntu-latest
-    name: Converting Markdown to Confluence
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Conversion step
-        uses: TTengs/MarkdownToConfluence@v3
-        with:
-          fileslocation: './documentation'
-          should_upload: true
-          confluence_url: 'https://network.atlassian.net/wiki'
-          confluence_space_key: 'spaceKey'
-          auth_username: 'your@email.com'
-          auth_api_token: 'PeRsOnalApItOKen'
-          is_preview: false
-```
-
 With GitHub secrets
 ```yaml
 jobs:
@@ -110,7 +88,62 @@ jobs:
           auth_api_token: ${{ secrets.AUTH_API_TOKEN }}
           is_preview: false
 ```
+### Full pipeline with preview
+If you want to create a pipeline, that publishes a preview on a pull-request, and then update the public space once the pull-request is accepted, you will have to set up these two workflows:
 
+preview.yaml
+```
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "documentation/**"
+      
+jobs:
+  create-preview:
+    runs-on: ubuntu-latest
+    name: Uploading Preview
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Conversion step
+        uses: TTengs/MarkdownToConfluence@v3
+        with:
+          fileslocation: 'documentation'
+          confluence_url: 'https://network.atlassian.net'
+          confluence_space_key: 'PreviewSpaceKey'
+          auth_username: ${{ secrets.AUTH_USERNAME }}
+          auth_api_token: ${{ secrets.AUTH_API_TOKEN }}
+          is_preview: true
+```
+upload.yaml
+```
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "documentation/**"
+
+jobs:
+  push_to_confluence:
+    runs-on: ubuntu-latest
+    name: Converting Markdown to Confluence
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Conversion step
+        uses: TTengs/MarkdownToConfluence@v3
+        with:
+          fileslocation: 'documentation'
+          confluence_url: 'https://network.atlassian.net'
+          confluence_space_key: 'PublicSpaceKey'
+          auth_username: ${{ secrets.AUTH_USERNAME }}
+          auth_api_token: ${{ secrets.AUTH_API_TOKEN }}
+```
 ---
 
 # Writing Documentation
