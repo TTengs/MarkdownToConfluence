@@ -15,7 +15,7 @@ def before():
 
 @mock.patch.dict(os.environ, {"INPUT_FILESLOCATION": str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'})
 def test_convert():
-    from MarkdownToConfluence.confluence.convert_markdown import convert
+    from MarkdownToConfluence.utils.convert_markdown import convert
 
     root=str(pathlib.Path(__file__).parent.resolve()) + '/testdocs'
     filename = root + '/convert/test.md'

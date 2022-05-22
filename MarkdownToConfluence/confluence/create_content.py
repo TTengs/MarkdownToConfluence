@@ -3,7 +3,7 @@ import codecs
 import requests
 import sys, os, base64
 from requests.auth import HTTPBasicAuth
-import MarkdownToConfluence.confluence.convert_markdown as convert_markdown
+import MarkdownToConfluence.utils.convert_markdown as convert_markdown
 import MarkdownToConfluence.confluence.confluence_utils as confluence_utils
 from MarkdownToConfluence.utils import get_parent_path_from_child
 import MarkdownToConfluence.globals
@@ -45,15 +45,7 @@ def create_page(filename: str):
                     "value": "",
                     "representation": "storage"
                 }
-        },
-        "metadata": {
-            "properties": {
-                "editor": {"value":"v2"},
-                "content_appearance_published": {
-                    "value": "full-width"
-                }
             }
-        }
     }
 
     if(parent_name != ""):
