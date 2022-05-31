@@ -5,5 +5,4 @@ from .delete_content import delete_page, delete_all_pages_in_space, delete_non_e
 from .update_content import update_page_content
 from .upload_attachments import upload_attachment
 from .PageNotFoundError import PageNotFoundError
-from .convert_markdown import convert
 from .create_empty_page import create_empty_page

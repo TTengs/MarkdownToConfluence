@@ -3,7 +3,7 @@ import codecs
 import requests
 import os, base64
 from requests.auth import HTTPBasicAuth
-from MarkdownToConfluence.confluence import convert_markdown
+from MarkdownToConfluence.utils import convert_markdown
 from MarkdownToConfluence.utils.page_file_info import get_page_name_from_path, get_parent_name_from_path, get_parent_path_from_child
 from MarkdownToConfluence.confluence import confluence_utils
 import MarkdownToConfluence.globals
